@@ -1,0 +1,102 @@
+{
+  "apis": [
+    {
+      "path": "/admin/user_views",
+      "operations": [
+        {
+          "summary": "Fetch user views",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search User Views",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The user_view Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort User View by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_user_views"
+        }
+      ]
+    },
+    {
+      "path": "/admin/user_views/{user_view_id}",
+      "operations": [
+        {
+          "summary": "Delete User View",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The user_view Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_user_views__user_view_id_"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

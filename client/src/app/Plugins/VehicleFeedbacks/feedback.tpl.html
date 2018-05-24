@@ -1,0 +1,15 @@
+<form role="form" class="clearfix" name="feedbackAdd" ng-submit="feedbackSubmit(feedbackAdd.$valid)" novalidate>
+    <div class="form-group" ng-class="{ 'has-error' : (feedbackAdd.$submitted) && (!isRated) }">
+        <label class="control-label" for="feedback">{{'Rating' | translate}}</label>
+        <div class="star-rate" star-rating rating="starRating" click="getRating(param)" mouse-hover="getRatingHover(param)" mouse-leave="getRatingLeave(param)"></div>
+        <span class="error" ng-show="(feedbackAdd.$submitted ) && (!isRated)">{{'Required' | translate}}</span>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : (feedbackAdd.$submitted || feedbackAdd.feedback.$touched) && (feedbackAdd.feedback.$pristine || feedbackAdd.feedback.$invalid) }">
+        <label class="control-label" for="feedback">{{'Feedback' | translate}}</label>
+        <textarea class="form-control" name="feedback" id="feedback" placeholder="{{'Feedback' | translate}}" ng-model="user.feedback" ng-required="true"/>
+        <span class="error" ng-show="(feedbackAdd.$submitted || feedbackAdd.feedback.$touched) && (feedbackAdd.feedback.$pristine || feedbackAdd.feedback.$invalid) && (feedbackAdd.feedback.$error.required)">{{'Required' | translate}}</span>
+    </div>
+    <div class="form-group pull-right">
+        <button class="btn btn-orange btn-block" type="submit">{{'Update' | translate }}</button>
+    </div>
+</form>

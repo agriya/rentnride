@@ -1,0 +1,375 @@
+{
+  "apis": [
+    {
+      "path": "/users/register",
+      "operations": [
+        {
+          "summary": "Register Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Register",
+              "paramType": "body",
+              "required": true,
+              "type": "Register",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__users_register"
+        }
+      ]
+    },
+    {
+      "path": "/users/login",
+      "operations": [
+        {
+          "summary": "Login user",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Login",
+              "paramType": "body",
+              "required": true,
+              "type": "Login",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__users_login"
+        }
+      ]
+    },
+    {
+      "path": "/user",
+      "operations": [
+        {
+          "summary": "view user profile",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "ViewUser",
+              "paramType": "body",
+              "required": true,
+              "type": "ViewUser",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__user"
+        }
+      ]
+    },
+    {
+      "path": "/users/{user_id}/attachment",
+      "operations": [
+        {
+          "summary": "Get user Upload image thumb",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__users__user_id__attachment"
+        }
+      ]
+    },
+    {
+      "path": "/users/{user_id}/activate",
+      "operations": [
+        {
+          "summary": "activate user",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__users__user_id__activate"
+        }
+      ]
+    },
+    {
+      "path": "/users/forgot_password",
+      "operations": [
+        {
+          "summary": "forgot password",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "ForgotPassword",
+              "paramType": "body",
+              "required": true,
+              "type": "ForgotPassword",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__users_forgot_password"
+        }
+      ]
+    },
+    {
+      "path": "/users/{user_id}/change_password",
+      "operations": [
+        {
+          "summary": "change user password",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            },
+            {
+              "name": "ChangePassword",
+              "paramType": "body",
+              "required": true,
+              "type": "ChangePassword",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__users__user_id__change_password"
+        }
+      ]
+    },
+    {
+      "path": "/users/auth",
+      "operations": [
+        {
+          "summary": "get user details",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__users_auth"
+        }
+      ]
+    },
+    {
+      "path": "/users/stats",
+      "operations": [
+        {
+          "summary": "get user status",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__users_stats"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "ChangePassword": {
+      "properties": {
+        "old_password": {
+          "type": "string",
+          "required": true,
+          "description": "Old Password"
+        },
+        "password": {
+          "type": "string",
+          "required": true,
+          "description": "New Password"
+        },
+        "confirm_password": {
+          "type": "string",
+          "required": true,
+          "description": "Confirm Password"
+        }
+      },
+      "id": "ChangePassword"
+    },
+    "Register": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "required": true,
+          "description": "Name of the User"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Email of the User"
+        },
+        "password": {
+          "type": "string",
+          "required": true,
+          "description": "Password"
+        },
+        "confirm_password": {
+          "type": "string",
+          "required": true,
+          "description": "Confirm Password"
+        },
+        "is_agree_terms_conditions": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Accept Terms and Conditions"
+        }
+      },
+      "id": "Register"
+    },
+    "Login": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Login Email"
+        },
+        "password": {
+          "type": "string",
+          "required": true,
+          "description": "Login Password"
+        }
+      },
+      "id": "Login"
+    },
+    "ForgotPassword": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Enter Email"
+        }
+      },
+      "id": "ForgotPassword"
+    },
+    "ViewUser": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "required": true,
+          "description": "Enter User name"
+        }
+      },
+      "id": "ViewUser"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

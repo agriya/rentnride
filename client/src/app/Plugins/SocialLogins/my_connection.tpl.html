@@ -1,0 +1,88 @@
+<div class="page-head">
+	<div class="container">
+    	 <h2 class="pull-left text-uppercase">{{'Social' | translate}}</h2>
+    	<div class="pull-right profile-settings">
+            <dashboard-settings></dashboard-settings>
+        </div>
+    </div>
+</div>
+<div class="social-connection">
+	<div class="container">
+		<div class="row">
+            <div class="col-md-3 col-sm-6" ng-repeat="login in model.sociallogin.data">
+                <div class="connect-facebook" ng-if="login.name === 'Facebook'">
+                	<div class="media">
+                    	<div class="media-left">
+                        	<i class="fa fa-fw {{login.icon_class}}"></i>
+                        </div>
+                        <div class="media-body">
+                        	<p>{{'Increase your reputation by showing Facebook friends count' | translate}}..</p>
+                        </div>
+                    </div>
+                    <div class="connection-link">
+                    	<a ng-click="model.connect('facebook')" title="{{'Connect with facebook' | translate}}" ng-show="!model.fb_connected" class="btn btn-block">	 
+                        	{{'Connect with Facebook' | translate}}
+                       	</a>
+                        <a ng-click="model.disconnect('Facebook')" title="{{'Disconnect from facebook' | translate}}" ng-show="model.fb_connected" class="btn btn-block">
+                        	{{'Disconnect from Facebook' | translate}}
+                     	</a>
+                    </div>
+                </div>
+                <div class="connect-github" ng-if="login.name === 'Github' && !contentInIframe">
+                	<div class="media">
+                    	<div class="media-left">
+                        	<i class="fa fa-fw {{login.icon_class}}"></i>
+                        </div>
+                        <div class="media-body">
+                        	<p>{{'Increase your reputation by showing Github followers count' | translate}}..</p>
+                        </div>
+                    </div>
+                    <div class="connection-link">
+                    	<a ng-click="model.connect('github')" title="{{'Connect with Github' | translate}}" ng-show="!model.github_connected" class="btn btn-block">
+                        	{{'Connect with Github' | translate}}
+                       	</a>
+                    	<a ng-click="model.disconnect('github')" title="{{'Disconnect from Github' | translate}}" ng-show="model.github_connected" class="btn btn-block">
+                    		{{'Disconnect from Github' | translate}}
+                      	</a>
+                    </div>
+                </div>
+                <div class="connect-twitter" ng-if="login.name === 'Twitter' && contentInIframe !== true">
+                	<div class="media">
+                    	<div class="media-left">
+                        	<i class="fa fa-fw {{login.icon_class}}"></i>
+                        </div>
+                        <div class="media-body">
+                        	<p>{{'Increase your reputation by showing Twitter followers count' | translate}}..</p>
+                        </div>
+                    </div>
+                    <div class="connection-link">
+                    	<a ng-click="model.connect('twitter')" title="{{'Connect with Twitter' | translate}}" ng-show="!model.twitter_connected" class="btn btn-block">
+                            {{'Connect with Twitter' | translate}}
+                        </a>
+                        <a ng-click="model.disconnect('Twitter')" title="{{'Disconnect from Twitter' | translate}}" ng-show="model.twitter_connected" class="btn btn-block">
+                            {{'Disconnect from Twitter' | translate}}
+                        </a>
+                    </div>
+                </div>
+                <div class="connect-google" ng-if="login.name === 'Google' && !contentInIframe">
+                	<div class="media">
+                    	<div class="media-left">
+                        	<i class="fa fa-fw {{login.icon_class}}"></i>
+                        </div>
+                        <div class="media-body">
+                        	<p>{{'Increase your reputation by showing Google followers count' | translate}}..</p>
+                        </div>
+                    </div>
+                    <div class="connection-link">
+                    	<a ng-click="model.connect('google')" title="{{'Connect with Google' | translate}}" ng-show="!model.google_connected" class="btn btn-block">
+                        	{{'Connect with Google' | translate}}
+                       	</a>
+                    	<a ng-click="model.disconnect('Google')" title="{{'Disconnect from Google' | translate}}" ng-show="model.google_connected" class="btn btn-block">
+                        	{{'Disconnect from Google' | translate}}
+                    	</a>
+                    </div>
+                </div>
+			</div>
+    	</div>
+	</div>
+</div>

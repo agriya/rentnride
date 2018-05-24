@@ -1,0 +1,69 @@
+{
+  "apis": [
+    {
+      "path": "/settings?type=public_settings",
+      "operations": [
+        {
+          "summary": "Fetch all settings",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search settings",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The settings to sort",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort settings by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__settings_type_public_settings"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

@@ -1,0 +1,465 @@
+{
+  "apis": [
+    {
+      "path": "/admin/users",
+      "operations": [
+        {
+          "summary": "Fetch all users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "type",
+              "paramType": "query",
+              "type": "string",
+              "description": "Display Users By Listing Type",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "field",
+              "paramType": "query",
+              "type": "string",
+              "description": "Give Whatever Fields Needed by &quot;Comma Seperator&quot;",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Users",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive",
+                "facebook",
+                "twitter",
+                "google",
+                "All"
+              ],
+              "type": "string",
+              "description": "filter list of user ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The User Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort User by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_users"
+        },
+        {
+          "summary": "Store Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User",
+              "paramType": "body",
+              "required": true,
+              "type": "UserAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_users"
+        }
+      ]
+    },
+    {
+      "path": "/admin/users/{id}",
+      "operations": [
+        {
+          "summary": "Delete Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_users__id_"
+        },
+        {
+          "summary": "update users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "UserEdit": [
+            "body",
+            "required",
+            {
+              "type": "UserEdit"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_users__id_"
+        },
+        {
+          "summary": "Show user details",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_users__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/users/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_users__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/users/{id}/change_password",
+      "operations": [
+        {
+          "summary": "Change User Password",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            },
+            {
+              "name": "ChangePassword",
+              "paramType": "body",
+              "required": true,
+              "type": "ChangePassword",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_users__id__change_password"
+        }
+      ]
+    },
+    {
+      "path": "/admin/users/{id}/deactive",
+      "operations": [
+        {
+          "summary": "Deactivate the user ",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_users__id__deactive"
+        }
+      ]
+    },
+    {
+      "path": "/admin/users/{id}/active",
+      "operations": [
+        {
+          "summary": "Activate the user ",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_users__id__active"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "UserAdd": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "required": true,
+          "description": "Name of the User"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Email"
+        },
+        "password": {
+          "type": "string",
+          "required": true,
+          "description": "Password"
+        },
+        "role_id": {
+          "format": "int64",
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ],
+          "required": true,
+          "description": "If User role_id = 2, Admin role_id = 1"
+        }
+      },
+      "id": "UserAdd"
+    },
+    "UserEdit": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "required": true,
+          "description": "The User Identifier"
+        },
+        "username": {
+          "type": "string",
+          "required": true,
+          "description": "Username"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Email"
+        },
+        "role_id": {
+          "format": "int64",
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ],
+          "required": true,
+          "description": "If User role_id = 2, Admin role_id = 1"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ],
+          "required": true,
+          "description": "If User need to  be activated then value 1 else 0"
+        },
+        "is_email_confirmed": {
+          "format": "int64",
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ],
+          "required": true,
+          "description": "If User need to  be email verified then value = 1 else value = 0"
+        }
+      },
+      "id": "UserEdit"
+    },
+    "ChangePassword": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The User Identifier"
+        },
+        "password": {
+          "type": "string",
+          "required": true,
+          "description": "New Password"
+        },
+        "confirm_password": {
+          "type": "string",
+          "required": true,
+          "description": "Confirm Password"
+        }
+      },
+      "id": "ChangePassword"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

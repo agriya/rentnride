@@ -1,0 +1,367 @@
+{
+  "apis": [
+    {
+      "path": "/messages",
+      "operations": [
+        {
+          "summary": "Get the list of messages",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search messages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "Favourites",
+                "Price Low to High",
+                "Price High to Low",
+                "Recent"
+              ],
+              "type": "string",
+              "description": "Filter list for Messages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Message Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Message by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__messages"
+        }
+      ]
+    },
+    {
+      "path": "/sentMessages",
+      "operations": [
+        {
+          "summary": "Get all Sent Messages",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__sentMessages"
+        }
+      ]
+    },
+    {
+      "path": "/item_messages/{item_id}",
+      "operations": [
+        {
+          "summary": "Get item activities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "item_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "Item Idetifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__item_messages__item_id_"
+        }
+      ]
+    },
+    {
+      "path": "/item_user_messages/{item_user_id}",
+      "operations": [
+        {
+          "summary": "Get Booking activities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "item_user_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "Booking Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__item_user_messages__item_user_id_"
+        }
+      ]
+    },
+    {
+      "path": "/messages/{user_id}/user",
+      "operations": [
+        {
+          "summary": "Compose Message",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Compose",
+              "paramType": "body",
+              "required": true,
+              "type": "Compose",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__messages__user_id__user"
+        }
+      ]
+    },
+    {
+      "path": "/messages/{id}",
+      "operations": [
+        {
+          "summary": "View the message",
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "Message identifier"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__messages__id_"
+        }
+      ]
+    },
+    {
+      "path": "/messages/{message_id}/reply",
+      "operations": [
+        {
+          "summary": "reply Message",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "message_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "Message identifier"
+            },
+            {
+              "name": "reply",
+              "paramType": "body",
+              "required": true,
+              "type": "reply",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__messages__message_id__reply"
+        }
+      ]
+    },
+    {
+      "path": "/private_notes",
+      "operations": [
+        {
+          "summary": "Add Private Note",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "PrivateNoteAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "PrivateNoteAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__private_notes"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Compose": {
+      "properties": {
+        "to_user_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "To whom the message is sent to"
+        },
+        "subject": {
+          "type": "string",
+          "required": true,
+          "description": "subject for the message"
+        },
+        "message": {
+          "type": "string",
+          "required": true,
+          "description": "content of the message"
+        }
+      },
+      "id": "Compose"
+    },
+    "reply": {
+      "properties": {
+        "to_user_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "To whom the message is sent to"
+        },
+        "message_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "to message the is sent"
+        },
+        "subject": {
+          "type": "string",
+          "required": true,
+          "description": "subject for the message"
+        },
+        "message": {
+          "type": "string",
+          "required": true,
+          "description": "content of the message"
+        }
+      },
+      "id": "reply"
+    },
+    "PrivateNoteAdd": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "description": "The Booking identifier"
+        },
+        "message": {
+          "type": "string",
+          "required": true,
+          "description": "Message"
+        }
+      },
+      "id": "PrivateNoteAdd"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

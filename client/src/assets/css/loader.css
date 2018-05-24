@@ -1,0 +1,29 @@
+#preloader {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:#fff;
+    z-index:999;
+}
+
+#status {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    background-image:url(../img/loader.gif);
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px;
+}
+
+i.icon-sudopay-icon {
+    background: transparent url(../img/sudopay-icon.png) no-repeat scroll 0 0;
+    display: block;
+    height: 25px;
+    width: 30px;
+	margin-top: 2px;
+    background-size: 100%;

@@ -1,0 +1,42 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<ma-view-actions>
+				<ma-back-button></ma-back-button>
+			</ma-view-actions>
+			<h1><span> Page Add</span></h1>
+	    </div>
+	</div>
+</div>
+<div class="pages-form" id="create-view">
+    <form class="form-horizontal" name="pages" ng-submit="pageAdd()">
+        <div id="row-pages-slug" class="form-group has-feedback">
+            <label for="pageSlug" class="col-sm-2 control-label">Page Slug <span>*</span></label>
+            <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7">
+                <input type="text" ng-model="languageArr['pages']['slug']" name="Slug" class="form-control" required=""/>				
+                <span class="help-block navbar-btn"><i class="text-info">it should be slugify url like page-slug</i></span>
+            </div>				
+        </div>	
+        <div class="form-group" ng-repeat="languages in languageList.data" >
+            <h3>{{languages.name}}</h3>
+            <ng-form name="pagesFieldForm">
+                <label class="col-sm-2 control-label">Title <span>*</span></label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7">
+                    <input type="text" class="form-control" name="title" ng-model="languageArr['pages'][languages.id]['title']" ng-required="true" required>   
+                </div>
+            </ng-form>
+            <ng-form name="pagesFieldForm" class="form-group">
+                <label class="col-sm-2 control-label">content</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7">
+                    <div text-angular="" name="page_content_{{languages.id}}" ng-model="languageArr['pages'][languages.id]['page_content']" ng-required="true" required></div>
+                    
+                </div>
+            </ng-form>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+            <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

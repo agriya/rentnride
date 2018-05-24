@@ -1,0 +1,290 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_insurances",
+      "operations": [
+        {
+          "summary": "Fetch List of insurances",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Insurance",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of insurances ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Insurance Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Insurance by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_insurances"
+        },
+        {
+          "summary": "Store Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "InsuranceAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "InsuranceAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_insurances"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_insurances/{id}",
+      "operations": [
+        {
+          "summary": "Update Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Insurance Identifier"
+            },
+            {
+              "name": "InsuranceEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "InsuranceEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_insurances__id_"
+        },
+        {
+          "summary": "Show Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Insurance Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_insurances__id_"
+        },
+        {
+          "summary": "Delete Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Insurance Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_insurances__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_insurances/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Insurance Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_insurances__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "InsuranceAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Insurance Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        }
+      },
+      "id": "InsuranceAdd"
+    },
+    "InsuranceEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Insurance identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Insurance Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "InsuranceEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

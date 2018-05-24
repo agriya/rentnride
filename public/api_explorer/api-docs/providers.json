@@ -1,0 +1,81 @@
+{
+  "apis": [
+    {
+      "path": "/providers",
+      "operations": [
+        {
+          "summary": "Fetch all providers",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "Filter List of Providers ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Providers",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Provider Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Provider by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__providers"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

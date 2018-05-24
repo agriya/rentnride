@@ -1,0 +1,107 @@
+<div class="dashboard-block">
+    <div class="container">
+        <!-- <div class="clearfix">
+            <div class="pull-left">
+                <h2>{{'Dashboard' | translate}}</h2>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#/user/{{user.username}}" title="{{user.username}}">
+                            <img ng-if="user.user_avatar_source_id != model.ConstSocialLogin.Twitter && user.user_avatar_source_id != model.ConstSocialLogin.Github" ng-src="{{user.attachmentable.thumb.medium}}" title="{{user.username}}" alt="{{user.username}}">
+                            <img ng-if="user.user_avatar_source_id == model.ConstSocialLogin.Twitter || user.user_avatar_source_id == model.ConstSocialLogin.Github" ng-src="{{user.attachmentable.thumb.medium}}" title="{{user.username}}" alt="{{user.username}}" height="{{model.thumb.medium.height}}" width="{{model.thumb.medium.width}}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h3><a href="#/user/{{user.username}}" title="{{user.username}}">{{user.username}}</a></h3>
+                        <p>{{user.user_profile.about_me}}</p>
+                        <div class="form-group">
+                            <label>{{'Balance' | translate}}: <span>{{getFormatCurrency(user.available_wallet_amount)}}</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          	<div class="col-md-6 settings-block">
+            	<p class="text-right">
+                	<a href="#/users/user_profile" class="btn btn-orange" title="{{'Edit User Profile'|translate}}"><i class="fa fa-edit"></i>{{'Edit'|translate}}</a>
+               	</p>
+                <dashboard-settings class="pull-right"></dashboard-settings>
+                <a href="#/wallets" title="{{'Add Amount to Wallet' | translate}}" class="pull-right btn btn-green-d">{{'Add Amount to Wallet' | translate}}</a>
+            </div>
+        </div>
+        <div class="clearfix company-details" ng-if="$root.vehicle_company &&  $root.vehicle_company.is_active == 1">
+            <h3 class="text-uppercase">{{'Company Details' | translate}}</h3>
+            <div class="field car">
+                <p>{{$root.vehicle_company.name}}</p>
+            </div>
+            <div class="field envelope">
+                <p>{{$root.vehicle_company.email}}</p>
+            </div>
+            <div class="field marker">
+                <p>{{$root.vehicle_company.address}}</p>
+            </div>
+            <div class="field mobile">
+                <p>{{$root.vehicle_company.mobile}}</p>
+            </div>
+            <div class="field print" ng-show="$root.vehicle_company.fax">
+                <p>{{$root.vehicle_company.fax}}</p>
+            </div>
+        </div>
+        <!-- <div id="tab-container" class="dashborad-tab">
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a class="show" data-target="#dashboard" data-toggle="tab">{{'Dashboard'|translate}}</a>
+                </li>
+                <li ng-if="$root.settings['site.enabled_plugins'].indexOf('Vehicles') > -1 && $root.vehicle_company.is_active == 1">
+                    <a class="show" data-target="#myvehicles" data-toggle="tab">{{'My Vehicles'|translate}}</a>
+                </li>
+            </ul>
+        </div> -->
+        <div class="tab-content">
+            <!-- Dashboard view -->
+            <div class="tab-pane active dashboard_grid" id="dashboard">
+                <div class="row">
+                	<div class="" ng-class="{'col-md-8 col-md-offset-2': $root.vehicle_company.is_active != 1, 'col-md-6' : $root.vehicle_company.is_active == 1}" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1">
+                        <h3 class="text-uppercase">{{'Booking Details' | translate}}</h3>
+                        <ul class="list-unstyled dashboard-grid-list">
+                            <li class="col-md-3 col-xs-4" ng-repeat="booking in model.bookingStats">
+                                <h2>
+                                    <a title="{{booking.name|translate}}" href="#/booking/{{booking.id}}/{{booking.name|slugify}}">
+                                        {{booking.booking_count}}
+                                    </a>
+                                </h2>
+                                <p>{{booking.name|translate}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" ng-show="$root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1 && $root.vehicle_company.is_active == 1">
+                        <h3 class="text-uppercase">{{'Order Details' | translate}}</h3>
+                        <ul class="list-unstyled dashboard-grid-list">
+                            <li class="col-md-3 col-xs-4" ng-repeat="host in model.hostStats">
+                                <h2>
+                                    <a title="{{host.name|translate}}" href="#/orders/{{host.id}}/{{host.name|slugify}}">
+                                        {{host.host_count}}
+                                    </a>
+                                </h2>
+                                <p>{{host.name|translate}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- My vehicles view -->
+            <!-- <div class="tab-pane dashboard_grid vehicle-dashboard" id="myvehicles" ng-if="$root.settings['site.enabled_plugins'].indexOf('Vehicles') > -1 && $root.vehicle_company.is_active == 1">
+                <div ng-include="model.myvehicleTpl"></div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="transaction-block">
+    <my-transactions></my-transactions>
+</div>
+<div class="dashboard-feedback">
+    <user-feedback user_id="$root.auth.id"></user-feedback>
+</div>

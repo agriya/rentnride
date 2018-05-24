@@ -1,0 +1,256 @@
+{
+  "apis": [
+    {
+      "path": "/admin/languages",
+      "operations": [
+        {
+          "summary": "Fetch Languages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Languages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of languages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The language Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort languages by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_languages_filter__filter__sort__sort__sortby__sortby__page__page__q__q_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/languages",
+      "operations": [
+        {
+          "summary": "Store Languages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "LanguageAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "LanguageAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_languages"
+        }
+      ]
+    },
+    {
+      "path": "/admin/languages/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Language",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Language Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_languages__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/languages/{id}",
+      "operations": [
+        {
+          "summary": "update language",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The language Identifier"
+            },
+            {
+              "name": "LanguageEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "LanguageEdit",
+              "format": "string"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_languages__id_"
+        },
+        {
+          "summary": "Delete languages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The language Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_languages__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "LanguageAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Name"
+        },
+        "iso2": {
+          "type": "string",
+          "required": true,
+          "description": "iso2"
+        },
+        "iso3": {
+          "type": "string",
+          "required": true,
+          "description": "iso3"
+        }
+      },
+      "id": "LanguageAdd"
+    },
+    "LanguageEdit": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "required": true,
+          "description": "The Language Identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Name"
+        },
+        "iso2": {
+          "type": "string",
+          "required": true,
+          "description": "iso2"
+        },
+        "iso3": {
+          "type": "string",
+          "required": true,
+          "description": "iso3"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "LanguageEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

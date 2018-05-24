@@ -1,0 +1,191 @@
+{
+  "apis": [
+    {
+      "path": "/admin/user_cash_withdrawals",
+      "operations": [
+        {
+          "summary": "Fetch all Withdrawal Requests",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "success",
+                "rejected",
+                "all"
+              ],
+              "type": "integer",
+              "description": "filter list of requests ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The field_name to sort",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Requests by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_user_cash_withdrawals"
+        }
+      ]
+    },
+    {
+      "path": "/admin/user_cash_withdrawals/{id}",
+      "operations": [
+        {
+          "summary": "Delete withdrawal requests",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Withdrawal request Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_user_cash_withdrawals__id_"
+        },
+        {
+          "summary": "update Withdrawal requests",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "Withdrawal request ID"
+            },
+            {
+              "name": "WithdrawEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "WithdrawEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_user_cash_withdrawals__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/user_cash_withdrawals/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit withdrawal requests",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "Withdrawal request ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_user_cash_withdrawals__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WithdrawEdit": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "description": "The Withdrawal request identifier"
+        },
+        "withdrawal_status_id": {
+          "type": "string",
+          "required": true,
+          "description": "Withdrawal Status ID"
+        }
+      },
+      "id": "WithdrawEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "VehicleTaxes",
+  "class": "fa fa-2x fa-text-width",
+  "description": "By enabling this, item owner can manage taxes based on vehicle types.",
+  "dependencies": "VehicleRentals",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "14"
+}

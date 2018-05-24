@@ -1,0 +1,10 @@
+<!-- banner content starts -->
+<section class="clearfix text-center max-img">
+    <div ng-if="model.position === 'topBanner' && $root.settings['banner.all_page_top']">
+        <div ng-bind-html="$root.settings['banner.all_page_top'] | html"></div>
+    </div>
+    <div ng-if="model.position === 'bottomBanner' && $root.settings['banner.all_page_bottom']">
+        <div ng-bind-html="$root.settings['banner.all_page_bottom'] | html"></div>
+    </div>
+</section>
+<!-- banner content ends -->

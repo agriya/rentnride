@@ -1,0 +1,215 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <ma-view-actions>
+                <ma-back-button></ma-back-button>
+            </ma-view-actions>
+            <h1><span> View Vehicle</span></h1>
+        </div>
+    </div>
+</div>
+<div class="row" id="create-view">
+    <div class="col-xs-12 vehicle-view">
+        <div class="row">
+        	<div class="col-sm-8 mob-dc">
+                <h2>{{vehicle.name}}</h2>
+                <p>
+                    <span ng-if="enabled_plugin.indexOf('VehicleFeedbacks') >= 0" ng-repeat='rating in maxRatings track by $index'>
+                        <i class="fa fa-star text-warning" ng-class="((rating < vehicle.roundedRating)? 'fa-star':((((vehicle.feedback_rating - rating) > 0) && ((vehicle.feedback_rating - rating) < 1))
+                        ? 'fa-star-half': 'fa-star-o'))"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="col-sm-4 text-right price-block mob-dc">
+                <p> <strong class="text-orange"> {{siteCurrency}}{{vehicle.per_day_amount}} </strong> / {{'Day'|translate}}</p>
+                <p> <strong class="text-orange"> {{siteCurrency}}{{vehicle.per_hour_amount}} </strong> / {{'Hr'|translate}}</p>
+        	</div>
+        </div>
+        <div class="clearfix thumbnail">
+            <img ng-src="{{vehicle.attachments.thumb.large}}" class="img-responsive">
+        </div>  
+        <div class="clearfix">
+        	<ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" data-target="#specification">{{'Specifications'|translate}}</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" data-target="#counterLocation">{{'Counter Location'|translate}}</a>
+                </li>
+                <li ng-if="enabled_plugin.indexOf('VehicleFeedbacks') >= 0">
+                    <a data-toggle="tab" data-target="#feedback">{{'Feedbacks'|translate}}</a>
+                </li>
+         	</ul>
+        	<div class="tab-content">
+           		<div id="specification" class="tab-pane fade in active">
+                	<h4><strong>{{'Specifications'|translate}}</strong></h4>
+                    <div class="media">
+                        <div class="media-body">
+                            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+                            <dl class="dl-horizontal">
+                                <dt>{{'Type'|translate}} :</dt>
+                                <dd>{{vehicle.vehicle_type.name}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>{{'Make'|translate}} :</dt>
+                                <dd>{{vehicle.vehicle_make.name}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>{{'Model'|translate}} :</dt>
+                                <dd>{{vehicle.vehicle_model.name}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>{{'Vehicle No'|translate}} :</dt>
+                                <dd>{{vehicle.vehicle_no}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>{{'Fuel Type'|translate}} :</dt>
+                                <dd>{{vehicle.fuel_type.name}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>{{'Mileage'|translate}} :</dt>
+                                <dd>{{vehicle.mileage}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>{{'Vehicle Rental Count'|translate}} :</dt>
+                                <dd>{{vehicle.vehicle_rental_count}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="vehicle.is_manual_transmission">
+                                <dt><span class="fa fa-code-fork fa-2x"></span> :</dt>
+                                <dd>{{'Manual' | translate }}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="!vehicle.is_manual_transmission">
+                                <dt><span class="fa fa-code-fork fa-2x"></span> :</dt>
+                                <dd>{{'Automatic' | translate }}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="vehicle.is_ac">
+                                <dt><span class="fa fa-asterisk fa-2x"></span> :</dt>
+                                <dd>{{'Air Conditioning' | translate }}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="vehicle.no_of_seats > 0">
+                                <dt><span class="fa fa-male fa-2x"></span> :</dt>
+                                <dd>{{vehicle.no_of_seats}} {{'People' | translate}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="vehicle.no_small_bags > 0">
+                                <dt><span class="fa fa-briefcase fa-2x"></span> :</dt>
+                                <dd>{{vehicle.no_small_bags}} {{'Small Bags' | translate}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="vehicle.no_large_bags > 0">
+                                <dt><span class="fa fa-briefcase fa-2x"></span> :</dt>
+                                <dd>{{vehicle.no_large_bags}} {{'Large Bags' | translate}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="vehicle.no_of_gears > 0">
+                                <dt><span class="fa fa-gears fa-2x"></span> :</dt>
+                                <dd>{{vehicle.no_of_gears}} {{'Gears' | translate}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal" ng-show="vehicle.no_of_doors > 0">
+                                <dt><span class="fa fa-gears fa-2x"></span> :</dt>
+                                <dd>{{vehicle.no_of_doors}} {{'Doors' | translate}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    
+                	<h4><strong>{{'Prices'|translate}}</strong></h4>
+                    <div class="media">
+                        <div class="media-body">
+                            <dl class="dl-horizontal">
+                                <dt>{{'Per hour amount'|translate}} :</dt>
+                                <dd>{{siteCurrency}}{{vehicle.per_hour_amount}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>{{'Per day amount'|translate}} :</dt>
+                                <dd>{{siteCurrency}}{{vehicle.per_day_amount}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                
+                <!-- Vehicle Extra Accessory -->
+                <div ng-show="enabled_plugin.indexOf('VehicleExtraAccessories') >= 0 && vehicle.vehicle_type && vehicle_extra_accessories.length > 0"
+                     <h4><strong>{{'Insurance'|translate}}</strong></h4></div>
+                <div class="media" ng-repeat="data in vehicle_extra_accessories"
+                     ng-show="vehicle.vehicle_type && vehicle_extra_accessories.length > 0">
+                    <div class="media-body"><h5 class="media-heading"><strong>{{data.vehicle_extra_accessory.name}}</strong>
+                    </h5>
+                        <p>{{data.vehicle_extra_accessory.description}}</p></div>
+                    <div class="media-right text-orange"><strong>{{data.rate}}</strong></div>
+                </div>
+                <!-- vehicle Fuel Option -->
+                <div ng-show="enabled_plugin.indexOf('VehicleFuelOptions') >= 0 && vehicle.vehicle_type && vehicle_fuel_option.length > 0"><h4>
+                    <strong>{{'Fuel Options'|translate}}</strong></h4></div>
+                <div class="media" ng-repeat="data in vehicle_fuel_option"
+                     ng-show="vehicle.vehicle_type && vehicle_fuel_option.length > 0">
+                    <div class="media-body"><h5 class="media-heading"><strong>{{data.vehicle_fuel_option.name}}</strong>
+                    </h5>
+                        <p>{{data.vehicle_fuel_option.description}}</p></div>
+                    <div class="media-right text-orange"><strong>{{data.rate}}</strong></div>
+                </div>
+                <!-- vehicle Insurance -->
+                <div ng-show="enabled_plugin.indexOf('VehicleInsurances') >= 0 && vehicle.vehicle_type && vehicle_insurance.length > 0"><h4>
+                    <strong>{{'Insurances'|translate}}</strong></h4></div>
+                <div class="media" ng-repeat="data in vehicle_insurance"
+                     ng-show="vehicle.vehicle_type && vehicle_insurance.length > 0">
+                    <div class="media-body"><h5 class="media-heading"><strong>{{data.vehicle_insurance.name}}</strong>
+                    </h5>
+                        <p>{{data.vehicle_insurance.description}}</p></div>
+                    <div class="media-right text-orange"><strong>{{data.rate}}</strong></div>
+                </div>
+            </div>
+            <div id="counterLocation" class="tab-pane fade">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <h4><strong>{{'Pickup Locations'|translate}}</strong></h4>
+                        <ul class="row">
+                            <li ng-repeat="location in pickup_locations">{{location.address}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><strong>{{'Drop Locations'|translate}}</strong></h4>
+                        <ul class="row">
+                            <li ng-repeat="location in drop_locations">{{location.address}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="feedback" class="tab-pane fade" ng-if="enabled_plugin.indexOf('VehicleFeedbacks') >= 0">
+                <ul class="media-list">
+                    <li class="media" ng-repeat="vehicleFeedback in vehicleFeedbacks"
+                        ng-if="vehicle_metadata.total > 0">
+                        <div class="col-md-12">
+                            <div class="col-md-8">
+                                <a href="#/users/show/{{vehicleFeedback.user_id}}" class="media-left pull-left" data-dismiss="modal">
+                                    <img class="media-object img-thumbnail" ng-src="{{vehicleFeedback.user.attachmentable.thumb.smallmedium}}" title="{{vehicleFeedback.user.username}}">
+                                    <p>{{vehicleFeedback.user.username}}</p>
+                                </a>
+                                <div class="media-body">
+                                    <p> {{vehicleFeedback.feedback}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                            <span ng-repeat='rating in maxRatings track by $index'>
+                                            <i class="fa fa-1x text-danger"
+                                               ng-class="(rating < vehicleFeedback.rating) ? 'fa-star' : 'fa-star-o'"></i>
+                                            </span>
+                                <p>{{vehicleFeedback.created_at}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li ng-if="vehicle_metadata.total == 0">
+                        <div class="alert alert-danger text-center">
+                            {{'No Record Found' | translate}}
+                        </div>
+                    </li>
+                </ul>
+                <div class="paging clearfix text-center" ng-if="vehicle_metadata.total > 0">
+                	<uib-pagination total-items="vehicle_metadata.total"
+                        num-pages="vehicle_metadata.total_pages" ng-model="currentPage"
+                        max-size="maxSize" class="pagination-sm"
+                        boundary-link-numbers="true" rotate="false"
+                        items-per-page="vehicle_metadata.per_page"
+                        ng-change="paginate(currentPage)">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+   		</div>
+	</div>
+</div>

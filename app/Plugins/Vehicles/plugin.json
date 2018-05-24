@@ -1,0 +1,9 @@
+{
+  "name": "Vehicles",
+  "class": "fa fa-2x fa-taxi",
+  "description": "By enabling this plugin, user can work with vehicle related functionalities.",
+  "dependencies": "",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "9"
+}

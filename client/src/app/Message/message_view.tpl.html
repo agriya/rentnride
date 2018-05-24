@@ -1,0 +1,39 @@
+<div class="page-head">
+	<div class="container">
+    	<h2 class="text-uppercase">{{'Message View' | translate}}</h2>
+    </div>
+</div>
+<div class="message">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                <div ng-include="sidebar_tpl" class="message-sidebar"></div>
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="mail-view clearfix">
+                    <a class="btn btn-orange" ng-if="message_type == 'sentmail'" ui-sref="message({type:'sentmail'})" title="{{'Back to Sent Mail' | translate}}">{{'Back to Sent Mail' | translate}}</a>
+                    <a class="btn btn-orange" ng-if="message_type == 'inbox'" ui-sref="message({type:'inbox'})" title="{{'Back to Inbox' | translate}}">{{'Back to Inbox' | translate}}</a>
+                    <a class="btn btn-orange" ng-if="message_type == 'starred'" ui-sref="message({type:'starred'})" title="{{'Back to Starred' | translate}}">{{'Back to Starred' | translate}}</a>
+                    <table class="table col-xs-12 table-condensed table-hover">
+                        <tr>
+                            <td ng-if="message.is_sender == 0"><strong>{{'From: ' | translate }}</strong></td>
+                            <td ng-if="message.is_sender == 1"><strong>{{'To: ' | translate }}</strong></td>
+                            <td>{{message.from_user.username}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>{{'Date: ' | translate }}</strong></td>
+                            <td>{{message.created_at}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>{{'Subject: ' | translate }}</strong></td>
+                            <td><div ng-bind-html="message.message_content.subject | html"></div></td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-12" ng-bind-html="message.message_content.message | html"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

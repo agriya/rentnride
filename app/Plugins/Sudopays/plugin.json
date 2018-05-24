@@ -1,0 +1,9 @@
+{
+	"name": "ZazPay",
+	"class": "fa fa-2x icon-sudopay-icon pull-left",
+	"description": "By enabling this plugin, user can synchronize with zazpay and can access more payment gateways.",
+	"dependencies": "PaymentGateways",
+	"module_id": "792",
+	"module_hash": "408ceefc3362ad8d8cdb52cc7f573b52",
+	"display_order": "10"
+}

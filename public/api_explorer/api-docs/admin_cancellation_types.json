@@ -1,0 +1,266 @@
+{
+  "apis": [
+    {
+      "path": "/admin/cancellation_types",
+      "operations": [
+        {
+          "summary": "Fetch List of cancellation types",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search cancellation types",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The cancellation types Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort cancellation types by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_cancellation_types"
+        },
+        {
+          "summary": "Store cancellation types",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "CancellationTypeAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "CancellationTypeAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_cancellation_types"
+        }
+      ]
+    },
+    {
+      "path": "/admin/cancellation_types/{id}",
+      "operations": [
+        {
+          "summary": "Update cancellation types",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The cancellation types Identifier"
+            },
+            {
+              "name": "CancellationTypeEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "CancellationTypeEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_cancellation_types__id_"
+        },
+        {
+          "summary": "Fetch particular Cancellation Type",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Cancellation Type Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_cancellation_types__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/cancellation_types/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Cancellation Type",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Cancellation Type Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_cancellation_types__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "CancellationTypeAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Cancellation Type Name"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description of the Cancellation Type"
+        },
+        "minimum_duration": {
+          "type": "string",
+          "required": true,
+          "description": "maximum duration"
+        },
+        "maximum_duration": {
+          "type": "string",
+          "required": true,
+          "description": "maximum duration"
+        },
+        "deduct_rate": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Deduct rate in %"
+        }
+      },
+      "id": "CancellationTypeAdd"
+    },
+    "CancellationTypeEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Cancellation type identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Cancellation Type Name"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description of the Cancellation Type"
+        },
+        "minimum_duration": {
+          "type": "string",
+          "required": true,
+          "description": "maximum duration"
+        },
+        "maximum_duration": {
+          "type": "string",
+          "required": true,
+          "description": "maximum duration"
+        },
+        "deduct_rate": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Deduct rate in %"
+        }
+      },
+      "id": "CancellationTypeEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

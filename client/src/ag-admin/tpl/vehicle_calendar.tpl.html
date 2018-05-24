@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <ma-view-actions>
+                <ma-back-button></ma-back-button>
+            </ma-view-actions>
+            <h1><span> View Calendar</span></h1>
+        </div>
+    </div>
+</div>
+<div class="calendar-block">
+    <div class="calendar-header text-center clearfix">
+        <h2>{{calendarTitle}}</h2>
+        <div class="navbar-left">
+            <div class="btn-group">
+                <button class="btn btn-primary" mwl-date-modifier date="viewDate"  decrement="calendarView" ng-click="prev()">
+                    {{'Previous'|translate}}
+                </button>
+                <button class="btn btn-default" mwl-date-modifier date="viewDate"  set-to-today ng-click="today()">
+                    {{'Today'|translate}}
+                </button>
+                <button class="btn btn-primary"  mwl-date-modifier  date="viewDate" increment="calendarView" ng-click="next()">
+                    {{'Next'|translate}}
+                </button>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="btn-group">
+                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'month'">{{'Month'|translate}}</label>
+                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'week'">{{'Week'|translate}}</label>
+                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'day'">{{'Day'|translate}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="calendar-body">
+        <mwl-calendar
+            events="events"
+            view="calendarView"
+            view-title="calendarTitle"
+            view-date="viewDate"
+            on-event-click="eventClicked(calendarEvent)"
+            >
+        </mwl-calendar>
+	</div>
+</div>

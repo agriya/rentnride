@@ -1,0 +1,85 @@
+<div class="page-head">
+    <div class="container">
+        <h2 class="text-uppercase">{{'Bookings' | translate}}</h2>
+    </div>
+</div>
+<div class="clearfix">
+    <div class="container">
+        <div id="bookings-tab-container" class="m-t-30 tab-orange">
+            <ul class="nav nav-pills">
+                <li ng-class="{active : statusID === 0}">
+                    <a class="show" ng-click="filterVehicleRental(0, 'all')" data-target="#" data-toggle="tab">{{'All' | translate}}</a>
+                </li>
+                <li ng-class="{active : statusID === status.id}" ng-repeat="status in itemUserStatus">
+                    <a class="show" ng-click="filterVehicleRental(status.id, status.slug)" data-target="#" data-toggle="tab">{{status.name | translate}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th  colspan="3">{{'Booking Details' | translate}}</th>
+                        <th>{{'Name' | translate}}</th>
+                        <th ng-if="statusID == 0">{{'Status' | translate}}</th>
+                        <th>{{'Host' | translate}}</th>
+                        <th>{{'Gross' | translate}}</th>
+                        <th>{{'Booked On' | translate}}</th>
+                        <th>{{'Action' | translate}}</th>
+                    </tr>
+                    <tr class="sub-head">
+                        <th>{{'ID'|translate}}</th>
+                        <th>{{'From'|translate}}</th>
+                        <th>{{'To'|translate}}</th>
+                        <th colspan="6"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="_metadata.total === 0">
+                        <td colspan="9">
+                            <p class="alert alert-danger">{{'No Record Found' |translate}}</p>
+                        </td>
+                    </tr>
+                    <tr ng-repeat='booking in VehicleRentalLists' ng-show="_metadata.total > 0">
+                        <td>{{booking.id}}</td>
+                        <td>{{booking.item_booking_start_date}}</td>
+                        <td>{{booking.item_booking_end_date}}</td>
+                        <td><a href="#/vehicle/{{booking.item_userable.id}}/{{booking.item_userable.slug}}" title="{{booking.item_userable.name}}">{{booking.item_userable.vehicle_make.name}}-<strong>{{booking.item_userable.vehicle_model.name}}#{{booking.item_userable.id}}</strong></a></td>
+                        <td ng-if="statusID == 0">{{booking.item_user_status.name | translate}}</td>
+                        <td>{{booking.item_userable.user.username}}</td>
+                        <td>{{getFormatCurrency(booking.total_amount)}}</td>
+                        <td>{{booking.created_at}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <a href="javascript:void(0);" title="{{'Settings' | translate}}" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>
+                                    <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li ng-if="booking.item_user_status_id == ConstItemUserStatus.PaymentPending">
+                                        <a href="" ng-click="vehicleRentalPaynow(booking.id)" title="{{'Paynow' | translate}}">{{'Paynow' | translate}}</a>
+                                    </li>
+                                    <li ng-if="booking.item_user_status_id == ConstItemUserStatus.WaitingForAcceptance">
+                                        <a ng-click="VehicleRentalCancel(booking.id)" title="{{'Cancel' | translate}}">{{'Cancel' | translate}}</a>
+                                    </li>
+                                    <li ng-if="($root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1) && (booking.item_user_status_id == ConstItemUserStatus.WaitingForReview || booking.item_user_status_id == ConstItemUserStatus.HostReviewed) && booking.is_dispute == 0">
+                                        <a href="#/activity/{{booking.id}}/review" title="{{'Review' | translate}}">{{'Review' | translate}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/activity/{{booking.id}}/all" title="{{'View Activities' | translate}}">{{'View Activities' | translate}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/activity/{{booking.id}}/note" title="{{'Private Note' | translate}}">{{'Private Note' | translate}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="paging clearfix text-center" ng-show="_metadata.total > 0">
+            <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="_metadata.total" num-pages="_metadata.total_pages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="_metadata.per_page" ng-change="paginate()"></uib-pagination>
+        </div>
+    </div>
+</div>

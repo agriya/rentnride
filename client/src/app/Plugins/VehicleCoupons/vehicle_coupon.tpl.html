@@ -1,0 +1,22 @@
+<div class="vehicle-coupon col-sm-12">
+    <form role="form" class="payment-form clearfix" name="vehicleCoupon" ng-submit="vehicleCouponSubmit(vehicleCoupon.$valid)" novalidate>
+		<h4>{{'Coupons' | translate}}</h4>
+        <div class="row">
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleCoupon.$submitted || vehicleCoupon.coupon_code.$touched) && (vehicleCoupon.coupon_code.$pristine || vehicleCoupon.coupon_code.$invalid) }">
+                <!--<label class="col-md-3 col-sm-3 control-label" for="coupon_code">{{'Coupon Code' | translate}}</label>-->
+                <input type="text" class="form-control" name="coupon_code" id="coupon_code" placeholder="{{'Coupon Code'|translate}}" ng-model='coupon_code' required>
+                <span class="error" ng-show="(vehicleCoupon.$submitted || vehicleCoupon.coupon_code.$touched) && (vehicleCoupon.coupon_code.$pristine || vehicleCoupon.coupon_code.$invalid) && (vehicleCoupon.coupon_code.$error.required)">
+                    {{'You must enter the Coupon Code' | translate}}
+                </span>
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="sr-only" for="submit">{{'Apply' |translate}}</label>
+                <button class="btn btn-orange" ng-disabled="apply_is_disabled" id="submit" type="submit" title="{{'Apply' | translate}}">
+                    <span ng-show="apply_is_disabled">
+                    <i class="fa fa-spinner fa-pulse fa-lg"></i></span>
+                    {{'Apply' | translate }}
+                </button>
+            </div>
+		</div>
+    </form>
+</div>

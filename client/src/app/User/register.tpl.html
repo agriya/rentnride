@@ -1,0 +1,63 @@
+<div class="login-bg">
+    <div class="container">
+        <div class="user-login">
+            <h2 class="text-uppercase">{{'Sign Up' | translate}}</h2>
+            <form class="form-login" name="signupForm" ng-submit="model.signup(signupForm.$valid)" novalidate>
+                <div class="form-group username" ng-class="{ 'has-error' : ((signupForm.$submitted || signupForm.username.$touched) && (signupForm.username.$pristine || signupForm.username.$invalid)) || model.nameErr}">
+                    <input type="text"  class="form-control input-lg" placeholder="{{'Username' | translate }}" name="username" ng-model="model.username" ng-required="true" ng-minlength="3" ng-change="model.nameErr=''" ng-pattern="/^[a-zA-Z0-9]*$/">
+                    <div ng-show="((signupForm.$submitted || signupForm.username.$touched) && (signupForm.username.$pristine || signupForm.username.$invalid)) || model.nameErr">
+                        <span class="error" ng-show="((signupForm.$submitted || signupForm.username.$touched) && (signupForm.username.$pristine || signupForm.username.$invalid || signupForm.username.$error.required)) || model.nameErr">{{'Required' | translate }}</span>
+                        <span class="error" ng-show="signupForm.username.$error.minlength">{{ 'Minimum length is 3' | translate }}</span>
+                    	<span class="error" ng-show="model.nameErr">{{model.nameErr}}</span>
+                        <span class="error" ng-show="(signupForm.username.$error.pattern)">{{'Enter the Username without blankspace' | translate }}</span>
+                    </div>
+                </div>
+                <div class="form-group envelop" ng-class="{ 'has-error' : ((signupForm.$submitted || signupForm.email.$touched) && (signupForm.email.$pristine || signupForm.email.$invalid || signupForm.email.$error.email))|| model.emailErr}">
+                    <input type="email" class="form-control input-lg" placeholder="{{'Email' | translate }}" name="email" ng-model="model.email" ng-required="true" ng-change="model.emailErr=''">
+                    <div ng-show="((signupForm.$submitted || signupForm.email.$touched) && (signupForm.email.$pristine || signupForm.email.$invalid)) || model.emailErr">
+                        <span class="error" ng-show="(signupForm.email.$error.required)">{{'Required' | translate }}</span>
+                        <span class="error" ng-show="(signupForm.email.$error.email)">{{'Enter valid email' | translate }}</span>
+                        <span class="error" ng-show="model.emailErr">{{model.emailErr}}</span>					
+                    </div>
+                </div>
+                <div class="form-group password" ng-class="{ 'has-error' : ((signupForm.$submitted || signupForm.password.$touched) && (signupForm.password.$pristine || signupForm.password.$invalid)) || model.passwordErr}">
+                    <input type="password" class="form-control input-lg" placeholder="{{'Password' | translate }}" name="password" ng-model="model.password" ng-required="true" ng-minlength="6" ng-maxlength="40" ng-change="model.passwordErr=''">
+                    <div ng-show="((signupForm.$submitted || signupForm.password.$touched) && (signupForm.password.$pristine || signupForm.password.$invalid)) || model.passwordErr">
+                        <span class="error" ng-show="(signupForm.password.$error.required)">{{ 'Required' | translate }}</span>
+                        <span class="error" ng-show="(signupForm.password.$error.minlength)">{{ 'Minimum length is 6' | translate }}</span>
+                        <span class="error" ng-show="(signupForm.password.$error.maxlength)">{{ 'Maximum length is 20' | translate }}</span>
+                        <span class="error" ng-show="model.passwordErr">{{model.passwordErr}}</span>
+                    </div>
+                </div>
+                <div class="form-group password" ng-class="{ 'has-error' : ((signupForm.$submitted || signupForm.confirmPassword.$touched) && (signupForm.confirmPassword.$pristine || signupForm.confirmPassword.$invalid)) || model.confirmPasswordErr}">
+                    <input password-match="model.password" type="password" class="form-control input-lg" placeholder="{{'Confirm Password' | translate }}" name="confirmPassword"ng-model="model.confirm_password" ng-required="true" ng-minlength="6" ng-maxlength="40" ng-change="model.confirmPasswordErr=''">
+                    <div ng-show="((signupForm.$submitted || signupForm.confirmPassword.$touched) && (signupForm.confirmPassword.$pristine || signupForm.confirmPassword.$invalid)) || model.confirmPasswordErr">
+                        <span class="error" ng-show="(signupForm.confirmPassword.$error.required)">{{'Required' | translate}}</span>
+                        <span class="error" ng-show="(signupForm.confirmPassword.$error.minlength)">{{'Minimum length is 6' | translate}}</span>
+                        <span class="error" ng-show="(signupForm.confirmPassword.$error.maxlength)">{{'Maximum length is 20' | translate }}</span>
+                        <span class="error" ng-show="(signupForm.confirmPassword.$dirty && signupForm.confirmPassword.$error.compareTo)">{{'Password Mismatch' | translate }}</span>
+                        <span class="error" ng-show="model.confirmPasswordErr">{{model.confirmPasswordErr}}</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : model.captchaErr}">
+                    <div class="g-recaptcha" vc-recaptcha key="model.captcha_site_key" on-create="setRecaptchaId(widgetId)" on-success="model.captchaErr=''"></div>
+                    <div class="error" ng-show="model.captchaErr">{{model.captchaErr}}</div>
+                </div>        
+                <div class="row login-btn" ng-class="{ 'has-error' : (signupForm.$submitted || signupForm.termCondition.$touched) && (signupForm.termCondition.$pristine || signupForm.termCondition.$invalid)}">
+                    <div class="col-md-6">
+                        <label class="checkbox custom-checkbox" for="checkbox1">
+                            <input class="hide" type="checkbox" name="termCondition" ng-model="model.terms_conditions" ng-required="true" id="checkbox1">
+                            <span></span>{{'Accept' | translate }}
+                            <a title="{{'Terms and conditions' | translate}}" ui-sref="pages({ slug: 'terms-and-conditions' })" target="_blank">{{'Terms and Conditions' | translate}}</a>
+                        </label>
+                        <span class="error" ng-show="(signupForm.$submitted || signupForm.termCondition.$touched) && (signupForm.termCondition.$pristine || signupForm.termCondition.$invalid) && (signupForm.termCondition.$error.required)">{{'Required' | translate }}</span>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-block btn-orange text-uppercase">{{'Sign Up' | translate }}</button>
+                    </div>
+                </div>
+            </form> 
+        	<social-login class="clearfix"></social-login>  
+        </div>
+    </div>
+</div>

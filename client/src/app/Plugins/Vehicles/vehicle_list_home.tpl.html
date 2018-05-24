@@ -1,0 +1,72 @@
+<div class="vehicle-drive">
+	<div class="container">
+    	<h1>{{'TYPE BASED CAR LISTING'|translate}}!</h1>
+        <div class="list-tab">
+            <ul class="nav nav-tabs" ng-if="vehicleTypes.length > 0">
+                <li role="presentation" ng-class="{'active':type.id == vehicleTypes.status_id}" ng-repeat="type in vehicleTypes" ng-click="getVehicles(type.id)">
+                    <a href="javascript:void(0);">{{type.name}}</a>
+                </li>
+            </ul>
+            <div class="tab-content" ng-if="vehicles.length > 0">
+                <uib-carousel active="active" interval="false" class="home" no-wrap="noWrapSlides">
+                    <uib-slide ng-repeat="vehicle in vehicles track by $index"  index="$index">
+                    	<div class="row">
+                            <div class="col-sm-6 col-md-4" ng-repeat="list in vehicle">
+                                <div class="thumbnail clearfix">
+                                	<div class="thumb-img">
+                                        <a href="#/vehicle/{{list.id}}/{{list.slug}}" title="{{list.name}}">
+                                        	<img ng-src="{{list.attachments.thumb.smallmedium}}" class="img-responsive" alt="image">
+                                        </a>
+                                    </div>                                    
+                                    <div class="caption clearfix">
+                                         <label class="pull-left">
+                                         	<a href="#/vehicle/{{list.id}}/{{list.slug}}"><span>{{list.vehicle_make.name}}</span></a>
+                                            {{list.vehicle_model.name}}
+                                         </label>
+                                         <div class="amount pull-left">
+                                             <p><span>{{getFormatCurrency(list.per_day_amount)}} </span>/ {{'per day'|translate}}</p>
+                                             <p><span>{{getFormatCurrency(list.per_hour_amount)}} </span>/ {{'per hour'|translate}}</p>
+                                         </div>
+                                         <div class="col-sm-12 p-0">
+                                             <ul class="list-unstyled col-sm-6 col-xs-12">
+                                                <li>
+                                                    <h4>{{'Manual'|translate}}</h4>
+                                                    <p>{{'Transmission'|translate}}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>{{'Air Conditioning'|translate}}</h4>
+                                                    <p>{{'Transmission'|translate}}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>{{'Diesel'|translate}}</h4>
+                                                    <p>{{'Fuel Type'|translate}}</p>
+                                                </li>
+                                             </ul>
+                                             <ul class="list-unstyled col-sm-6 col-xs-12">
+                                                <li>
+                                                    <h4>5</h4>
+                                                    <p>{{'Seats'|translate}}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>2</h4>
+                                                    <p>{{'Luggage'|translate}}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>1</h4>
+                                                    <p>{{'Bag'|translate}}</p>
+                                                </li>
+                                             </ul>
+                                       	</div>
+                                    </div> 
+                                </div>
+                            </div>
+                    	</div>
+                    </uib-slide>
+                </uib-carousel>
+                <div class="text-center vehicle-btn">
+                    <a ui-sref="all_vehicles" class="btn" title="{{'List of Vehicles'|translate}}">{{'List of Vehicles'|translate}}</a>
+              	</div>
+			</div>
+        </div>
+   	</div>
+</div>

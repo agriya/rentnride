@@ -1,0 +1,290 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_taxes",
+      "operations": [
+        {
+          "summary": "Fetch List of taxes",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Tax",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of taxes ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Tax Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Tax by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_taxes"
+        },
+        {
+          "summary": "Store Tax",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "TaxAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "TaxAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_taxes"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_taxes/{id}",
+      "operations": [
+        {
+          "summary": "Update Tax",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Tax Identifier"
+            },
+            {
+              "name": "TaxEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "TaxEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_taxes__id_"
+        },
+        {
+          "summary": "Show Tax",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Tax Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_taxes__id_"
+        },
+        {
+          "summary": "Delete Tax",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Tax Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_taxes__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_taxes/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Tax",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Tax Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_taxes__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "TaxAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Tax Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        }
+      },
+      "id": "TaxAdd"
+    },
+    "TaxEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Tax identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Tax Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "TaxEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

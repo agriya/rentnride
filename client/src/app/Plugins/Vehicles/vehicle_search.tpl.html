@@ -1,0 +1,51 @@
+<div class="banner">
+    <div class="container">
+        <h1 class="text-center">{{'Car Hire'|translate}} &amp; {{'Rental Booking Script for...'|translate}}</h1>
+        <form role="form" class="clearfix" name="SearchForm" ng-submit="SearchSubmit(SearchForm.$valid)" novalidate>
+            <div class="pull-right diff-loc">
+                <label class="checkbox custom-checkbox" for="checkbox1">
+                    <input class="hide" id="checkbox1" type="checkbox" ng-model="check_drop_location" ng-change="returnLocation(check_drop_location)" name="check_drop_location">
+                    <span></span>
+                    {{'Return car to different location'| translate}}
+                </label>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : (SearchForm.$submitted || SearchForm.pickup_location.$touched) && (SearchForm.pickup_location.$pristine || SearchForm.pickup_location.$invalid) && (SearchForm.pickup_location.$error.required)}">
+                <label for="pickupLocation">{{'Pickup Location'|translate}}:</label>
+                <div class="icon-marker">
+                    <input type="text" ng-model="vehicle.pickup_location" typeahead-editable="false" name="pickup_location" id="pickupLocation" class="form-control" placeholder="{{'Enter Location, Area or City'|translate}}" uib-typeahead="location as location.address for location in locations | filter:{address:$viewValue}" ng-required="true" autocomplete="off">
+                </div>
+                <span class="error" ng-show="(SearchForm.$submitted || SearchForm.pickup_location.$touched) && (SearchForm.pickup_location.$pristine || SearchForm.pickup_location.$invalid) && (SearchForm.pickup_location.$error.required)">{{'Required' | translate }}</span>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : (SearchForm.$submitted || SearchForm.drop_location.$touched) && (SearchForm.drop_location.$pristine || SearchForm.drop_location.$invalid) && (SearchForm.drop_location.$error.required)}" ng-show="check_drop_location">
+                <label for="dropLocation">{{'Dropoff Location'|translate}}:</label>
+                <div class="icon-marker">
+                    <input type="text" ng-model="vehicle.drop_location" typeahead-editable='false' name="drop_location" id="dropLocation" class="form-control" placeholder="{{'Enter Location, Area or City'|translate}}" uib-typeahead="location as location.address for location in locations | filter:{address:$viewValue}" class="form-control" ng-required="check_drop_location" autocomplete="off">
+                </div>
+                <span class="error" ng-show="(SearchForm.$submitted || SearchForm.drop_location.$touched) && (SearchForm.drop_location.$pristine || SearchForm.drop_location.$invalid) && (SearchForm.drop_location.$error.required)">{{'Required' | translate }}</span>
+            </div>
+            <div class="pickup-drop">
+                <div class="form-group" ng-class="{ 'has-error' : (SearchForm.$submitted || SearchForm.pickup_date.$touched) && (SearchForm.pickup_date.$pristine || SearchForm.pickup_date.$invalid) && (SearchForm.pickup_date.$error.required) || vehicle.start_date < currentDate}">
+                    <label for="pickupDateTime">{{'Pickup Date and Time'|translate}}</label>
+                    <div class="icon-calendar">
+                        <input type="text" name="pickup_date" class="form-control" placeholder="{{'Pickup Date' | translate}}" aria-describedby="basic-addon3" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="vehicle.start_date" is-open="open_pickup.date" id="pickupDateTime" ng-required="true" ng-change="dateErr=''" ng-focus="openSearchPickupCalendar($event, 'date')" button-bar="buttonBar">
+                    </div>
+                    <span class="error" ng-show="(SearchForm.$submitted || SearchForm.pickup_date.$touched) && (SearchForm.pickup_date.$pristine || SearchForm.pickup_date.$invalid) && (SearchForm.pickup_date.$error.required)">{{'Select Pickup Date' | translate }}</span>
+                    <span class="error" ng-show="vehicle.start_date < currentDate">{{'Pickup Date should be greater than current date' | translate }}</span>
+                    <span class="error" ng-show="dateErr">{{dateErr}}</span>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : (SearchForm.$submitted || SearchForm.drop_date.$touched) && (SearchForm.drop_date.$pristine || SearchForm.drop_date.$invalid) && (SearchForm.drop_date.$error.required) || vehicle.end_date <= vehicle.start_date}">
+                    <label for="dropDateTime">{{'Dropoff Date and Time'|translate}}</label>
+                    <div class="icon-calendar">
+                        <input type="text" class="form-control" placeholder="{{'Drop Off Date' | translate}}" name="drop_date" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="vehicle.end_date" is-open="open_drop.date" id="dropDateTime" ng-required="true" ng-change="dateErr=''"aria-describedby="basic-addon3" ng-focus="openSearchDropCalendar($event, 'date')" button-bar="buttonBar">
+                    </div>
+                    <span class="error" ng-show="(SearchForm.$submitted || SearchForm.drop_date.$touched) && (SearchForm.drop_date.$pristine || SearchForm.drop_date.$invalid) && (SearchForm.drop_date.$error.required)">{{'Select Drop Off Date' | translate }}</span>
+                    <span class="error" ng-show="(vehicle.end_date <= vehicle.start_date)">{{'End Date Should be Greater than Start date' | translate }}</span>
+                    <span class="error" ng-show="dateErr">{{dateErr}}</span>
+                </div>
+                <div class="form-btn">
+                    <button type="submit" class="btn btn-block btn-green">{{'Search'|translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

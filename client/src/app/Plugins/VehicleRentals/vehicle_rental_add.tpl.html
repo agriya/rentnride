@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h2>{{'Bookit' | translate}}</h2>
+        </div>
+    </div>
+    <hr>
+    <div class="clearfix">
+        <div class="col-sm-10">
+            <form class="form-horizontal" name="BookAddForm"
+                  ng-submit="BookFormSubmit(BookAddForm.$valid)"
+                  novalidate>
+                <div class="form-group" ng-class="{ 'has-error' : (BookAddForm.$submitted || BookAddForm.from_date.$touched) && (BookAddForm.from_date.$pristine || BookAddForm.from_date.$invalid) && (BookAddForm.from_date.$error.required)}">
+                    <label class="col-md-3 col-sm-3 control-label" for="from_date">
+                        {{'From Date' | translate}}
+                    </label>
+                    <div class="col-md-5 col-sm-9">
+                        <p class="input-group">
+                            <input type="text" name="from_date" placeholder="{{'From Date' | translate}}" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="booking.item_booking_start_date" is-open="open.date" id="from_date" ng-required="true" ng-change="dateErr=''" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'date')"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+                        <span ng-show="(BookAddForm.$submitted || BookAddForm.from_date.$touched) && (BookAddForm.from_date.$pristine || BookAddForm.from_date.$invalid) && (BookAddForm.from_date.$error.required)" class="help-block">
+                            {{'Select From Date' | translate }}
+                        </span>
+                        <span ng-show="dateErr" class="text-danger">{{dateErr}}</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : (BookAddForm.$submitted || BookAddForm.quantity.$touched) && (BookAddForm.quantity.$pristine || BookAddForm.quantity.$invalid)}">
+                    <label class="col-md-3 col-sm-3 control-label" for="quantity">
+                        {{'Quantity' | translate}}
+                    </label>
+                    <div class="col-md-5 col-sm-9">
+                        <input type="text" class="form-control" name="quantity" id="quantity" placeholder="{{'Quantity' | translate}}" ng-model="booking.quantity" ng-required="true" ng-change="quantityErr=''"/>
+                        <span ng-show="(BookAddForm.$submitted || BookAddForm.quantity.$touched) && (BookAddForm.quantity.$pristine || BookAddForm.quantity.$invalid) && (BookAddForm.quantity.$error.required)" class="help-block">
+                            {{'Enter Quantity' | translate }}
+                        </span>
+                        <span ng-show="quantityErr" class="text-danger">{{quantityErr}}</span>
+                    </div>
+                </div>
+                <div class="well well-sm clearfix">
+                    <div class="pull-right">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">{{'Book it' | translate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>

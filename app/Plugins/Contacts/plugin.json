@@ -1,0 +1,9 @@
+{
+	"name": "Contacts", 
+	"class": "fa fa-2x fa-support",
+	"description": "By enabling this plugin, user can easily interact with admin",
+	"dependencies": "",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "3"
+}

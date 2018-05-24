@@ -1,0 +1,219 @@
+{
+  "apis": [
+    {
+      "path": "/admin/providers",
+      "operations": [
+        {
+          "summary": "Fetch all providers",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "Filter List of Providers ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Providers",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Provider Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Provider by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_providers"
+        }
+      ]
+    },
+    {
+      "path": "/admin/providers/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Providers",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Provider Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_providers__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/providers/{id}",
+      "operations": [
+        {
+          "summary": "Update Providers",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Provider Identifier"
+            },
+            {
+              "name": "ProviderEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "ProviderEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_providers__id_"
+        },
+        {
+          "summary": "Delete Providers",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Provider Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_providers__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "ProviderEdit": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "required": true,
+          "description": "The Provider Identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Name of the Provider"
+        },
+        "secret_key": {
+          "type": "string",
+          "required": true,
+          "description": "Secret Key of the Provider"
+        },
+        "api_key": {
+          "type": "string",
+          "required": true,
+          "description": "Api Key of the Provider"
+        },
+        "display_order": {
+          "type": "string",
+          "required": true,
+          "description": "Enter Order to Display Providers"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "ProviderEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

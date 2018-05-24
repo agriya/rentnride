@@ -1,0 +1,15 @@
+<form role="form" class="clearfix" name="feedbackEdit" ng-submit="EditfeedbackSubmit(feedbackEdit.$valid)" novalidate>
+    <div class="form-group" ng-class="{ 'has-error' : (feedbackEdit.$submitted && bookingFeedback.rating == 0) }">
+        <label class="control-label">{{'Rating' | translate}}</label>
+        <div ng-if="bookingFeedback.rating" star-rating rating="bookingFeedback.rating" click="getRating(param)"></div>
+        <span class="error" ng-show="(feedbackEdit.$submitted && bookingFeedback.rating == 0 )">{{'Required' | translate}}</span>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : (feedbackEdit.$submitted || feedbackEdit.review.$touched) && (feedbackEdit.review.$pristine || feedbackEdit.review.$invalid) }">
+        <label class="control-label" for="review">{{'Feedback' | translate}}</label>
+        <textarea class="form-control" name="review" id="review" placeholder="{{'Feedback' | translate}}" ng-model="bookingFeedback.feedback" ng-required="true"/>
+        <span class="error" ng-show="(feedbackEdit.$submitted || feedbackEdit.review.$touched) && (feedbackEdit.review.$pristine || feedbackEdit.review.$invalid) && (feedbackEdit.review.$error.required)">{{'Required' | translate}}</span>
+    </div>
+    <div class="form-group pull-right">
+        <button class="btn btn-orange btn-block" type="submit">{{'Update' | translate }}</button>
+    </div>
+</form>

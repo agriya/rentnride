@@ -1,0 +1,227 @@
+{
+  "apis": [
+    {
+      "path": "/admin/messages",
+      "operations": [
+        {
+          "summary": "Get the list of messages",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search messages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "Favourites",
+                "Price Low to High",
+                "Price High to Low",
+                "Recent"
+              ],
+              "type": "string",
+              "description": "Filter list for Messages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Message Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Message by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_messages"
+        }
+      ]
+    },
+    {
+      "path": "/admin/messages/{id}",
+      "operations": [
+        {
+          "summary": "Show Message",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Message Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_messages__id_"
+        },
+        {
+          "summary": "Delete the specified Message",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter Message ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_messages__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/item_messages/{item_id}",
+      "operations": [
+        {
+          "summary": "Get item activities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "item_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Item Idetifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_item_messages__item_id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/item_user_messages/{item_user_id}",
+      "operations": [
+        {
+          "summary": "Get Booking activities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "item_user_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Booking Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_item_user_messages__item_user_id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/user_messages/{user_id}",
+      "operations": [
+        {
+          "summary": "Get User activities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "user_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "User Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_user_messages__user_id_"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

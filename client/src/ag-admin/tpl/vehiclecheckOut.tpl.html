@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <ma-view-actions>
+                <ma-back-button></ma-back-button>
+            </ma-view-actions>
+            <h1><span> Vehicle Checkout</span></h1>
+        </div>
+    </div>
+</div>
+<div class="row" id="create-view">
+    <form name="checkoutForm" ng-submit="checkout(checkoutForm.$valid)" novalidate>
+        <div class="col-md-8">
+            <div class="col-md-12">
+                <vehicle-detail></vehicle-detail>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4><strong>{{'Checkout Details'|translate}}</strong></h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12" ng-if="VehicleRentalDetails.late_checkout_total_fee > 0">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 control-label" for="claim_amount">
+                                        {{'Late Fee' | translate}}
+                                    </label>
+                                    <div class="col-md-5 col-sm-9">
+                                        <p><strong>{{siteCurrency}}{{VehicleRentalDetails.late_checkout_total_fee}}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group" ng-class="{'has-error':(checkoutForm.$submitted || checkoutForm.claim_amount.$touched) && (checkoutForm.claim_amount.$pristine || checkoutForm.claim_amount.$invalid) && (checkoutForm.claim_amount.$error.number)}">
+                                    <label class="col-md-3 col-sm-3 control-label" for="claim_amount">
+                                        {{'Claim Request Amount' | translate}}
+                                    </label>
+                                    <div class="col-md-5 col-sm-9">
+                                        <input type="number" class="form-control" name="claim_amount" id="claim_amount" placeholder="{{'Claim Request Amount' | translate}}" ng-model="claim_amount" ng-required="true" ng-change="calculateAmount(claim_amount)"/>
+                                                <span ng-show="(checkoutForm.$submitted || checkoutForm.claim_amount.$touched) && (checkoutForm.claim_amount.$pristine || checkoutForm.claim_amount.$invalid) && (checkoutForm.claim_amount.$error.number)" class="help-block">
+                                                    {{'Enter amount' | translate }}
+                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12" ng-if="claim_amount">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 control-label" for="claim_amount">
+                                        {{'Total' | translate}}
+                                    </label>
+                                    <div class="col-md-5 col-sm-9">
+                                        <p><strong>{{siteCurrency}}{{claim_amount + VehicleRentalDetails.late_checkout_total_fee}}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-xs-12 col-sm-12 col-md-12" ng-if="claim_amount && VehicleRentalDetails.deposit_amount > 0">
+                                    <div class="alert alert-info">{{'Claim to Deposit' | translate}} <span class="pull-right">{{siteCurrency}}{{claimToDeposit}}</span></div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12" ng-if="manualPay > 0">
+                                    <div class="alert alert-info">{{'Manual Payment' | translate}} <span class="pull-right">{{siteCurrency}}{{manualPay}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xs-12 ">
+                        <button type="submit" class="active btn btn-primary pull-right">{{'CheckOut'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <trip-detail></trip-detail>
+</div>

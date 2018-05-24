@@ -1,0 +1,54 @@
+{
+  "apis": [
+    {
+      "path": "/languages/{iso2}/pages",
+      "operations": [
+        {
+          "summary": "Fetch pages by languages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "iso2",
+              "paramType": "path",
+              "type": "string",
+              "required": true,
+              "description": "The Language iso2",
+              "format": "string"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__languages__iso2__pages"
+        }
+      ]
+    },
+    {
+      "path": "/page/{id}",
+      "operations": [
+        {
+          "summary": "Show Page",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "string",
+              "required": true,
+              "description": "The Page Identifier",
+              "format": "string"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__page__id_"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

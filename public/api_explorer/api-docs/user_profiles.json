@@ -1,0 +1,133 @@
+{
+  "apis": [
+    {
+      "path": "/user_profiles",
+      "operations": [
+        {
+          "summary": "Edit User Profile",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "user_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Edit User Profile"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__user_profiles"
+        },
+        {
+          "summary": "Update User Profile",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "user_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Edit User profile details"
+            },
+            {
+              "name": "ProfileEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "ProfileEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__user_profiles"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "ProfileEdit": {
+      "properties": {
+        "user_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The User identifier"
+        },
+        "first_name": {
+          "type": "string",
+          "required": true,
+          "description": "First Name"
+        },
+        "last_name": {
+          "type": "string",
+          "required": true,
+          "description": "Last Name"
+        },
+        "about_me": {
+          "type": "string",
+          "required": true,
+          "description": "About me"
+        },
+        "website": {
+          "type": "string",
+          "required": true,
+          "description": "Website"
+        },
+        "facebook_profile_link": {
+          "type": "string",
+          "required": true,
+          "description": "Facebook profile link"
+        },
+        "twitter_profile_link": {
+          "type": "string",
+          "required": true,
+          "description": "Twitter profile Link"
+        },
+        "google_plus_profile_link": {
+          "type": "string",
+          "required": true,
+          "description": "Google Plus profile link"
+        },
+        "linkedin_profile_link": {
+          "type": "string",
+          "required": true,
+          "description": "LinkedIn profile link"
+        },
+        "youtube_profile_link": {
+          "type": "string",
+          "required": true,
+          "description": "Youtube profile link"
+        }
+      },
+      "id": "ProfileEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

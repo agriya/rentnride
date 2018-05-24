@@ -1,0 +1,67 @@
+<div class="user-view-details">
+	<div class="container">
+    	<div class="media">
+            <div class="media-left">
+            	<a href="#/user/{{model.user.username}}" title="{{model.user.username}}">
+                    <img ng-if="model.user.user_avatar_source_id != model.ConstSocialLogin.Twitter && model.user.user_avatar_source_id != model.ConstSocialLogin.Github" ng-src="{{model.user.attachmentable.thumb.medium}}" title="{{model.user.username}}" class="img-responsive" alt="{{model.user.username}}">
+                    <img ng-if="model.user.user_avatar_source_id == model.ConstSocialLogin.Twitter || model.user.user_avatar_source_id == model.ConstSocialLogin.Github" ng-src="{{model.user.attachmentable.thumb.medium}}" title="{{model.user.username}}" class="img-responsive" alt="{{model.user.username}}" height="{{model.thumb.medium.height}}" width="{{model.thumb.medium.width}}">
+           		</a>
+            </div>
+            <div class="media-body">
+                <div class="col-md-12">
+                    <h3 class="clearfix">
+                    	<a href="#/user/{{model.user.username}}" title="{{model.user.username}}" class="pull-left">
+                            {{model.user.username}}
+                        </a>
+                    </h3>
+                    <p class="clearfix">
+                        {{model.user.user_profile.about_me}}
+                    </p>
+                </div>
+            </div>
+      	</div>
+        <div class="clearfix" ng-show="model.user.user_profile.website || model.user.user_profile.facebook_profile_link || model.user.user_profile.google_plus_profile_link || model.user.user_profile.twitter_profile_link || model.user.user_profile.linkedin_profile_link || model.user.user_profile.youtube_profile_link">
+        	<h2 class="text-uppercase">{{'Reference' | translate }}</h2>
+            <ul class="list-inline">
+            	<li ng-if="model.user.user_profile.website">
+                    <a href="{{model.user.user_profile.website}}" target="_blank" class="globe"><i class="fa fa-globe fa-fw"></i></a>
+                </li>
+                <li ng-if="model.user.user_profile.facebook_profile_link">
+                    <a href="{{model.user.user_profile.facebook_profile_link}}" target="_blank" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
+                </li>
+                <li ng-if="model.user.user_profile.google_plus_profile_link">
+                    <a href="{{model.user.user_profile.google_plus_profile_link}}" target="_blank" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
+                </li>
+                <li ng-if="model.user.user_profile.twitter_profile_link">
+                    <a href="{{model.user.user_profile.twitter_profile_link}}" target="_blank" class="twitter"><i class="fa fa-twitter fa-fw"></i> </a>
+                </li>
+                <li ng-if="model.user.user_profile.linkedin_profile_link">
+                    <a href="{{model.user.user_profile.linkedin_profile_link}}" target="_blank" class="linkedin"><i class="fa fa-linkedin fa-fw"></i></a>
+                </li>
+                <li ng-if="model.user.user_profile.youtube_profile_link">
+                    <a href="{{model.user.user_profile.youtube_profile_link}}" target="_blank" class="youtube"><i class="fa fa-youtube fa-fw"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix" ng-show="model.user.providerUser.data.length > 0">
+            <h2 class="text-uppercase">{{'Connect' | translate }}</h2>
+            <ul class="list-inline">
+                <li ng-repeat="provider in model.user.providerUser.data">
+                    <a href="javascript:void(0);" class="facebook" ng-show="provider.provider_id == model.ConstSocialLogin.Facebook">
+                        <i class="fa fa-facebook fa-fw"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="twitter" ng-show="provider.provider_id == model.ConstSocialLogin.Twitter">
+                        <i class="fa fa-twitter fa-fw"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="google" ng-show="provider.provider_id == model.ConstSocialLogin.Google">
+                        <i class="fa fa-google fa-fw"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="github" ng-show="provider.provider_id == model.ConstSocialLogin.Github">
+                        <i class="fa fa-github fa-fw"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<user-feedback user_id="model.user.id"></user-feedback>

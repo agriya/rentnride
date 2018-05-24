@@ -1,0 +1,258 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_rentals",
+      "operations": [
+        {
+          "summary": "Fetch all vehicle_rentals",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Vehicle rentals",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "upcoming",
+                "waiting for review",
+                "past",
+                "waiting for acceptance",
+                "rejected",
+                "expired",
+                "All"
+              ],
+              "type": "string",
+              "description": "filter list of vehicle_rental",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Vehicle rental Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Vehicle rental by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "start_date",
+              "paramType": "query",
+              "type": "string",
+              "description": "Booking Start date (YYYY-MM-DD) format",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "end_date",
+              "paramType": "query",
+              "type": "string",
+              "description": "Booking end date (YYYY-MM-DD) format",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_rentals"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_rentals/{id}/cancelled-by-admin",
+      "operations": [
+        {
+          "summary": "Cancel Vehicle rental",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Vehicle rental Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_rentals__id__cancelled_by_admin"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_rentals/{id}",
+      "operations": [
+        {
+          "summary": "Show Vehicle rental Details",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Vehicle rental Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_rentals__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_rentals/{id}/checkin",
+      "operations": [
+        {
+          "summary": "Checkin / attend the  Booking",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Booking Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_rentals__id__checkin"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_rentals/{id}/checkout",
+      "operations": [
+        {
+          "summary": "Checkout  the  Booking",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Booking Identifier"
+            },
+            {
+              "name": "Checkout",
+              "paramType": "body",
+              "required": true,
+              "type": "Checkout",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_rentals__id__checkout"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Checkout": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "description": "The Vehicle Rental identifier"
+        },
+        "claim_request_amount": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Host claim amount if any"
+        }
+      },
+      "id": "Checkout"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

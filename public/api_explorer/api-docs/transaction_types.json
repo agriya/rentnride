@@ -1,0 +1,61 @@
+{
+  "apis": [
+    {
+      "path": "/transaction_types",
+      "operations": [
+        {
+          "summary": "Fetch all transaction types",
+          "parameters": [
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "sorting field name",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "sort transaction types by ascending / descending order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__transaction_types"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

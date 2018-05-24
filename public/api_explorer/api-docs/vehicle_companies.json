@@ -1,0 +1,218 @@
+{
+  "apis": [
+    {
+      "path": "/vehicle_companies",
+      "operations": [
+        {
+          "summary": "Get the list of vehicle companies",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search vehicle company",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "is_active",
+                "all"
+              ],
+              "type": "string",
+              "description": "Filter list for vehicle companies",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The vehicle company Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle company by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_companies"
+        },
+        {
+          "summary": "Store vehicle company",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "VehicleCompanyAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleCompanyAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__vehicle_companies"
+        }
+      ]
+    },
+    {
+      "path": "/vehicle_companies/edit",
+      "operations": [
+        {
+          "summary": "Edit the vehicle company",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_companies_edit"
+        }
+      ]
+    },
+    {
+      "path": "/vehicle_companies/show",
+      "operations": [
+        {
+          "summary": "View the vehicle company",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_companies_show"
+        }
+      ]
+    },
+    {
+      "path": "/vehicle_companies/{id}",
+      "operations": [
+        {
+          "summary": "Delete the specified vehicle company",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter vehicle company ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__vehicle_companies__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "VehicleCompanyAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Vehicle company Name"
+        },
+        "address": {
+          "type": "string",
+          "required": true,
+          "description": "Vehicle company address"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Vehicle company latitude",
+          "required": false
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Vehicle company longitude",
+          "required": false
+        },
+        "phone": {
+          "type": "string",
+          "description": "Vehicle company phone",
+          "required": false
+        },
+        "mobile": {
+          "type": "string",
+          "required": true,
+          "description": "Vehicle company mobile"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Vehicle company email"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "VehicleCompanyAdd"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

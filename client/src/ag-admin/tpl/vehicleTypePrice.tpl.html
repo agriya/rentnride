@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <ma-view-actions>
+                <ma-back-button></ma-back-button>
+            </ma-view-actions>
+            <h1><span> Add Vehicle Type Price</span></h1>
+        </div>
+    </div>
+</div>
+<div class="row" id="create-view">
+    <div class="col-md-12">
+        <form class="form-horizontal" role="form" name="PriceAdd" ng-submit="VehicleTypePrices(PriceAdd.$valid)" novalidate>
+            <div class="form-group" ng-class="{'has-feedback has-success' : PriceAdd.vehicle_type_id.$valid, 'has-feedback has-error' : ((PriceAdd.$submitted || PriceAdd.vehicle_type_id.$touched) && (PriceAdd.vehicle_type_id.$pristine || PriceAdd.vehicle_type_id.$invalid))|| model.vehicle_type_idErr}">
+                <div class="col-sm-2">
+                    <label class="control-label">Vehicle Type</label>
+                </div>
+                <div class="col-sm-6">
+                    <select class="form-control" name="vehicle_type_id" id="vehicle_type_id" ng-model="vehicleTypePrices.vehicle_type_id" ng-options="vehicleType.id as vehicleType.name for vehicleType in vehicleTypes" ng-change="model.vehicle_type_idErr=''" ng-required="true">
+                        <option value="" selected="selected">select</option>
+                    </select>
+                    <div ng-show="PriceAdd.vehicle_type_id.$valid">
+                        <span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>
+                    </div>
+                    <div ng-show="((PriceAdd.$submitted || PriceAdd.vehicle_type_id.$touched) && (PriceAdd.vehicle_type_id.$pristine || PriceAdd.vehicle_type_id.$invalid)) || model.vehicle_type_idErr">
+                        <span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+                        <span class="help-block" ng-show="(PriceAdd.vehicle_type_id.$error.required)">Required</span>
+                        <span class="help-block" ng-show="model.vehicle_type_idErr">{{model.vehicle_type_idErr}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-feedback has-success' : PriceAdd.is_active.$valid, 'has-feedback has-error' : ((PriceAdd.$submitted || PriceAdd.is_active.$touched) && (PriceAdd.is_active.$pristine || PriceAdd.is_active.$invalid))|| model.is_activeErr}">
+                <div class="col-sm-2">
+                    <label class="control-label">Active?</label>
+                </div>
+                <div class="col-sm-6">
+                    <select class="form-control" ng-model="vehicleTypePrices.is_active" name="is_active" id="is_active" ng-required="true" ng-change="model.is_activeErr=''">
+                        <option value="" selected="selected">Active?</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    <div ng-show="PriceAdd.is_active.$valid">
+                        <span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>
+                    </div>
+                    <div ng-show="((PriceAdd.$submitted || PriceAdd.is_active.$touched) && (PriceAdd.is_active.$pristine || PriceAdd.is_active.$invalid)) || model.is_activeErr">
+                        <span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+                        <span class="help-block" ng-show="(PriceAdd.is_active.$error.required)">Required</span>
+                        <span class="help-block" ng-show="model.is_activeErr">{{model.is_activeErr}}</span>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-info" ng-click="addNewChoice()">Add field</a>
+            <div class="row" data-ng-repeat="choice in choices">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <div class="form-group col-md-12 " ng-class="{'has-error' : ((PriceAdd.$submitted || PriceAdd.minimum_no_of_day.$touched) && (PriceAdd.minimum_no_of_day.$pristine || PriceAdd.minimum_no_of_day.$invalid))|| model.minimum_no_of_dayErr}">
+                        <label class="pull-left">Minimum no of day</label>
+                        <input type="text" class="form-control" placeholder="Minimum no of day" id="minimum_no_of_day" name="minimum_no_of_day" data-ng-model="choice.minimum_no_of_day" ng-required="true" ng-change="model.nameErr=''">
+                        <div ng-show="((PriceAdd.$submitted || PriceAdd.minimum_no_of_day.$touched) && (PriceAdd.minimum_no_of_day.$pristine || PriceAdd.minimum_no_of_day.$invalid)) || model.minimum_no_of_dayErr">
+                            <span class="help-block" ng-show="(PriceAdd.minimum_no_of_day.$error.required)">Required</span>
+                            <span class="help-block" ng-show="model.minimum_no_of_dayErr">{{model.minimum_no_of_dayErr}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <div class="form-group col-md-12" ng-class="{'has-error' : ((PriceAdd.$submitted || PriceAdd.maximum_no_of_day.$touched) && (PriceAdd.maximum_no_of_day.$pristine || PriceAdd.maximum_no_of_day.$invalid))|| model.maximum_no_of_dayErr}">
+                        <label class="pull-left">Maximum no of day</label>
+                        <input type="text" class="form-control" placeholder="Maximum no of day" id="maximum_no_of_day" name="maximum_no_of_day" data-ng-model="choice.maximum_no_of_day" ng-required="true" ng-change="model.nameErr=''">
+                        <div ng-show="((PriceAdd.$submitted || PriceAdd.maximum_no_of_day.$touched) && (PriceAdd.maximum_no_of_day.$pristine || PriceAdd.maximum_no_of_day.$invalid)) || model.maximum_no_of_dayErr">
+                            <span class="help-block" ng-show="(PriceAdd.maximum_no_of_day.$error.required)">Required</span>
+                            <span class="help-block" ng-show="model.maximum_no_of_dayErr">{{model.maximum_no_of_dayErr}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <div class="form-group col-md-12" ng-class="{'has-error' : ((PriceAdd.$submitted || PriceAdd.discount_percentage.$touched) && (PriceAdd.discount_percentage.$pristine || PriceAdd.discount_percentage.$invalid))|| model.discount_percentageErr}">
+                        <label class="pull-left">Discount Percentage</label>
+                        <input type="text" class="form-control" placeholder="Discount Percentage" id="discount_percentage" name="discount_percentage" data-ng-model="choice.discount_percentage" ng-required="true" ng-change="model.nameErr=''">
+                        <div ng-show="((PriceAdd.$submitted || PriceAdd.discount_percentage.$touched) && (PriceAdd.discount_percentage.$pristine || PriceAdd.discount_percentage.$invalid)) || model.discount_percentageErr">
+                            <span class="help-block" ng-show="(PriceAdd.discount_percentage.$error.required)">Required</span>
+                            <span class="help-block" ng-show="model.discount_percentageErr">{{model.discount_percentageErr}}</span>
+                        </div>
+                    </div>
+                </div>
+				<a class="btn btn-danger" ng-show="$last" ng-click="removeChoice()">Remove field</a>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+            </div>
+
+       
+   <div id="choicesDisplay">
+      {{ choices }}
+   </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,592 @@
+/**
+*    CSS for @BookorRent
+*
+* @author		ganesh_119at09 (Sridharan Team)
+* @copyright 	Copyright (c) 2012 {@link http://www.agriya.com Agriya Infoway}
+* @license 		http://www.agriya.com Agriya Infoway Licence
+* @version 		SVN: $Id: custom-responsive.less ganesh_119at09 $
+* @since 		2013-10-09
+*/
+
+@media screen and (max-width:1199px) {
+	.how-it-works {
+		.responsive-view {
+			width:100%;
+			overflow-x:auto;
+			overflow-y:hidden;
+			border:1px solid @grey;
+			.view-block {
+				width:1200px;
+			}
+		}
+	}
+	#cal-week-box {
+		display:none;
+	}
+	
+	/* Spanish Language
+	=====================*/
+	html:not([lang='en']) {
+		.header {
+			.left-menu {
+				margin-left:@margin - 15px;
+			}
+		}
+	}
+}
+@media screen and (min-width:768px) and (max-width:1199px) {
+	.header {
+		.navbar-header {
+			float:none;
+			text-align:center;
+			.navbar-brand {
+				float:none;
+				display:inline-block;
+			}
+		}
+		.navbar-collapse {
+			.left-menu {
+				margin-left:@margin - 15px;
+			}
+			margin-top:@margin + 15px;
+			ul.nav {
+				width:100%;
+				float:none;
+				text-align:center;
+				> li {
+					float:none;
+					display:inline-block;
+					vertical-align:top;
+				}
+			}
+			ul.nav + ul {
+				margin:(@margin) (@margin - 15px);
+			}
+		}
+	}
+}
+
+@media screen and (min-width:992px) and (max-width:1199px) {
+	.header {
+		.left-menu {
+			margin-left:@margin - 15px;
+			li a {
+				margin-right:@margin - 15px;
+			}
+		}
+	}
+	.banner form .pickup-drop > .form-group {
+		width:288px;
+	}
+	.vehicle-view .vehicle-banner .specification ul li {
+		margin:(@margin - 15px) (@margin + 5px);
+	}
+	.vehicle-details .media .vehicle-img {
+		width:210px;
+		height:120px;
+	}
+	.add-wallet .wallet-amount ul {
+		margin-left:@margin + 63px; 
+	}
+}
+
+@media screen and (min-width:768px) and (max-width:991px) {
+	.main-section {
+		min-height: 40%;
+	}
+	.banner {
+		padding-top:@padding - 15px;
+		form {
+			margin-top:@margin + 5px;
+			.pickup-drop > .form-group {
+				width:100%;
+				margin-right:@margin - 15px;
+			}
+			.form-btn {
+				.btn {
+					margin-top:@margin - 15px;
+				}
+			}
+		}
+	}
+	.vehicle-view .vehicle-banner {
+		label {
+			padding-right:@padding + 20px;
+		}
+		.specification ul li {
+			margin:(@margin - 15px) (@margin - 3px);
+		}
+	}
+	.add-wallet .wallet-amount ul {
+		margin-left:@margin + 73px; 
+	}
+	.vehicle-dashboard .rating + ul li {
+		margin-bottom:@margin - 5px;
+	}
+	.dashboard-block .tab-content {
+		margin-top:@margin + 5px;
+	}
+}
+
+@media screen and (max-width:991px) {
+	.vehicle-details {
+		margin-top:@margin + 15px;
+	}
+	.vehicle-payment .payment-right trip-detail > div {
+		padding:@padding - 15px;
+		margin-top:@margin + 10px;
+	}
+	.calendar-block .calendar-header h2 {
+		font-size:@font-size + 6px;
+	}
+	.dashboard-block .company-details .field {
+		margin-right:@margin;
+	}
+	.table-responsive {
+		overflow:auto;
+	}
+	.login-bg .user-login form .login-btn {
+		margin:(@margin - 15px) (@margin - 30px) (@margin);
+		.for-passwd {
+			margin:(@margin - 15px) (@margin - 15px) (@margin - 3px);
+		}
+	}
+	.form-block .form-block .vehicle-company {
+		.page-head h2 {
+			margin-left:@margin - 15px;
+		}
+		.col-md-12 {
+			width:100%;
+			margin-left:0;
+		}
+	}
+}
+
+@media screen and (max-width:767px) {
+	.header {
+		.navbar-toggle {
+			margin:(@margin + 10px) (@margin - 5px) (@margin - 15px) (@margin - 15px);
+			.icon-bar {
+				background-color:@black-38;
+			}
+		}
+		.navbar-brand {
+			padding:(@padding + 1px) (@padding - 15px);
+		}
+		.navbar-collapse {
+			margin-top:@margin + 20px;
+			border-top:1px solid #dbdbdb;	
+			border-bottom:1px solid #dbdbdb;
+		}
+		ul {
+			margin:(@margin - 15px) !important;
+			li {
+				margin:@margin - 15px !important;
+				a {
+					margin:(@margin - 5px) (@margin - 15px);
+				}
+			}
+		}
+		.left-menu + ul {
+			li a {
+				text-align:left;
+				margin-right:@margin - 15px;
+				.fa {
+					float:right;
+					margin-top:@margin - 13px;
+				}
+			}
+			currency-conversion {
+				&.open:after {
+					display:none;
+				}
+				> a {
+					text-align:left;
+					margin-right:@margin - 15px;
+					.fa {
+						float:right;
+						margin-top:@margin - 32px;
+					}
+				}
+			}
+			> li.dropdown.open::after {
+				display:none;
+			}
+			> li .dropdown-menu li a {
+				padding:(@padding - 9px) (@padding - 5px);
+				border-radius:@border-radius;
+			}
+		} 
+	}
+	.page-head {
+		h2 {
+			margin-top:@margin - 15px;
+		}
+		.left-head {
+			float:none !important;
+			text-align:center;
+		}
+		&.money-head {
+			.btn-green-d {
+				margin:(@margin - 15px) (@margin - 15px) (@margin) (@margin - 15px);
+			}
+			dashboard-settings {
+				margin-left:@margin;
+			}
+		}
+		p + label {
+			margin-bottom:@margin + 5px;
+		}
+	}
+	.footer ul.list-unstyled {
+		border-bottom:1px solid #999999;
+		padding-bottom:@padding;
+	}
+	
+	.banner {
+		padding:(@padding) (@padding - 15px) (@padding + 20px);
+		min-height:auto;
+		h1 {
+			font-size:@font-size + 16px;
+			letter-spacing:0; 
+		}
+		form {
+			margin-top:@margin + 5px;
+			padding:@padding + 5px;
+			.pickup-drop > .form-group, .form-btn {
+				width:100%;
+			}
+			.form-btn .btn {
+				margin-top:@margin - 15px;
+			}
+		}
+	}
+	.section-quote ul li .btn {
+		margin-bottom:@margin + 5px;
+	}
+	.how-it-works .icon-img {
+		& > div {
+			border-bottom:1px solid @grey;
+			margin-bottom:@margin + 5px;
+		}
+		&:before {
+			display:none;
+		}	
+		& > div:first-child ul {
+			padding:@padding - 15px;
+		}
+	}
+	.vehicle-drive {
+		.thumbnail {
+			.caption {
+				 padding:(@padding - 2px) (@padding) (@padding - 15px);
+				 .amount {
+					margin-left:@margin;
+				}
+				ul {
+					padding:(@padding - 15px) (@padding) !important;
+					&:nth-of-type(2) {
+						padding-left:@padding - 15px;
+					}
+				}			
+			}
+		}
+		.list-tab {
+			.nav-tabs {
+				li {
+					float:none;
+				}
+			}
+		}
+	}
+	.login-bg {
+		min-height:500px;
+		.user-login {
+			margin:(@margin + 45px) auto;
+			padding:@padding;
+			social-login .form-group { width:100%; }
+			.g-recaptcha {
+				transform:scale(0.75);
+			}
+		}
+	}
+	.dashboard-block {
+		.settings-block {
+			margin-top:@margin + 5px;
+			p, dashboard-settings, .btn-green-d {
+				float:none !important;
+				display:inline-block;
+				text:left;
+			}
+		}
+		.media, .media-body {
+			display:block;
+		}
+		.media-body {
+			width:auto;
+			margin-top:@margin + 15px;
+		}
+		.company-details .field {
+			width:100% !important;
+			margin-right:@margin - 15px;
+			margin-bottom:@margin;
+		}
+		.dashboard_grid > div > div:first-child {
+			border-bottom:1px solid @black-38;
+			margin-bottom:@margin;
+			padding-bottom:@padding;
+		}
+		.vehicle-dashboard {
+			.rating + ul li {
+				display:block;
+				padding:(@padding - 15px) (@padding - 15px) (@padding - 7px);
+				margin:(@margin - 15px) (@margin - 15px) (@margin);
+				border-right:0;
+				border-bottom:1px solid @grey-8c;
+			}
+			.package-list {
+				margin-top:@margin + 5px;
+				.package-details {
+					text-align:left;
+					.dropdown {
+						float:left !important;
+						.dropdown-menu {
+							left:0;
+						}
+					}
+				}
+			}
+		}
+	}
+	.transactions {
+		.transaction-tab {
+			margin-top:@margin + 5px;
+			ul.nav {
+				float:none !important;
+				li {
+					float:none !important;
+					a {
+						wiadth:100%;
+						margin-bottom:@margin;
+					}
+				}
+			}
+		}
+	}
+	
+	.vehicle-details {
+		.media {
+			clear:both;
+			overflow:visible;
+			.media-left, .media-body {
+				width:100%;
+				display:block;
+			}
+			ul {
+				margin:(@margin) (@margin - 15px) (@margin - 15px);
+			}
+		}
+		.booknow-block {
+			float:none !important;
+			padding-right:@padding;
+		}
+		h4 .star-rate {
+			display:block;
+			margin:(@margin - 5px) (@margin - 15px);
+		}
+		.date-selection > div {
+			padding:@padding - 15px;
+		}
+		.rental-location {
+			padding:(@padding) (@padding + 15px);
+			.diff-loc {
+				padding:@padding - 15px;
+			}
+		}
+	}
+	.vehicle-view {
+		.vehicle-view-tab .tab-head li {
+			float:none;
+			a {
+				margin:@margin - 15px;
+			}
+		}
+		.vehicle-banner {
+			.specification ul li {
+				display:block;
+				margin:@margin - 15px;
+			}
+			label {
+				padding-right:@padding + 25px;
+				h3 { font-size:@font-size + 11px; }
+			}
+			.btn {
+				min-height:45px;
+				font-size:@font-size + 11px;
+			}
+			.social-share li a {
+				width:40px;
+				height:40px;
+				font-size:@font-size + 6px;
+				padding:@padding - 7px;
+				&:hover {
+					width:50px;
+				}
+			}
+		}
+	}
+	.change-search {
+		padding:@padding;
+		text-align:center;
+		&:before, &:after {
+			display:none;
+		}
+		.row > div {
+			border-bottom:1px solid rgba(0, 0, 0, 0.1);
+			border-right:0 !important;
+			margin-right:@margin - 15px !important;
+			margin-bottom:@margin;
+			padding-bottom:@padding;
+			&:last-child {
+				border-bottom:0;
+				margin:@margin - 15px;
+				padding:@padding - 15px;
+			}
+		}
+	}
+	.vehicle-payment {
+		.dispute-info {
+			dt:after {
+				display:none;
+			}
+		}
+		.payment-left {
+			.get-gateways ul.nav li {
+				float:none;
+			}
+			.payment-form .nav li {
+				float:none;
+				+ li {
+					margin-left:@margin - 15px;
+					margin-top:@margin - 8px;
+				}
+			}
+		}
+	}
+	.add-wallet {
+		.wallet-amount {
+			h2 {
+				margin:@margin - 15px;
+				padding:@padding;
+			}
+			ul {
+				margin:@margin - 15px;
+				li {
+					border-right:0 !important;
+				}
+			}
+		}
+		.vehicle-payment {
+			padding-left:@padding - 15px;
+			padding-right:@padding - 15px;
+		}
+	}
+	.g-recaptcha {
+		transform:scale(0.85);
+	}
+	.user-feedback .media {
+		.media-left, .media-body {
+			display:block;
+			width:100%;
+		}
+		.media-body > div {
+			padding:@padding - 15px;
+			h3 {
+				margin-top:@margin - 5px;
+			}
+		}
+	}
+	.calendar-block {
+		.calendar-header {
+			& > div {
+				float:none !important;
+				margin-top:@margin;
+			}
+		}
+		.calendar-body {
+			.cal-day-inmonth {
+				span {
+					width:30px;
+					height:30px;
+					font-size:@font-size + 2px !important;
+					line-height:33px;
+				}
+			}
+			.cal-month-box {
+				.cal-row-fluid .cal-cell {
+					min-height:50px;
+				}
+				.cal-month-day {
+					position:relative;
+					height:50px;
+					padding:(@padding - 5px) (@padding - 15px);
+					.events-list {
+						top:0;
+						bottom:auto;
+						.event {
+							width:8px;
+							height:8px;
+						}
+					}
+					.cal-events-num {
+						position:absolute;
+						margin:@margin - 15px;
+						bottom:2px;
+						right:3px;
+						padding:(@padding - 12px) (@padding - 10px);
+						width:15px;
+						height:15px;
+						font-size:@font-size - 4px;
+					}
+				}
+			}
+		}
+	}
+	.datetime-picker-dropdown {
+		width:265px;
+	}
+	.date-picker-menu {
+		th .btn, td .btn {
+			padding:(@padding - 10px) (@padding - 6px);
+		}
+	}
+	.message .mail-view {
+		margin-top:@margin + 15px;
+	}
+	
+	/* Spanish Language
+	=====================*/
+	html:not([lang='en']) {
+		.message .mail-view .btn {
+			font-size:@font-size - 2px;
+		}
+		.page-head.money-head .btn-green-d {
+			font-size:@font-size - 3.5px;
+			letter-spacing:0.2px;
+			padding:@padding - 5px;
+			margin-right:@margin - 10px;
+		}
+	}
+}
+
+@media screen and (max-width:639px) {
+	.tab-orange ul.nav li {
+		display:block;
+	}
+}
+
+@media screen and (max-width:430px) {
+	.growl-container.growl-fixed.top-center {
+		margin-left:@margin - 160px !important;
+	}
+}

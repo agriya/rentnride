@@ -1,0 +1,253 @@
+<div class="dashboard_summary">
+    <div class="row dashboard_custom_panel">
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-red">
+            	<a href='#/users/list?search={"role_id":"userpass"}' class="show">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3"><img src="../assets/img/customer.png" alt="[Image: Total Customers]" title="Total Customers" /></div>
+                            <div class="col-xs-9">
+                                <div><h2>{{'Total Customers' | translate}}</h2></div>
+                                <div class="huge">{{adminactivities.total_users}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn" ng-show="enabled_plugin.indexOf('Vehicles') >= 0">
+            <div class="panel panel-green">
+           		<a href='#/vehicles/list' class="show">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3"><img src="../assets/img/vehicle.png" alt="[Image: Total Vehicles]" title="Total Vehicles" /></div>
+                            <div class="col-xs-9">
+                                <div><h2>{{'Total Vehicles' | translate}}</h2></div>
+                                <div class="huge">{{adminactivities.total_vehicle_count}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn" ng-show="enabled_plugin.indexOf('VehicleRentals') >= 0">
+            <div class="panel panel-blue">
+            	<a href='#/vehicle_rentals/list' class="show">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3"><img src="../assets/img/rental.png" alt="[Image: Total Rental]" title="Total Rental" /></div>
+                            <div class="col-xs-9">
+                                <div><h2>{{'Total Rental' | translate}}</h2></div>
+                                <div class="huge">{{adminactivities.total_booking_count}}</div>
+                            </div>
+                        </div>
+                    </div> 
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-yellow">
+            	<a href='#/transactions/list?search={"to_user":1}' class="show">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3"><img src="../assets/img/revenue.png" alt="[Image: Total Revenue]" title="Total Revenue" /></div>
+                            <div class="col-xs-9">
+                                <div><h2>{{'Total Revenue' | translate}}</h2></div>
+                                <div class="huge">{{adminactivities.total_revenue}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8 dashboard_grid">
+            <div class="panel panel-default" ng-show="overview_close">
+                <div class="panel-heading clearfix">
+                    <div class="clearfix">
+                   	    <span class="pull-left title">{{'Overview' | translate}} </span>
+                        <ul class="list-inline pull-left">
+                            <li ng-repeat="range in rangeVal">
+                                <a class="btn" ng-class-odd="'btn-default'" ng-class-even="'btn-default'" href="#" ng-click="selectedRangeItem(range.key, range.value)" ng-class="{'active':range.value === rangeText}">
+                                    {{range.value}}
+                                </a>
+                            </li>
+                        </ul>
+						<div class="pull-right">
+					<span ng-init="overview = true" ng-click="overview = !overview"><i class="fa fa-angle-down pull-left" ng-class="{'fa-angle-down pull-left':overview, 'fa-angle-up pull-left':!overview}" ></i></span> <span ng-init="overview_close = true" ng-click="overview_close = !overview_close"> <i class="fa fa-remove" ></i></span>
+					</div>
+                      </div>
+                </div>
+                <div class="panel-body" ng-show="overview">
+                    <ul class="list-group clearfix text-center">
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6">
+                            <a title="{{'View All Users' | translate}}" class="pull-right" href='#/users/list?search={"role_id":"userpass"}'>
+                                <i class="fa fa-share"></i>
+                            </a>
+                            <h2 class="text-primary">{{adminstats.user_register}}</h2>
+                            <p>{{'User Register' | translate}}</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6">
+                            <a title="{{'View All Logins' | translate}}" class="pull-right" href="#/user_logins/list">
+                                <i class="fa fa-share"></i>
+                            </a>
+                            <h2 class="text-danger">{{adminstats.user_login}}</h2>
+                            <p>{{'User Login' | translate}}</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6" ng-show="enabled_plugin.indexOf('Vehicles') >= 0">
+                            <a title="{{'View All Vehicles' | translate}}" class="pull-right" href="#/vehicles/list">
+                                <i class="fa fa-share"></i>
+                            </a>
+                            <h2 class="text-success">{{adminstats.vehicle_count}}</h2>
+                            <p>{{'Vehicles' | translate}}</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6" ng-show="enabled_plugin.indexOf('VehicleRentals') >= 0">
+                            <a title="{{'View All Vehicle Rentals' | translate}}" class="pull-right" href="#/vehicle_rentals/list">
+                                <i class="fa fa-share"></i>
+                            </a>
+                            <h2 class="text-warning">{{adminstats.booking_count}}</h2>
+                            <p>{{'Rentals' | translate}}</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6" ng-show="enabled_plugin.indexOf('VehicleFeedbacks') >= 0">
+                            <a title="{{'View All Feedbacks' | translate}}" class="pull-right" href="#/vehicle_feedbacks/list">
+                                <i class="fa fa-share"></i>
+                            </a>
+                            <h2 class="text-default">{{adminstats.feedback_count}}</h2>
+                            <p>{{'Feedbacks' | translate}}</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6">
+                            <a title="{{'View All Transactions' | translate}}" class="pull-right"
+                               href="#/transactions/list">
+                                <i class="fa fa-share"></i>
+                            </a>
+                            <h2 class="text-primary">{{adminstats.transaction_count}}</h2>
+                            <p>{{'Transactions' | translate}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default  dashboard_activities"  ng-show="activity_close">
+                <div class="panel-heading">Activities
+					<div class="pull-right">
+					<span ng-init="activity = true" ng-click="activity = !activity"><i class="fa fa-angle-down pull-left" ng-class="{'fa-angle-down pull-left':activity, 'fa-angle-up pull-left':!activity}" ></i></span> <span ng-init="activity_close = true" ng-click="activity_close = !activity_close"> <i class="fa fa-remove" ></i></span>
+					</div>
+				</div>
+                <!-- /.panel-heading -->
+                <div class="panel-body" ng-show="activity">
+                    <div class="list-group">
+                    	<div class="col-md-12 act-list">
+                            <a href='#/vehicles/list?search={"filter":"active"}'
+                               ng-show="enabled_plugin.indexOf('Vehicles') >= 0">
+                               <div class="media">
+                               		<div class="pull-left add-icon-bg green-bg"></div>
+                                    <div class="media-body">
+                                        {{'Last vehicles Add' | translate}}
+                                        <span ng-if="adminactivities.last_item !== undefined">
+                                            {{adminactivities.last_item}}
+                                        </span>
+                                        <span ng-if="adminactivities.last_item === undefined">
+                                            -
+                                        </span>
+                                   </div>
+                               </div>
+                            </a>
+                        </div>
+                        <div class="col-md-12 act-list">
+                          <a href='#/vehicle_rentals/list' 
+                          	ng-show="enabled_plugin.indexOf('VehicleRentals') >= 0">
+                            <div class="media">
+                            	<div class="pull-left add-icon-bg blue-bg"></div>
+                                <div class="media-body">
+                                    {{'Last Rental' | translate}}
+                                    <span ng-if="adminactivities.last_vehicle_rental !== undefined">
+                                        {{adminactivities.last_vehicle_rental}}
+                                    </span>
+                                    <span ng-if="adminactivities.last_vehicle_rental === undefined">
+                                        -
+                                    </span>
+                                </div>
+                             </div>
+                           </a>
+                        </div>
+                        <div class="col-md-12 act-list">
+                            <a href='#/vehicle_feedbacks/list'
+                               ng-show="enabled_plugin.indexOf('VehicleFeedbacks') >= 0">
+                                <div class="media">
+                            		<div class="pull-left add-icon-bg yellow-bg"></div>
+                                    <div class="media-body">
+                                		{{'Last Rental Feedback' | translate}}
+                                        <span ng-if="adminactivities.last_feedback !== undefined">
+                                            {{adminactivities.last_feedback}}
+                                        </span>
+                                        <span ng-if="adminactivities.last_feedback === undefined"> - </span>
+                                   </div>
+                               </div>
+                            </a>
+                        </div>
+                        <div class="col-md-12 act-list">
+                            <a href="#/user_logins/list">
+                             <div class="media">
+                             	<div class="pull-left add-icon-bg orange-bg"></div>
+                                <div class="media-body">
+                                	{{'Last User Login' | translate}}
+                                    <span ng-if="adminactivities.last_user_login !== undefined">
+                                        {{adminactivities.last_user_login}}
+                                    </span>
+                                    <span ng-if="adminactivities.last_user_login === undefined"> - </span>
+                                 </div>
+                              </div>
+                            </a>
+                        </div>
+                        <div class="col-md-12 act-list">
+                            <a href="#/users/list">
+                             <div class="media">
+                             	<div class="pull-left add-icon-bg blue2-bg"></div>
+                                <div class="media-body">
+                                	{{'Last User Register' | translate}}
+                                    <span ng-if="adminactivities.last_register !== undefined">
+                                        {{adminactivities.last_register}}
+                                    </span>
+                                	<span ng-if="adminactivities.last_register === undefined"> - </span>
+                                </div>
+                             </div>
+                            </a>
+                       </div>
+                    </div>
+                    <!-- /.list-group -->
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+            
+            <div class="dashboard_lumen">
+                <div class="panel panel-default" ng-show="version_close">
+                    <div class="panel-heading"> BookorRent 
+						<div class="pull-right">
+							<span ng-init="version = true" ng-click="version = !version">
+								<i class="fa fa-angle-down pull-left" ng-class="{'fa-angle-down pull-left':version, 'fa-angle-up pull-left':!version}" ></i>
+							</span> 
+							<span ng-init="version_close = true" ng-click="version_close = !version_close"><i class="fa fa-remove" ></i>
+							</span>
+						</div>
+					</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body" ng-show="version">
+                        <div class="list-group">
+                            <div class="navbar-btn"> <h3 class="">{{'Version' | translate}} &nbsp; {{site_version}} </h3> </div>
+                            <a href="http://customers.agriya.com/" target="_blank" class="list-group-item">{{'Product Support' | translate}}</a>
+                            <a href="http://dev1products.dev.agriya.com/doku.php?id=car-rental" target="_blank" class="list-group-item">{{'Product Manual' | translate}}</a>
+                            <a href="http://www.cssilize.com/" target="_blank" class="list-group-item"> CSSilize PSD to XHTML Conversion and BookorRent theming </a>
+                            <a href="http://blogs.agriya.com/" target="_blank" class="list-group-item"> Agriya Blog Follow Agriya news </a>
+                        </div>
+                        <!-- /.list-group -->
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-btn "></div>
+    </div>
+</div>

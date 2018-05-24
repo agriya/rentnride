@@ -1,0 +1,178 @@
+{
+  "apis": [
+    {
+      "path": "/admin/transaction_types",
+      "operations": [
+        {
+          "summary": "List all transaction types",
+          "parameters": [
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "sorting field name",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "sort transaction types by ascending / descending order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_transaction_types"
+        }
+      ]
+    },
+    {
+      "path": "/admin/transaction_types/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit transaction type",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "The transaction type identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_transaction_types__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/transaction_types/{id}",
+      "operations": [
+        {
+          "summary": "Update transaction type",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The transaction type Identifier"
+            },
+            {
+              "name": "EditTransactionType",
+              "paramType": "body",
+              "required": true,
+              "type": "EditTransactionType",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_transaction_types__id_"
+        },
+        {
+          "summary": "Show transaction type",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "The transaction type identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_transaction_types__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "EditTransactionType": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "description": "The transaction type identifier"
+        },
+        "message": {
+          "type": "string",
+          "required": true,
+          "description": "Message"
+        }
+      },
+      "id": "EditTransactionType"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

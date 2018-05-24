@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.credit_card_number.$touched) && (PaymentForm.credit_card_number.$pristine || PaymentForm.credit_card_number.$invalid) }">
+        <input type="text" class="form-control" id="credit_card_number" name="credit_card_number" ng-model="buyer.credit_card_number" placeholder="{{'Card Number' | translate}}" cc-number cc-format ng-required="true" maxlength="19"/>
+        <div ng-show="(PaymentForm.$submitted || PaymentForm.credit_card_number.$touched) && (PaymentForm.credit_card_number.$pristine || PaymentForm.credit_card_number.$invalid)">
+            <div class="error" ng-show="PaymentForm.credit_card_number.$error.required">{{'Required' | translate}}</div>
+            <div class="error" ng-show="PaymentForm.$error.ccNumber || Paymentform.$error.ccNumberType">
+                {{ 'Enter valid credit card number!' | translate }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <div class="row" cc-exp>
+            <div class="col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.credit_card_expire_month.$touched) && (PaymentForm.credit_card_expire_month.$pristine || PaymentForm.credit_card_expire_month.$invalid)}">
+                <input name="credit_card_expire_month" cc-exp-month ng-model="buyer.credit_card_expire_month" class="form-control" ng-min="1" ng-max="12" id="credit_card_expire_month" type="text" placeholder="{{'MM' | translate }}" ng-required="true"/>
+                <div ng-show="(PaymentForm.$submitted || PaymentForm.credit_card_expire_month.$touched) && (PaymentForm.credit_card_expire_month.$pristine || PaymentForm.credit_card_expire_month.$invalid)">
+                    <div class="error" ng-show="(PaymentForm.credit_card_expire_month.$error.required)">{{'Required' | translate}} </div>
+                    <div class="error" ng-show="(PaymentForm.credit_card_expire_month.$invalid)">{{'Enter valid month' | translate}} </div>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.credit_card_expire_year.$touched) && (PaymentForm.credit_card_expire_year.$pristine || PaymentForm.credit_card_expire_year.$invalid) }">
+                <input name="credit_card_expire_year" cc-exp-year full-year ng-model="buyer.credit_card_expire_year" class="form-control" id="credit_card_expire_year" type="text" placeholder="{{'YYYY' | translate }}" ng-required="true"/>
+                <div ng-show="(PaymentForm.$submitted || PaymentForm.credit_card_expire_year.$touched) && (PaymentForm.credit_card_expire_year.$pristine || PaymentForm.credit_card_expire_year.$invalid)">
+                    <div class="error" ng-show="(PaymentForm.credit_card_expire_year.$error.required)">{{'Required' | translate}} </div>
+                    <div class="error" ng-show="(PaymentForm.$error.ccExpYear)">{{'Enter valid year' | translate}} </div>
+                </div>
+            </div>
+            <div class="has-error" ng-if="(PaymentForm.credit_card_expire_year.$valid && PaymentForm.credit_card_expire_month.$valid) && (PaymentForm.$error.ccExp)">
+                <div class="error">{{'Enter valid Expire Month' | translate}} </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.credit_card_name_on_card.$touched) && (PaymentForm.credit_card_name_on_card.$pristine || PaymentForm.credit_card_name_on_card.$invalid) }">
+        <input name="credit_card_name_on_card" ng-model="buyer.credit_card_name_on_card" class="form-control" id="credit_card_name_on_card" type="text" class="card_name" placeholder="Name on Card" ng-required="true"/>
+        <div class="error" ng-show="(PaymentForm.$submitted || PaymentForm.credit_card_name_on_card.$touched) && (PaymentForm.credit_card_name_on_card.$pristine || PaymentForm.credit_card_name_on_card.$invalid) && (PaymentForm.credit_card_name_on_card.$error.required)">{{'Required' | translate}}</div>
+    </div>
+    <div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.credit_card_code.$touched) && (PaymentForm.credit_card_code.$pristine || PaymentForm.credit_card_code.$invalid) }">
+        <input name="credit_card_code" cc-cvc ng-model="buyer.credit_card_code" class="form-control" id="credit_card_code" type="text" placeholder="{{'Card Code' | translate }}" ng-required="true"/>
+        <div ng-show="(PaymentForm.$submitted || PaymentForm.credit_card_code.$touched) && (PaymentForm.credit_card_code.$pristine || PaymentForm.credit_card_code.$invalid)">
+            <div class="error" ng-show="(PaymentForm.credit_card_code.$error.required)">{{'Required' | translate}}</div>
+            <div class="error" ng-show="(PaymentForm.$error.ccCvc)">{{'Enter Valid ccv numer' | translate}}</div>
+        </div>
+    </div>
+</div>

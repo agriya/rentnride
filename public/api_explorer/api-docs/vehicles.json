@@ -1,0 +1,838 @@
+{
+  "apis": [
+    {
+      "path": "/vehicles/filters",
+      "operations": [
+        {
+          "summary": "Get the list of filter details needed for vehicle search",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicles_filters"
+        }
+      ]
+    },
+    {
+      "path": "/vehicles/me",
+      "operations": [
+        {
+          "summary": "Get the own list of vehicles",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search vehicle",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The vehicle Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicles_me"
+        }
+      ]
+    },
+    {
+      "path": "/vehicles/search",
+      "operations": [
+        {
+          "summary": "Search the vehicles and list",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "enum": [
+                "price",
+                "rating"
+              ],
+              "type": "string",
+              "description": "Sort Vehicle by Price / Rating Order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "VehicleSearch",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleSearch",
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__vehicles_search"
+        }
+      ]
+    },
+    {
+      "path": "/vehicles",
+      "operations": [
+        {
+          "summary": "Store vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "VehicleAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__vehicles"
+        }
+      ]
+    },
+    {
+      "path": "/vehicles/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit the vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicles__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/vehicles/{id}",
+      "operations": [
+        {
+          "summary": "Update vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "vehicle id"
+            },
+            {
+              "name": "VehicleEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__vehicles__id_"
+        },
+        {
+          "summary": "View the vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicles__id_"
+        },
+        {
+          "summary": "Delete the specified vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter vehicle ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__vehicles__id_"
+        }
+      ]
+    },
+    {
+      "path": "/vehicle/add",
+      "operations": [
+        {
+          "summary": "Get the vehicle related details",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_add"
+        }
+      ]
+    },
+    {
+      "path": "/vehicles/paynow",
+      "operations": [
+        {
+          "summary": "Pay Vehicle listing fee",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "VehicleListingFee",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleListingFee",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__vehicles_paynow"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "VehicleListingFee": {
+      "properties": {
+        "vehicle_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle id"
+        },
+        "gateway_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "gateway id"
+        },
+        "payment_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "payment id"
+        },
+        "address": {
+          "type": "string",
+          "required": true,
+          "description": "address"
+        },
+        "city": {
+          "type": "string",
+          "required": true,
+          "description": "city"
+        },
+        "state": {
+          "type": "string",
+          "required": true,
+          "description": "state"
+        },
+        "country": {
+          "type": "string",
+          "required": true,
+          "description": "country"
+        },
+        "zip_code": {
+          "type": "string",
+          "required": true,
+          "description": "zip_code"
+        },
+        "credit_card_code": {
+          "type": "string",
+          "required": true,
+          "description": "credit_card_code"
+        },
+        "credit_card_expire": {
+          "type": "string",
+          "required": true,
+          "description": "credit_card_expire"
+        },
+        "credit_card_expire_month": {
+          "type": "string",
+          "required": true,
+          "description": "credit_card_expire_month"
+        },
+        "credit_card_expire_year": {
+          "type": "string",
+          "required": true,
+          "description": "credit_card_expire_year"
+        },
+        "credit_card_name_on_card": {
+          "type": "string",
+          "required": true,
+          "description": "credit_card_name_on_card"
+        },
+        "credit_card_number": {
+          "type": "string",
+          "required": true,
+          "description": "credit_card_number"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "email"
+        },
+        "phone": {
+          "type": "string",
+          "required": true,
+          "description": "phone"
+        }
+      },
+      "id": "VehicleListingFee"
+    },
+    "VehicleAdd": {
+      "properties": {
+        "vehicle_make_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_make_id"
+        },
+        "vehicle_model_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_model_id"
+        },
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_type_id"
+        },
+        "pickup_counter_locations": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "an array of counter locations",
+          "required": false
+        },
+        "drop_counter_locations": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "an array of counter locations",
+          "required": false
+        },
+        "driven_kilometer": {
+          "type": "number",
+          "format": "double",
+          "description": "driven_kilometer",
+          "required": false
+        },
+        "vehicle_no": {
+          "type": "string",
+          "description": "vehicle_no",
+          "required": false
+        },
+        "no_of_seats": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_seats",
+          "required": false
+        },
+        "no_of_doors": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_doors",
+          "required": false
+        },
+        "no_of_gears": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_gears",
+          "required": false
+        },
+        "is_manual_transmission": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_manual_transmission",
+          "required": false
+        },
+        "no_small_bags": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_small_bags",
+          "required": false
+        },
+        "no_large_bags": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_large_bags",
+          "required": false
+        },
+        "is_ac": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_ac",
+          "required": false
+        },
+        "minimum_age_of_driver": {
+          "format": "int64",
+          "type": "integer",
+          "description": "minimum_age_of_driver",
+          "required": false
+        },
+        "mileage": {
+          "type": "number",
+          "format": "double",
+          "description": "mileage",
+          "required": false
+        },
+        "is_km": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_km",
+          "required": false
+        },
+        "is_airbag": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_airbag",
+          "required": false
+        },
+        "no_of_airbags": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_airbags",
+          "required": false
+        },
+        "is_abs": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_abs",
+          "required": false
+        },
+        "per_hour_amount": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "per_hour_amount"
+        },
+        "per_day_amount": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "per_day_amount"
+        },
+        "fuel_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "fuel_type_id",
+          "required": false
+        }
+      },
+      "id": "VehicleAdd"
+    },
+    "VehicleEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Vehicle identifier"
+        },
+        "vehicle_make_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_make_id"
+        },
+        "vehicle_model_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_model_id"
+        },
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_type_id"
+        },
+        "pickup_counter_locations": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "an array of counter locations",
+          "required": false
+        },
+        "drop_counter_locations": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "an array of counter locations",
+          "required": false
+        },
+        "driven_kilometer": {
+          "type": "number",
+          "format": "double",
+          "description": "driven_kilometer",
+          "required": false
+        },
+        "vehicle_no": {
+          "type": "string",
+          "description": "vehicle_no",
+          "required": false
+        },
+        "no_of_seats": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_seats",
+          "required": false
+        },
+        "no_of_doors": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_doors",
+          "required": false
+        },
+        "no_of_gears": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_gears",
+          "required": false
+        },
+        "is_manual_transmission": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_manual_transmission",
+          "required": false
+        },
+        "no_small_bags": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_small_bags",
+          "required": false
+        },
+        "no_large_bags": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_large_bags",
+          "required": false
+        },
+        "is_ac": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_ac",
+          "required": false
+        },
+        "minimum_age_of_driver": {
+          "format": "int64",
+          "type": "integer",
+          "description": "minimum_age_of_driver",
+          "required": false
+        },
+        "mileage": {
+          "type": "number",
+          "format": "double",
+          "description": "mileage",
+          "required": false
+        },
+        "is_km": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_km",
+          "required": false
+        },
+        "is_airbag": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_airbag",
+          "required": false
+        },
+        "no_of_airbags": {
+          "format": "int64",
+          "type": "integer",
+          "description": "no_of_airbags",
+          "required": false
+        },
+        "is_abs": {
+          "format": "int64",
+          "type": "integer",
+          "description": "is_abs",
+          "required": false
+        },
+        "per_hour_amount": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "per_hour_amount"
+        },
+        "per_day_amount": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "per_day_amount"
+        },
+        "fuel_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "fuel_type_id",
+          "required": false
+        }
+      },
+      "id": "VehicleEdit"
+    },
+    "VehicleSearch": {
+      "properties": {
+        "start_date": {
+          "description": "Enter start date for your trip",
+          "type": "string",
+          "required": true
+        },
+        "end_date": {
+          "description": "Enter end date for your trip",
+          "type": "string",
+          "required": false
+        },
+        "pickup_location_id": {
+          "description": "Enter Pickup location id.",
+          "type": "string",
+          "required": true
+        },
+        "drop_location_id": {
+          "description": "Enter Drop location id.",
+          "type": "string",
+          "required": true
+        },
+        "vehicle_type": {
+          "type": "array",
+          "items": {
+            "$ref": "vehicle_type"
+          },
+          "description": "an array of &#39;vehicle_type&#39; objects",
+          "required": false
+        },
+        "fuel_type": {
+          "type": "array",
+          "items": {
+            "$ref": "fuel_type"
+          },
+          "description": "an array of &#39;fuel_type&#39; objects",
+          "required": false
+        },
+        "price_min": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Minimum price to filter",
+          "required": false
+        },
+        "price_max": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Maximum price to filter",
+          "required": false
+        },
+        "mileage_min": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Minimum Mileage to filter",
+          "required": false
+        },
+        "mileage_max": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Maximum Mileage to filter",
+          "required": false
+        },
+        "seat_min": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Minimum Seat to filter",
+          "required": false
+        },
+        "seat_max": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Maximum Seat to filter",
+          "required": false
+        },
+        "ac": {
+          "type": "boolean",
+          "description": "Filter Vehicle by AC Type",
+          "required": false
+        },
+        "non_ac": {
+          "type": "boolean",
+          "description": "Filter Vehicle by AC Type",
+          "required": false
+        },
+        "manual_transmission": {
+          "type": "boolean",
+          "description": "Filter Vehicle by Transmission Type",
+          "required": false
+        },
+        "auto_transmission": {
+          "type": "boolean",
+          "description": "Filter Vehicle by Transmission Type",
+          "required": false
+        },
+        "airbag": {
+          "type": "boolean",
+          "description": "Filter Vehicle by Airbag Type",
+          "required": false
+        },
+        "non_airbag": {
+          "type": "boolean",
+          "description": "Filter Vehicle by Airbag Type",
+          "required": false
+        }
+      },
+      "id": "VehicleSearch"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

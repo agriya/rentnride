@@ -1,0 +1,9 @@
+{
+  "name": "VehicleSurcharges",
+  "class": "fa fa-2x fa-download",
+  "description": "By enabling this, item owner can manage surcharges based on vehicle types.",
+  "dependencies": "VehicleRentals",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "15"
+}

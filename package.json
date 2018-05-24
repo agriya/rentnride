@@ -1,0 +1,28 @@
+{
+  "name": "RentnRide",
+  "version": "0.0.1",
+  "author": "Agriya",
+  "test": "RentnRide",
+  "devDependencies": {
+    "grunt": ">=0.4.5 <1.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "~1.2.0",
+    "grunt-contrib-uglify": "~1.0.1",
+    "grunt-html2js": "^0.3.5",
+    "grunt-ng-annotate": "^2.0.1",
+    "lodash": "^4.7.0",
+    "grunt-angular-translate": "~0.3.0",
+    "grunt-parallel": "~0.4.1",
+    "grunt-regex-replace": "~0.2.6",
+    "grunt-exec": "^0.4.6",
+    "grunt-ssh": "^0.12.8",
+    "grunt-ngdocs": "~0.2.10",
+    "grunt-zip": "^0.17.1"
+  },
+  "dependencies": {
+    "lodash": "^4.7.0"
+  }
+}

@@ -1,0 +1,124 @@
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="text-uppercase">{{'Trip Summary'|translate}}</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group clearfix">
+                    <label class="col-sm-3">{{'Pick Up'|translate}}:</label>
+                    <p class="col-sm-9">{{VehicleRentalDetails.pickup_counter_location.address}}</p>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-sm-3">{{'Time'|translate}}:</label>
+                    <p class="col-sm-9">{{VehicleRentalDetails.item_booking_start_date}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group clearfix">
+                    <label class="col-sm-3">{{'Drop Off'|translate}}:</label>
+                    <p class="col-sm-9">{{VehicleRentalDetails.drop_counter_location.address}}</p>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-sm-3">{{'Time' | translate}}:</label>
+                    <p class="col-sm-9">{{VehicleRentalDetails.item_booking_end_date}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="text-uppercase">{{'Fare Details'|translate}}</h4>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{'Details'|translate}}</th>
+                        <th width="85">{{'Day(s)'|translate}}</th>
+                        <th>{{'Total'|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="#/vehicle/{{vehicleDetails.id}}/{{vehicleDetails.slug}}" title="{{vehicleDetails.name}}">{{vehicleDetails.vehicle_make.name}}-<strong>{{vehicleDetails.vehicle_model.name}}#{{vehicleDetails.id}}</strong></a>
+                        </td>
+                        <td ng-if="VehicleRentalDetails.date_diff.total_days > 0">{{VehicleRentalDetails.date_diff.total_days}} {{'Day(s)'| translate}}</td>
+                        <td ng-if="VehicleRentalDetails.date_diff.total_hours > 0">{{VehicleRentalDetails.date_diff.total_hours}} {{'Hour(s)'| translate}}</td>
+                        <td>{{getFormatCurrency(VehicleRentalDetails.booking_amount)}}</td>
+                    </tr>
+                    <tr ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleTaxes') > -1 && VehicleRentalDetails.tax_amount > 0">
+                        <td>{{'Tax'|translate}}</td>
+                        <td></td>
+                        <td>(+) {{getFormatCurrency(VehicleRentalDetails.tax_amount)}}</td>
+                    </tr>
+                    <tr ng-if="VehicleRentalDetails.deposit_amount > 0">
+                        <td>{{'Deposit'|translate}}</td>
+                        <td></td>
+                        <td>(+){{getFormatCurrency(VehicleRentalDetails.deposit_amount)}}</td>
+                    </tr>
+                    <tr ng-if="VehicleRentalDetails.drop_location_differ_charges > 0">
+                        <td>{{'One way drop off charge'|translate}}&nbsp;<i class="fa fa-info-circle" title="{{differ_location_distance}} * {{getFormatCurrency(unit_price)}}(Per Unit) = {{getFormatCurrency(VehicleRentalDetails.drop_location_differ_charges)}}" ></i></td>
+                        <td></td>
+                        <td>(+) {{getFormatCurrency(VehicleRentalDetails.drop_location_differ_charges)}}</td>
+                    </tr>
+                    <tr ng-if="VehicleRentalDetails.drop_location_differ_additional_fee > 0">
+                        <td>{{'Drop Location Differ Additional Fee'|translate}}</td>
+                        <td></td>
+                        <td>(+) {{getFormatCurrency(VehicleRentalDetails.drop_location_differ_additional_fee)}}</td>
+                    </tr>
+                    <tr ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleExtraAccessories') > -1 && VehicleRentalDetails.extra_accessory_amount > 0">
+                        <td>{{'Extra Accessory Amount'|translate}}</td>
+                        <td></td>
+                        <td>(+) {{getFormatCurrency(VehicleRentalDetails.extra_accessory_amount)}}</td>
+                    </tr>
+                    <tr ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleInsurances') > -1 && VehicleRentalDetails.insurance_amount > 0">
+                        <td>{{'Insurance Amount'|translate}}</td>
+                        <td></td>
+                        <td>(+){{getFormatCurrency(VehicleRentalDetails.insurance_amount)}}</td>
+                    </tr>
+                    <tr ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFuelOptions') > -1 &&VehicleRentalDetails.fuel_option_amount > 0">
+                        <td>{{'Fuel Amount'|translate}}</td>
+                        <td></td>
+                        <td>(+) {{getFormatCurrency(VehicleRentalDetails.fuel_option_amount)}}</td>
+                    </tr>
+                    <tr ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleSurcharges') > -1 && VehicleRentalDetails.surcharge_amount > 0">
+                        <td>{{'Surcharge Amount'|translate}}</td>
+                        <td></td>
+                        <td>(+) {{getFormatCurrency(VehicleRentalDetails.surcharge_amount)}}</td>
+                    </tr>
+                    <tr ng-if="VehicleRentalDetails.additional_fee > 0">
+                        <td>{{'Additional Fee'|translate}}</td>
+                        <td></td>
+                        <td>(+) {{getFormatCurrency(VehicleRentalDetails.additional_fee)}}</td>
+                    </tr>
+                    <tr ng-if="VehicleRentalDetails.special_discount_amount > 0">
+                        <td>{{'Special Discount Amount'|translate}}</td>
+                        <td></td>
+                        <td>(-) {{getFormatCurrency(VehicleRentalDetails.special_discount_amount)}}</td>
+                    </tr>
+                    <tr ng-if="VehicleRentalDetails.type_discount_amount > 0">
+                        <td>{{'Type Discount Amount'|translate}}</td>
+                        <td></td>
+                        <td>(-) {{getFormatCurrency(VehicleRentalDetails.type_discount_amount)}}</td>
+                    </tr>
+                    <tr ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleCoupons') > -1 && VehicleRentalDetails.coupon_discount_amount > 0">
+                        <td>{{'Discount'|translate}}</td>
+                        <td></td>
+                        <td>(-) {{getFormatCurrency(VehicleRentalDetails.coupon_discount_amount)}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>{{'Total Price'|translate}}</strong>
+                        </td>
+                        <td></td>
+                        <td>{{getFormatCurrency(VehicleRentalDetails.total_amount)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+	<a ng-show="isPayment && booker_detail.id" class="btn btn-green btn-block" ng-click="continuePayment()">{{'Continue Payment'|translate}}</a>
+</div>

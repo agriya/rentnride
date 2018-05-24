@@ -1,0 +1,4 @@
+<a class="btn btn-default dropdown-toggle border-link" data-toggle="dropdown"> {{currency_code}} <span class="fa fa-angle-down"></span></a>
+<ul class="dropdown-menu" role="menu">
+    <li ng-repeat="currency in $root.currencies"><a title="{{currency.code}}" class="" ng-click="getCurrentCurrency(currency.id)">{{currency.code}}</a></li>
+</ul>

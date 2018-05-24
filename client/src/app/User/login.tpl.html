@@ -1,0 +1,33 @@
+<div class="login-bg">
+    <div class="container">
+        <div class="user-login">
+            <h2 class="text-uppercase">{{'Sign In' | translate}}</h2>
+            <form class="form-login" name="loginForm" ng-submit="model.login(loginForm.$valid)" novalidate>
+                <div class="form-group username" ng-class="{ 'has-error' : (loginForm.$submitted || loginForm.email.$touched) && (loginForm.email.$pristine || loginForm.email.$invalid || loginForm.email.$error.email)}">
+                        <input type="email" class="form-control input-lg" placeholder="{{'Email' | translate}}" name="email" ng-model="model.email" ng-required="true">
+                    <div ng-show="(loginForm.$submitted || loginForm.email.$touched) && (loginForm.email.$pristine || loginForm.email.$invalid)">
+                        <span class="error" ng-show="(loginForm.email.$error.required)">{{'Required' | translate }}</span>
+                        <span class="error" ng-show="(loginForm.email.$error.email)">{{ 'Enter valid email' | translate }}</span>
+                    </div>
+                </div>
+                <div class="form-group password" ng-class="{ 'has-error' : (loginForm.$submitted || loginForm.password.$touched) && (loginForm.password.$pristine || loginForm.password.$invalid)}">
+                    <input type="password" class="form-control input-lg" placeholder="{{'Password' | translate}}" name="password" ng-model="model.password" ng-required="true" ng-minlength="6" ng-maxlength="40">
+                    <div ng-show="(loginForm.$submitted || loginForm.password.$touched) && (loginForm.password.$pristine || loginForm.password.$invalid)">
+                        <span class="error" ng-show="(loginForm.password.$error.required)">{{'Required' | translate }}</span>
+                        <span class="error" ng-show="(loginForm.password.$error.minlength)">{{'Minimum length is 6' | translate}}</span>
+                        <span class="error" ng-show="(loginForm.password.$error.maxlength)">{{'Maximum length is 40' | translate }}</span>
+                    </div>
+                </div>
+                <div class="row login-btn">
+                    <div class="col-md-6 for-passwd">
+                        <a href="#/users/forgot_password" title="Forgot Password">{{'Forgot Your password' | translate}}?</a>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-block btn-orange text-uppercase" type="submit">{{'Sign In' | translate}}</button>
+                    </div>
+                </div>
+            </form>
+           	<social-login class="clearfix"></social-login>
+        </div>
+    </div>
+</div>

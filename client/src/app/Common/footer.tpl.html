@@ -1,0 +1,98 @@
+<div class="footer">
+	<div class="container">
+    	<!-- bottom Banner start-->
+        <div banner position="bottomBanner"></div>
+        <!-- bottom Banner end-->
+    	<div class="row">
+            <div class="col-md-10 col-md-offset-1">
+            	<div class="row footer-menu">
+                    <div class="col-sm-3">
+                        <h3 ng-bind-html="$root.settings['site.name'] | html"></h3>      
+                        <ul class="list-unstyled">
+                            <li ng-if="$root.settings['site.enabled_plugins'].indexOf('Vehicles') > -1">
+                                <a title="{{'List of Vehicles'|translate}}" ui-sref="all_vehicles">{{'List of Vehicles'|translate}}</a>
+                            </li>
+                            <li><a ui-sref="howitworks" title="{{'How It Works'|translate}}" href="#">{{'How It Works'|translate}}</a></li>
+                            <li class="navbar-btn" ng-if="$root.settings['site.enabled_plugins'].indexOf('Contacts') > -1"><div contact-links></div></li>
+                        </ul>       	
+                    </div>
+                    <div class="col-sm-3">
+                        <h3>{{'HELP'|translate}}</h3>
+                        <ul class="list-unstyled" ng-if="$root.settings['site.enabled_plugins'].indexOf('Pages') > -1">
+                            <li><div footer-links></div></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 get-app">
+                        <!--<h3>{{'DOWNLOAD APP FOR SCRIPT'|translate}}</h3>
+                        <ul class="list-inline">
+                            <li><img class="img-responsive center-block" src="assets\img\app-store.png" alt="app-store"></li>
+                            <li><img class="img-responsive center-block" src="assets\img\play-store.png" alt="play-store"></li>
+                        </ul>-->
+                        <h3>{{'FOLLOW US ON'|translate}}</h3>
+                        <ul class="list-inline social-icons">
+                            <li ng-show="$root.settings['follow.facebook_url']">
+                                <a href="{{$root.settings['follow.facebook_url']}}" target="_blank" title="{{'Follow me on facebook'| translate}}">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.google_plus_url']">
+                                <a href="{{$root.settings['follow.google_plus_url']}}" target="_blank" title="{{'Follow me on google plus'| translate}}">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.linkedin_url']">
+                                <a href="{{$root.settings['follow.linkedin_url']}}" target="_blank" title="{{'Follow me on linkedin'| translate}}">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.foursquare_url']">
+                                <a href="{{$root.settings['follow.foursquare_url']}}" target="_blank" title="{{'Follow me on foursquare'| translate}}">
+                                    <i class="fa fa-foursquare"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.pinterest_url']">
+                                <a href="{{$root.settings['follow.pinterest_url']}}" target="_blank" title="{{'Follow me on pinterest'| translate}}">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.flickr_url']">
+                                <a href="{{$root.settings['follow.flickr_url']}}" target="_blank" title="{{'Follow me on flickr'| translate}}">
+                                    <i class="fa fa-flickr"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.instagram_url']">
+                                <a href="{{$root.settings['follow.instagram_url']}}" target="_blank" title="{{'Follow me on instagram'| translate}}">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.tumblr_url']">
+                                <a href="{{$root.settings['follow.tumblr_url']}}" target="_blank" title="{{'Follow me on tumblr'| translate}}">
+                                    <i class="fa fa-tumblr"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.youtube_url']">
+                                <a href="{{$root.settings['follow.youtube_url']}}" target="_blank" title="{{'Follow me on youtube'| translate}}">
+                                    <i class="fa fa-youtube"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.vimeo_url']">
+                                <a href="{{$root.settings['follow.vimeo_url']}}" target="_blank" title="{{'Follow me on vimeo'| translate}}">
+                                    <i class="fa fa-vimeo"></i>
+                                </a>
+                            </li>
+                            <li ng-show="$root.settings['follow.twitter_url']">
+                                <a href="{{$root.settings['follow.twitter_url']}}" target="_blank" title="{{'Follow me on twitter'| translate}}">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix" ng-show="$root.settings['user.is_allow_user_to_switch_language'] == 1">
+                            <div ng-translate-language-select></div>
+                        </div>
+                    </div>
+            	</div>
+            </div>
+      	</div>
+        <p class="text-center">{{'Copyright'|translate}} &copy; {{'Book or Rent'|translate}}. {{currentYear}} {{'All rights reserved'|translate}}</p>
+    </div>
+</div>

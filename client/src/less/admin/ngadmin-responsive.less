@@ -1,0 +1,365 @@
+/**
+*    CSS for @BookorRent
+*
+* @author		ganesh_119at09 (Sridharan Team)
+* @copyright 	Copyright (c) 2012 {@link http://www.agriya.com Agriya Infoway}
+* @license 		http://www.agriya.com Agriya Infoway Licence
+* @version 		SVN: $Id: ngadmin-responsive.less ganesh_119at09 $
+* @since 		2013-10-09
+*/
+
+@media screen and (max-width:1199px) {
+	ma-datagrid {
+		width:100%;
+		float:left;
+		overflow-x:auto;
+		overflow-y:hidden;
+		border-bottom:@border;
+		padding-bottom:@padding + 5px;
+	}
+	.table {
+		max-width:1095px;
+		width:1095px;
+	}
+}
+
+@media screen and (min-width:992px) and (max-width:1199px) {
+	.list-view.ng-admin-entity-setting_categories table {
+		width:auto;
+		tbody tr {
+			width:46%;
+			min-height:202px;
+			margin:(@margin - 3px);
+		}
+	}
+}
+
+@media screen and (max-width:991px) {
+	.list-view.ng-admin-entity-setting_categories table {
+		width:auto;
+		tbody tr {
+			width:100%;
+			margin:(@margin - 3px) (@margin - 15px);
+		}
+	}
+}
+
+@media screen and (max-width:767px) {
+	.navbar {
+		min-height:50px !important;
+		z-index:99999;
+		.navbar-brand {
+			height: 100%;
+			margin:(@padding - 10px) (@padding - 15px);
+			img {
+				max-width: 180px;
+			}
+		}
+		.navbar-toggle {
+			border:0;
+			margin-top:@margin + 15px;
+			margin-right:@margin - 15px;
+			&:hover, &:focus, &:active {
+				background:none;
+			}
+			.icon-bar {
+				background-color:@white;
+			}
+		}
+		.sidebar {
+			top:96px;
+			border: none;
+			margin-top: 0px;
+			.navbar-collapse {
+				padding:@padding - 15px;
+				overflow:visible;
+				ul ul {
+					top:45px;
+					left:0;
+					z-index:9;
+				}
+			}
+		}
+		.navbar-brand {
+			img {
+				margin-top:@margin - 15px;
+			}
+		}
+	}
+	.sidebar-nav {
+		> ul > li {
+			&:last-of-type, &:nth-last-of-type(2) {
+				display:block !important;
+			}
+		}
+	}
+	.mob-dc{
+		text-align:center !important;
+	}
+	#page-wrapper {
+		padding:(@padding - 15px) (@padding);
+		margin:(@margin - 15px);
+	}
+	.dashboard_summary {
+		.dashboard_grid {
+			.list-group {
+				.list-group-item {
+					width:100%;
+					margin:(@margin - 15px) (@margin - 15px) (@margin);
+				}
+			}
+		}
+	}
+	.page-header {
+		> ma-view-actions {
+   			 margin-top: -7px;
+		}
+	}
+	.admin-content {
+		form.filters { 
+			.filter > label {
+		 		 + div {
+				 	width: 85%;
+		 		}
+			 }
+		}
+		ma-filter-form {
+			.remove_filter {
+				margin-left:0;
+			}
+		}
+		.show-value{
+			.pull-right{
+				float: none !important;
+				.btn{ 
+					width: 100%;
+				}
+		 	}
+		}
+		.edit-form , .add-form{
+			form {
+				> div {
+					padding: 0 10px !important;
+				}
+			}
+		}
+		 #edit-view, #create-view, #show-view {
+			.form-horizontal, &.form-horizontal {
+				.control-label {
+					width:100%;
+					& + div {
+						width:100%;
+					}
+				}
+				ma-submit-button {
+					margin-left:@margin - 15px;
+				}
+			}
+		}
+		#create-view, #edit-view {
+			form {
+				max-width:100%;
+				padding:(@padding + 15px) (@padding - 5px);
+				& > .row {
+					margin:@margin - 15px;
+				}
+				.btn-primary {
+					margin-left:@margin - 15px;
+					width:100%;
+				}
+				> div {
+					width: 100%;
+					padding: 0;
+				}
+				.col-sm-offset-2 {	
+					width: 100%;
+					text-align: center;
+				}
+			}
+		}
+		ma-view-actions {
+			ma-create-button, ma-list-button, ma-edit-button, ma-delete-button{
+				.glyphicon{
+					padding-left:@padding - 12px;
+				}
+			}
+		}
+		.login-page{
+			 padding:(@padding + 35) (@padding - @padding); 
+		}
+		.calendar-block {
+			margin:(@margin + 5px) 0  0;
+			padding-bottom:@padding + 35px;
+			.calendar-header {
+				& > div {
+					float:none !important;
+					margin-top:@margin;
+				}
+			}
+			.calendar-body {
+				.cal-day-inmonth {
+					span {
+						width:30px;
+						height:30px;
+						font-size:@font-size + 2px !important;
+						line-height:33px;
+					}
+				}
+				.cal-month-box {
+					.cal-row-fluid .cal-cell {
+						min-height:50px;
+					}
+					.cal-month-day {
+						position:relative;
+						height:50px;
+						padding:(@padding - 5px) (@padding - 15px);
+						.events-list {
+							top:0;
+							bottom:auto;
+							.event {
+								width:8px;
+								height:8px;
+							}
+						}
+						.cal-events-num {
+							position:absolute;
+							margin:@margin - 15px;
+							bottom:2px;
+							right:3px;
+							padding:(@padding - 12px) (@padding - 10px);
+							width:15px;
+							height:15px;
+							font-size:@font-size - 4px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.humane, .humane-flatty {
+		width:80%;
+		left:10%;
+	}
+	#cal-week-box {
+		display:none;
+	}
+}
+
+@media(min-width:768px) {
+	.ng-admin-entity-email_templates,.ng-admin-entity-pages,.ng-admin-entity-vehicle_taxes,.pages-form, .ng-admin-entity-vehicle_fuel_options, .ng-admin-entity-vehicle_surcharges, .ng-admin-entity-vehicle_insurances, .ng-admin-entity-vehicle_extra_accessories {
+		form {
+			> div {
+				width: 85% !important;
+			}
+		}
+	}
+	.vehicle-form {
+		.option-block {
+			line-height:44px;
+			margin-top:@margin + 5px;
+			margin-left:0;
+			.checkbox {
+				margin-top:@margin - 5px;
+			}
+		}
+	}
+}
+
+@media(max-width:991px) {
+	.calendar-block {
+		.calendar-header {
+			h2 {
+				display:block;
+				margin-bottom:@margin;
+				font-size:@font-size + 8px;
+			}
+			.navbar-left {
+				margin-bottom:@margin;
+			}
+		}
+		.calendar-body {
+			.cal-month-day {
+				height:50px;
+				padding:10px 0;
+			}
+			.cal-cell {
+			 	min-height: 50px;
+			}
+			.cal-day-inmonth, .cal-month-day.cal-day-today {
+				span {
+					width:35px;
+					height:35px;
+					line-height:35px;
+				}
+			}
+		}
+	}
+}
+@media(max-width:950px) {
+	.dashboard_grid {
+		.list-inline {
+			text-align: center;
+			margin-left:0 !important;
+			li{
+				margin-bottom:@margin;
+			}
+		}
+	}
+
+}
+@media(min-width:1200px) and (max-width: 1350px) {
+	.dashboard_grid {
+		.panel-heading {
+			.list-inline {
+				margin-left:@margin - 6px !important;
+				.btn-default {
+					padding:(@padding - 7px) (@padding - 6px) !important;
+				}
+			}
+		}
+	}
+}
+@media(min-width:1360px) and (max-width: 1366px) {
+	.dashboard_grid {
+		.panel-heading {
+			.list-inline {
+				margin-left:@margin !important;
+				.btn-default {
+					padding:(@padding - 7px) (@padding - 1px) !important;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 480px) {
+	.pagination-bar {
+		.pagination li { 
+			a, span {
+				padding:(@padding - 4px) (@padding - 1px);
+				margin-bottom:@margin - 5px;
+			}
+			&:first-child a {
+				 margin-right:0;
+			}
+			&:last-child a {
+			 	margin-left:0;
+			}
+		}
+	}
+}
+@media (max-width:1198px) {
+	.ng-admin-entity-users {
+		ma-list-actions {
+			.btn, .btn-xs {
+				padding:1px 0 !important;
+			}
+		}
+	}
+}
+@media (min-width:1024px) {
+	.ng-admin-entity-setting_categories {
+		.col-lg-12{
+			padding:@padding - @padding;
+		}
+	}
+}

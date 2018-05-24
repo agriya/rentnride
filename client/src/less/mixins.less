@@ -1,0 +1,195 @@
+.button-variant(@color; @background; @border) {
+	color: @color;
+	background-color: @background;
+	border-color: @border;
+
+	&:hover,
+	&:focus,
+	&:active,
+	&.active,
+	.open .dropdown-toggle& {
+		color: @color;
+		background-color: darken(@background, 10%);
+        border-color: darken(@border, 12%);
+	}
+	&:active,
+	&.active,
+	.open .dropdown-toggle& {
+		background-image: none;
+	}
+	&.disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		&,
+		&:hover,
+		&:focus,
+		&:active,
+		&.active {
+			background-color: @background;
+			border-color: @border;
+		}
+	}
+
+	.badge {
+		color: @background;
+		background-color: @color;
+	}
+}
+
+.paragraph() {
+	font:(@font-size + 4px) (@ProximaNova-Light);
+	line-height:@line-height + 2px;
+	color:@black;
+}
+
+.list-font() {
+	font:(@font-size + 2px) (@ProximaNova-Light);
+	color:@black-38;
+}
+
+.social-link() {
+	.btn {
+		color:@white !important;
+		transition:0.3s linear;
+	}
+	.fa {
+		font-size:@font-size + 16px;
+		vertical-align:middle;
+	}
+	.btn-facebook { 
+		background-color:@facebook; 
+		&:hover, &:focus, &:active {
+			background-color:@facebook-hover; 
+		}
+	}
+	.btn-twitter {
+		background-color:@twitter;
+		&:hover, &:focus, &:active {
+			background-color:@twitter-hover;
+		}
+	}
+	.btn-google { 
+		background-color:@google; 
+		&:hover, &:focus, &:active {
+			background-color:@google-hover;
+		}
+	}
+	.btn-github { 
+		background-color:@github;  
+		&:hover, &:focus, &:active {
+			background-color:@github-hover;
+		}
+	}
+}
+
+.dashboard-grid() {
+	&:nth-of-type(1) h2 a  { border-color:#6676d4; }
+	&:nth-of-type(2) h2 a  { border-color:#a778ce; }
+	&:nth-of-type(3) h2 a  { border-color:#ffb739; }
+	&:nth-of-type(4) h2 a  { border-color:#4d95d2; }
+	&:nth-of-type(5) h2 a  { border-color:#ee6b7d; }
+	&:nth-of-type(6) h2 a  { border-color:#12afcb; }
+	&:nth-of-type(7) h2 a  { border-color:#67809f; }
+	&:nth-of-type(8) h2 a  { border-color:#f9744b; }
+	&:nth-of-type(9) h2 a  { border-color:#16a085; }
+	&:nth-of-type(10) h2 a { border-color:#f7f683; }
+	&:nth-of-type(11) h2 a { border-color:#f867b6; }
+	&:nth-of-type(12) h2 a { border-color:#40c36e; }
+}
+
+.img-width() {
+	width:120px;
+	height:120px;
+	border:4px solid rgba(0, 0, 0, 0.1);
+	display:flex;
+	img {
+		margin:auto;
+	}
+}
+
+.dashboard-btn() {
+	font:(@font-size) (@ProximaNova-Regular);
+	border-radius:@border-radius + 16px;
+	.fa {
+		margin-left:@margin - 5px;
+	}
+}
+
+.white-dropdown() {
+	.dropdown {
+		.btn {
+			min-width:147px;
+			border:2px solid #e0e0e0;
+			font:(@font-size) (@ProximaNova-Regular);
+			line-height:@line-height - 12px;
+			background-color:@white;
+			color:@black;
+			padding:(@padding - 4px) (@padding + 5px);
+			border-radius:@border-radius + 22px;
+			.fa {
+				color:@orange;
+				margin-left:@margin + 25px;
+			}
+		}
+		&.open {
+			.btn {
+				border-radius:26px 26px 0 0;
+			}
+			.dropdown-menu {
+				min-width:174px;
+				left:auto;
+				right:0;
+				border:2px solid #e0e0e0;
+				border-top:0;
+				border-radius:0 0 15px 15px;
+				margin:@margin - 15px;
+				box-shadow:none;
+				overflow:hidden;
+				li a {
+					font:(@font-size) (@ProximaNova-Regular);
+					&:hover,&:focus, &:focus {
+						background-color:@orange;
+						color:@white;
+					}
+				}
+			}
+		}
+	}
+}
+
+.specifications() {
+	li {
+		padding:(@padding - 10px) (@padding - 15px) (@padding + 5px) (@padding + 25px);
+		&:before {
+			content:"";
+			width:30px;
+			height:30px;
+			position:absolute;
+			left:0;
+		}
+		&.manual    { background:url('@{images}manual.png') no-repeat 3px 2px;    }
+		&.automatic { background:url('@{images}automatic.png') no-repeat 4px 0px; }
+		&.air-cond  { background:url('@{images}air.png') no-repeat 4px 0px;       }
+		&.bag       { background:url('@{images}bag.png') no-repeat 3px 0px;       }
+		&.luggage   { background:url('@{images}luggage.png') no-repeat 3px 0px;   }
+		&.user      { background:url('@{images}user-list.png') no-repeat 3px 0px; }
+	}
+}
+
+.btn-font-small() {
+	font-size:@font-size + 4px;
+	padding:(@padding - 5px) (@padding - 3px);
+}
+
+.opa-color() {
+	opacity:1;
+	color:@white;
+}
+
+.remove-page-head-color() {
+	background:none;
+	padding-bottom:@padding + 25px;
+	.profile-settings {
+		display:none;
+	}
+}

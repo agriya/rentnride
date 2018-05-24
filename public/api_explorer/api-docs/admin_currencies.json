@@ -1,0 +1,371 @@
+{
+  "apis": [
+    {
+      "path": "/admin/currencies",
+      "operations": [
+        {
+          "summary": "Fetch List of Currencies",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "type",
+              "paramType": "query",
+              "type": "string",
+              "description": "Give which type currency load",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Currency",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of currencies ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Currency Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Currency by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_currencies"
+        },
+        {
+          "summary": "Store Currency",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "CurrencyAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "CurrencyAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_currencies"
+        }
+      ]
+    },
+    {
+      "path": "/admin/currencies/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Currency",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Currency Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_currencies__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/currencies/{id}",
+      "operations": [
+        {
+          "summary": "Update Currency",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Currency Identifier"
+            }
+          ],
+          "CurrencyEdit": [
+            "body",
+            "required",
+            {
+              "type": "CurrencyEdit"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_currencies__id_"
+        },
+        {
+          "summary": "Delete Currency",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Currency Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_currencies__id_"
+        },
+        {
+          "summary": "Show Currency",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Currency Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_currencies__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "CurrencyAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Currency Name"
+        },
+        "code": {
+          "type": "string",
+          "required": true,
+          "description": "Currency Code"
+        },
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "Currency Symbol"
+        },
+        "decimals": {
+          "type": "string",
+          "required": true,
+          "description": "Decimal length of Currency"
+        },
+        "dec_point": {
+          "type": "string",
+          "required": true,
+          "description": "Format of decimal dot/comma"
+        },
+        "thousands_sep": {
+          "type": "string",
+          "required": true,
+          "description": "Thousands Separator of Currency"
+        },
+        "prefix": {
+          "type": "string",
+          "required": true,
+          "description": "Display symbol if currency is placed before"
+        },
+        "suffix": {
+          "type": "string",
+          "required": true,
+          "description": "Display symbol if currency is placed after"
+        },
+        "is_prefix_display_on_left": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Whether to display currency in left"
+        },
+        "is_use_graphic_symbol": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Need to use graphical symbols for Currency"
+        }
+      },
+      "id": "CurrencyAdd"
+    },
+    "CurrencyEdit": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "required": true,
+          "description": "The Currency Identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Currency Name"
+        },
+        "code": {
+          "type": "string",
+          "required": true,
+          "description": "Currency Code"
+        },
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "Currency Symbol"
+        },
+        "decimals": {
+          "type": "string",
+          "required": true,
+          "description": "Decimal length of Currency"
+        },
+        "dec_point": {
+          "type": "string",
+          "required": true,
+          "description": "Format of decimal dot/comma"
+        },
+        "thousands_sep": {
+          "type": "string",
+          "required": true,
+          "description": "Thousands Separator of Currency"
+        },
+        "prefix": {
+          "type": "string",
+          "required": true,
+          "description": "Display symbol if currency is placed before"
+        },
+        "suffix": {
+          "type": "string",
+          "required": true,
+          "description": "Display symbol if currency is placed after"
+        },
+        "is_prefix_display_on_left": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Whether to display currency in left"
+        },
+        "is_use_graphic_symbol": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Need to use graphical symbols for Currency"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active currency"
+        }
+      },
+      "id": "CurrencyEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

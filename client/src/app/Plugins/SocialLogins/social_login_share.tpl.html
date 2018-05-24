@@ -1,0 +1,52 @@
+<div class="social-share">
+    <ul class="list-unstyled">
+        <li>
+            <a href="" data-toggle="tooltip" data-placement="top" title="{{'Share facebook'| translate}}" class="btn-social btn-fb"
+               socialshare
+               socialshare-provider="facebook"
+               socialshare-media="{{socialShareDetails.image}}"
+               socialshare-text="{{socialShareDetails.name}}"
+               socialshare-url="{{socialShareDetails.url + socialShareDetails.name + socialShareDetails.image}}"
+               socialshare-redirect-uri="{{socialShareDetails.url}}"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click"
+            >
+                <i class="fa fa-fw fa-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a href="" data-toggle="tooltip" data-placement="top" title="{{'Share Twitter'| translate}}" class="btn-social btn-twitter"
+               socialshare
+               socialshare-provider="twitter"
+               socialshare-type="feed"
+               socialshare-media="{{socialShareDetails.image}}"
+               socialshare-text="{{socialShareDetails.name}}"
+               socialshare-url="{{socialShareDetails.url}}"
+               socialshare-redirect-uri="{{socialShareDetails.url}}"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click"
+            >
+                <i class="fa fa-fw fa-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a href="" data-toggle="tooltip" data-placement="top" title="{{'Share Google Plus'| translate}}" class="btn-social btn-google"
+               socialshare
+               socialshare-provider="google"
+               socialshare-type="feed"
+               socialshare-media="{{socialShareDetails.image}}"
+               socialshare-text="{{socialShareDetails.name}}"
+               socialshare-url="{{socialShareDetails.url}}"
+               socialshare-redirect-uri="{{socialShareDetails.url}}"
+               socialshare-popup-height="300"
+               socialshare-popup-width="400"
+               socialshare-trigger="click"
+            >
+                <i class="fa fa-fw fa-google-plus"></i>
+            </a>
+        </li>
+
+    </ul>
+</div>

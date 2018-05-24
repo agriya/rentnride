@@ -1,0 +1,205 @@
+{
+  "apis": [
+    {
+      "path": "/vehicle_feedbacks",
+      "operations": [
+        {
+          "summary": "Fetch List of vehicle feedback",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search vehicle feedback",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The vehicle feedback Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle feedback by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "user_id",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Filter user Identifier",
+              "required": false
+            },
+            {
+              "name": "vehicle_id",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Filter vehicle Identifier",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_feedbacks"
+        }
+      ]
+    },
+    {
+      "path": "/vehicle_feedbacks/{id}",
+      "operations": [
+        {
+          "summary": "Fetch particular feedback",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The vehicle feedback Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_feedbacks__id_"
+        }
+      ]
+    },
+    {
+      "path": "/booker/review",
+      "operations": [
+        {
+          "summary": "Add booker Review",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "AddReview",
+              "paramType": "body",
+              "required": true,
+              "type": "AddReview",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__booker_review"
+        }
+      ]
+    },
+    {
+      "path": "/host/review",
+      "operations": [
+        {
+          "summary": "Add host Review",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "AddReview",
+              "paramType": "body",
+              "required": true,
+              "type": "AddReview",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__host_review"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "AddReview": {
+      "properties": {
+        "item_user_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The item user id"
+        },
+        "feedback": {
+          "type": "string",
+          "required": true,
+          "description": "Feedback"
+        },
+        "rating": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Rating",
+          "required": false
+        }
+      },
+      "id": "AddReview"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

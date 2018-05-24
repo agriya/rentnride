@@ -1,0 +1,86 @@
+<div class="page-head">
+	<div class="container">
+    	<h2 class="pull-left">{{'Profile Image' | translate}}</h2>
+        <div class="pull-right profile-settings">
+            <dashboard-settings></dashboard-settings>
+        </div>
+    </div>
+</div>
+<div class="profile-image">
+	<div class="container">
+        <form name="profileImage" class="row">
+        	<div class="col-sm-3 social-link" ng-repeat="login in model.sociallogin.data">
+            	<div class="clearfix facebook" ng-if="login.name === 'Facebook'">
+                    <div ng-show="!model.fb_connected">
+                        <a ng-click="model.connect('facebook')" title="{{'Connect' | translate}}" class="btn btn-block">
+                            <i class="fa fa-fw {{login.icon_class}}"></i> {{'Connect' | translate}}
+                        </a>
+                    </div>
+                    <div ng-if="model.fb_connected" class="radio">
+                        <label class="custom-radio">
+                            <input type="radio" ng-model="model.updateProfileDetails.source_id" name="" value="{{model.user_avatar_source.Facebook}}">
+                            <span></span>
+                            <img ng-src="{{model.fb_img}}" />
+                        </label>
+                    </div>
+                </div>
+                <div class="clearfix twitter" ng-if="login.name === 'Twitter'">
+                    <div ng-show="!model.twitter_connected">
+                        <a ng-click="model.connect('twitter')" title="{{'Connect' | translate}}" class="btn btn-block">
+                            <i class="fa fa-fw {{login.icon_class}}"></i> {{'Connect' | translate}}
+                        </a>
+                    </div>
+                    <div ng-if="model.twitter_connected" class="radio">
+                    	<label class="custom-radio">
+                            <input type="radio" ng-model="model.updateProfileDetails.source_id" name="" value="{{model.user_avatar_source.Twitter}}">
+                            <span></span>
+                            <img ng-src="{{model.twt_img}}" />
+                        </label>
+                    </div>
+                </div>
+                <div class="clearfix google" ng-if="login.name === 'Google'">
+                    <div ng-show="!model.google_connected">
+                        <a ng-click="model.connect('google')" title="{{'Connect' | translate}}" class="btn btn-block">
+                            <i class="fa fa-fw {{login.icon_class}}"></i> {{'Connect' | translate}}
+                        </a>
+                    </div>
+                    <div ng-if="model.google_connected" class="radio">
+                        <label class="custom-radio">
+                            <input type="radio" ng-model="model.updateProfileDetails.source_id" name="" value="{{model.user_avatar_source.Google}}">
+                            <span></span>
+                            <img ng-src="{{model.goo_img}}" />
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="clearfix github" ng-if="login.name === 'Github'">
+                    <div ng-show="!model.github_connected">
+                        <a ng-click="model.connect('github')" title="{{'Connect' | translate}}" class="btn btn-block">
+                            <i class="fa fa-fw {{login.icon_class}}"></i> {{'Connect' | translate}}
+                        </a>
+                    </div>
+                    <div ng-if="model.github_connected" class="radio">
+                        <label class="custom-radio">
+                            <input type="radio" ng-model="model.updateProfileDetails.source_id" name="" value="{{model.user_avatar_source.Github}}">
+                            <span></span>
+                            <img ng-src="{{model.git_img}}" />
+						</label>
+                    </div>
+                </div>
+            </div>
+        	<div class="col-sm-12">
+            	<i class="fa fa-fw {{login.icon_class}}"></i>
+                <div class="input no-mar radio">
+                    <label class="custom-radio">
+                        <input type="radio" ng-model="model.updateProfileDetails.source_id" name="" value="{{model.user_avatar_source.User}}">
+                        <span></span>
+                        <img ng-src="{{media.thumb.small}}" />
+					</label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-orange btn-block" ng-click="model.updateProfile(model.updateProfileDetails)">{{'Update' | translate }}</button>
+          	</div>
+        </form>
+    </div>
+</div>

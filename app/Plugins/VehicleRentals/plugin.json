@@ -1,0 +1,9 @@
+{
+  "name": "VehicleRentals",
+  "class": "fa fa-2x fa-hourglass",
+  "description": "By enabling this plugin, instructor can book.",
+  "dependencies": "Vehicles",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "10"
+}

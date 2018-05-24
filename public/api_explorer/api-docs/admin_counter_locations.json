@@ -1,0 +1,318 @@
+{
+  "apis": [
+    {
+      "path": "/admin/counter_locations",
+      "operations": [
+        {
+          "summary": "Get the list of counter locations",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search counter location",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The counter location Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort counter location by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "limit",
+              "paramType": "query",
+              "type": "string",
+              "description": "Limit for records",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "vehicle_id",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Vehicle Identifier",
+              "required": false
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_counter_locations"
+        },
+        {
+          "summary": "Store counter location",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "CounterLocationAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "CounterLocationAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_counter_locations"
+        }
+      ]
+    },
+    {
+      "path": "/admin/counter_locations/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit the counter location",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_counter_locations__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/counter_locations/{id}",
+      "operations": [
+        {
+          "summary": "Update counter location",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "counter location id"
+            },
+            {
+              "name": "CounterLocationEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "CounterLocationEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_counter_locations__id_"
+        },
+        {
+          "summary": "View the counter location",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_counter_locations__id_"
+        },
+        {
+          "summary": "Delete the specified counter location",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter counter location ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_counter_locations__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "CounterLocationAdd": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "required": true,
+          "description": "Counter location address"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Counter location latitude",
+          "required": false
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Counter location longitude",
+          "required": false
+        },
+        "fax": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Counter location fax",
+          "required": false
+        },
+        "phone": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Counter location phone",
+          "required": false
+        },
+        "mobile": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Counter location mobile"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Counter location email"
+        }
+      },
+      "id": "CounterLocationAdd"
+    },
+    "CounterLocationEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The counter location identifier"
+        },
+        "address": {
+          "type": "string",
+          "required": true,
+          "description": "Counter location address"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Counter location latitude",
+          "required": false
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Counter location longitude",
+          "required": false
+        },
+        "fax": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Counter location fax",
+          "required": false
+        },
+        "phone": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Counter location phone",
+          "required": false
+        },
+        "mobile": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Counter location mobile"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Counter location email"
+        }
+      },
+      "id": "CounterLocationEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

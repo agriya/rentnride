@@ -1,0 +1,290 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_surcharges",
+      "operations": [
+        {
+          "summary": "Fetch List of surcharges",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Surcharge",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of surcharges ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Surcharge Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Surcharge by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_surcharges"
+        },
+        {
+          "summary": "Store Surcharge",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "SurchargeAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "SurchargeAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_surcharges"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_surcharges/{id}",
+      "operations": [
+        {
+          "summary": "Update Surcharge",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Surcharge Identifier"
+            },
+            {
+              "name": "SurchargeEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "SurchargeEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_surcharges__id_"
+        },
+        {
+          "summary": "Show Surcharge",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Surcharge Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_surcharges__id_"
+        },
+        {
+          "summary": "Delete Surcharge",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Surcharge Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_surcharges__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_surcharges/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Surcharge",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Surcharge Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_surcharges__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "SurchargeAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Surcharge Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        }
+      },
+      "id": "SurchargeAdd"
+    },
+    "SurchargeEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Surcharge identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Surcharge Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "SurchargeEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

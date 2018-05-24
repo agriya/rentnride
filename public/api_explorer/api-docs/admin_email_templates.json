@@ -1,0 +1,158 @@
+{
+  "apis": [
+    {
+      "path": "/admin/email_templates",
+      "operations": [
+        {
+          "summary": "List of Email Templates",
+          "parameters": [
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "sorting field name",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "sort template by ascending / descending order",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_email_templates"
+        }
+      ]
+    },
+    {
+      "path": "/admin/email_templates/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit the email template by ID",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Email template id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_email_templates__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/email_templates/{id}",
+      "operations": [
+        {
+          "summary": "Update the Email Template",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Email template id"
+            },
+            {
+              "name": "EmailTemplateEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "EmailTemplateEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_email_templates__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "EmailTemplateEdit": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "description": "The Email Template identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Name of the Email Template"
+        },
+        "from_name": {
+          "type": "string",
+          "required": true,
+          "description": "From Email Address"
+        },
+        "reply_to": {
+          "type": "string",
+          "required": true,
+          "description": "Reply To email Address"
+        },
+        "subject": {
+          "type": "string",
+          "required": true,
+          "description": "Subject of the template"
+        },
+        "body_content": {
+          "type": "string",
+          "required": true,
+          "description": "Email body content"
+        }
+      },
+      "id": "EmailTemplateEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

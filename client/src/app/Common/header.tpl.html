@@ -1,0 +1,119 @@
+<div class="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img ng-src="assets/img/logo.png" alt="[Image: {{'BookorRent'| translate}}]" title="{{'BookorRent'| translate}}"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+            <ul class="nav navbar-nav left-menu"> 
+                <li ng-if="$root.settings['site.enabled_plugins'].indexOf('Vehicles') > -1" class="">
+                    <a ui-sref="all_vehicles">{{'List Cars'|translate}}</a>
+                </li>
+                <li>
+                    <a ui-sref="howitworks">{{'How it Works'|translate}}</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" ng-if="$root.settings['site.enabled_plugins'].indexOf('CurrencyConversions') > -1">
+                    <currency-conversion defaultcurrency="$root.default_currency"></currency-conversion>
+                </li>
+                <li class="dropdown" ng-if="$root.settings['site.enabled_plugins'].indexOf('Vehicles') > -1" ng-show="model.isAuthenticated() && $root.vehicle_company.is_active == 1">
+                    <a href="" title="{{'Hosting' | translate}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{'Hosting' | translate}} <span class="fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ui-sref-active="active">
+                        	<a ui-sref="vehicleAdd" title="{{'Add Vehicle' | translate}}"><i class="fa fa-car fa-fw"></i>{{'Add Vehicle' | translate}}</a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="myVehicles" title="{{'My Vehicles' | translate}}">
+                                <i class="fa fa-car fa-fw"></i>{{'My Vehicles' | translate}}
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1">
+                            <a ui-sref="orders({statusID: 0,slug: 'all'})" title="{{'Orders' | translate}}">
+                                <i class="fa fa-user-md fa-fw"></i>{{'Orders' | translate}}
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1">
+                            <a ui-sref="hostCalendar" title="{{'Calendar' | translate}}">
+                                <i class="fa fa-calendar fa-fw"></i>{{'Calendar' | translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown book-dropdown" ng-if="$root.settings['site.enabled_plugins'].indexOf('Vehicles') > -1">
+                    <a title="{{'Booking' | translate}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{'Booking' | translate}} <span class="fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ui-sref-active="active" ng-if="model.isAuthenticated() && $root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1">
+                            <a ui-sref="vehicle_rental_list_status({statusID: 0,slug: 'all'})" title="{{'Booking' | translate}}">
+                                <i class="fa fa-user-md fa-fw"></i>{{'Bookings' | translate}}
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="model.isAuthenticated() && $root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1">
+                            <a ui-sref="bookingCalendar" title="{{'Calendar' | translate}}">
+                                <i class="fa fa-calendar fa-fw"></i>{{'Calendar' | translate}}
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="home" title="{{'Search' | translate}}">
+                                <i class="fa fa-search fa-fw"></i>{{'Search' | translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-show="model.isAuthenticated()">
+                    <a ui-sref="message({type: 'inbox'})" title="{{'Messages' | translate}}">
+                        {{'Messages' | translate}}
+                    </a>
+                </li>
+                <li ui-sref-active="active" ng-show="!model.isAuthenticated()">
+                    <a ui-sref="register" title="{{'Sign Up' | translate}}" class="btn btn-default">
+                        {{'Sign Up' | translate}}
+                    </a>
+                </li>
+                <li ui-sref-active="active" ng-show="!model.isAuthenticated()">
+                    <a ui-sref="login" title="{{'Sign In' | translate}}" class="btn btn-default">
+                        {{'Sign In' | translate}}
+                    </a>
+                </li>
+                <li class="dropdown user-drop" ng-show="model.isAuthenticated()">
+                    <a href="javascript:void(0);" title="{{$root.auth.username}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img ng-if="$root.auth.user_avatar_source_id != model.ConstSocialLogin.Twitter && $root.auth.user_avatar_source_id != model.ConstSocialLogin.Github" ng-src="{{$root.auth.attachmentable.thumb.small}}" alt="{{$root.auth.username}}"/>
+                        <img ng-if="$root.auth.user_avatar_source_id == model.ConstSocialLogin.Twitter || $root.auth.user_avatar_source_id == model.ConstSocialLogin.Github" ng-src="{{$root.auth.attachmentable.thumb.small}}" alt="{{$root.auth.username}}" height="{{model.thumb.small.height}}" width="{{model.thumb.small.width}}"/>
+                        <span class="fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-if="$root.auth.role_id == 1">
+                            <a href="ag-admin/#/dashboard" title="{{'Admin Dashboard' | translate}}" target="_blank">
+                                <i class="fa fa-user fa-fw"></i>{{'Admin Dashboard' | translate}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/users/dashboard" title="{{'Dashboard' | translate}}">
+                                <i class="fa fa-user-md fa-fw"></i>{{'Dashboard' | translate}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/users/user_profile" title="{{'Settings' | translate}}">
+                                <i class="fa fa-pencil-square-o fa-fw"></i>{{'Settings' | translate}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="model.logout()" title="{{'Logout' | translate}}">
+                                <i class="fa fa-power-off fa-fw"></i>{{'Logout' | translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

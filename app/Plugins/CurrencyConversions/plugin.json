@@ -1,0 +1,9 @@
+{
+  "name": "CurrencyConversions",
+  "class": "fa fa-2x fa-money",
+  "description": "By enabling this plugin, Convert the currency code.",
+  "dependencies": "",
+  "module_id": "791",
+  "module_hash": "9f76c6399b9ccb8c6f9f9127bba0b6d3",
+  "display_order": "3"
+}

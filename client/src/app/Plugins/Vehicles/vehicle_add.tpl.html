@@ -1,0 +1,326 @@
+<!--- Vehicle Add Page--->
+<div class="page-head">
+	<div class="container">
+        <h2 class="text-uppercase">{{'Add Vehicle' | translate}}</h2>
+	</div>
+</div>
+
+<div class="form-block add-vehicle">
+    <div class="container">
+        <div class="row" id="create-view">
+            <div class="col-md-12">
+                <form name="vehicleAdd" ng-submit="vehicleSubmit(vehicleAdd.$valid, file)" enctype="multipart/form-data" novalidate>
+                    <div class="clearfix">
+                        <h4>{{'Basic Details' | translate}}</h4>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{'has-error' : (vehicleAdd.$submitted || vehicleAdd.vehicle_type.$touched) && (vehicleAdd.vehicle_type.$pristine || vehicleAdd.vehicle_type.$invalid) && (vehicleAdd.vehicle_type.$error.required)}">
+                                <label for="vehicle_type_id">{{'Vehicle Type' | translate}}</label>
+                                <select class="form-control" name="vehicle_type" id="vehicle_type_id" ng-model="vehicle.vehicle_type_id" ng-options="name for (name, id) in vehicleTypes" ng-change="getVehicleTypePrice(vehicle.vehicle_type_id)" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.vehicle_type.$touched) && (vehicleAdd.vehicle_type.$pristine || vehicleAdd.vehicle_type.$invalid) && (vehicleAdd.vehicle_type.$error.required)">
+                                    {{'Required'|translate}}
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{'has-error' : (vehicleAdd.$submitted || vehicleAdd.vehicle_make.$touched) && (vehicleAdd.vehicle_make.$pristine || vehicleAdd.vehicle_make.$invalid) && (vehicleAdd.vehicle_make.$error.required)}">
+                                <label for="vehicle_make_id">{{'Vehicle Make' | translate}}</label>
+                                <select class="form-control" name="vehicle_make" id="vehicle_make_id" ng-model="vehicle.vehicle_make_id" ng-options="name for (name, id) in vehicleMakes" ng-change="getVehicleModel(vehicle.vehicle_make_id)" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.vehicle_make.$touched) && (vehicleAdd.vehicle_make.$pristine || vehicleAdd.vehicle_make.$invalid) && (vehicleAdd.vehicle_make.$error.required)">
+                                    {{'Required'|translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.vehicle_model.$touched) && (vehicleAdd.vehicle_model.$pristine || vehicleAdd.vehicle_model.$invalid) && (vehicleAdd.vehicle_model.$error.required)}">
+                                <label for="vehicle_model_id">{{'Vehicle Model' | translate}}</label>
+                                <select class="form-control" name="vehicle_model" id="vehicle_model_id" ng-model="vehicle.vehicle_model_id" ng-options="vehicleModel.id as vehicleModel.name for vehicleModel in vehicleModels" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.vehicle_model.$touched) && (vehicleAdd.vehicle_model.$pristine || vehicleAdd.vehicle_model.$invalid) && (vehicleAdd.vehicle_model.$error.required)">
+                                    {{'Required'|translate}}
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.vehicle_no.$touched) && (vehicleAdd.vehicle_no.$pristine || vehicleAdd.vehicle_no.$invalid) && (vehicleAdd.vehicle_no.$error.required)}">
+                                <label for="vehicle_no">{{'Vehicle No' | translate}}</label>
+                                <input type="text" name="vehicle_no" ng-model="vehicle.vehicle_no" id="vehicle_no" class="form-control" placeholder="{{'Vehicle no' | translate}}" maxlength = "20" ng-required="true">
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.vehicle_no.$touched) && (vehicleAdd.vehicle_no.$pristine || vehicleAdd.vehicle_no.$invalid) && (vehicleAdd.vehicle_no.$error.required)">
+                                {{'Required' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.minimum_age_of_driver.$touched) && (vehicleAdd.minimum_age_of_driver.$pristine || vehicleAdd.minimum_age_of_driver.$invalid)}">
+                                <label for="minimum_age_of_driver">{{'Minimum driver age' | translate}}</label>
+                                <input type="number" ng-model="vehicle.minimum_age_of_driver" min="{{driver_min_age}}" max="{{driver_max_age}}" name="minimum_age_of_driver" id="minimum_age_of_driver" class="form-control" placeholder="{{'Minimum driver age' | translate}}" ng-required="true">
+                                <div ng-show="(vehicleAdd.$submitted || vehicleAdd.minimum_age_of_driver.$touched) && (vehicleAdd.minimum_age_of_driver.$pristine || vehicleAdd.minimum_age_of_driver.$invalid)">
+                                    <span class="error" ng-show="(vehicleAdd.minimum_age_of_driver.$error.required)">
+                                        {{'Required' | translate}}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.minimum_age_of_driver.$error.min)">
+                                        {{'Age should be greater than ' | translate}} {{driver_min_age}}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.minimum_age_of_driver.$error.max)">
+                                        {{'Age should be less than ' | translate}} {{driver_max_age}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                   	</div>
+                   	
+                    <div class="clearfix">
+                        <h4>{{'Attachment' | translate}}</h4>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.file.$touched) && (vehicleAdd.file.$pristine || vehicleAdd.file.$invalid) && (vehicleAdd.file.$error.required)}">
+                                <label for="inputFile">{{'Vehicle Image' | translate}}</label>
+                                <input type="file" ngf-select ng-model="file" name="file"  accept=".png,.jpg" ngf-max-size="2MB" id="inputFile" ng-required="true">
+                                <div ng-show="(vehicleAdd.$submitted || vehicleAdd.file.$touched) && (vehicleAdd.file.$pristine || vehicleAdd.file.$invalid)">
+                                    <span class="error" ng-show="(vehicleAdd.file.$error.required)">
+                                        {{'Required'|translate}}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.file.$error.maxSize)">
+                                       {{'Maximum allowed size is 2 MB'|translate}}.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                   	</div>
+                    
+                    <div class="clearfix">
+                    	<h4>{{'Price Details' | translate}}</h4>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.per_hour_amount.$touched) && (vehicleAdd.per_hour_amount.$pristine || vehicleAdd.per_hour_amount.$invalid)}">
+                                <label for="per_hour_amount">{{'Per Hour Amount' | translate}}</label>
+                                <input type="number" class="form-control" name="per_hour_amount" id="per_hour_amount" ng-model="vehicle.per_hour_amount" min="{{vehicleType.minimum_hour_price}}" max="{{vehicleType.maximum_hour_price}}" ng-required="true">
+                                <div ng-show="((vehicleAdd.$submitted || vehicleAdd.per_hour_amount.$touched) && (vehicleAdd.per_hour_amount.$pristine || vehicleAdd.per_hour_amount.$invalid))">
+                                    <span class="error" ng-show="(vehicleAdd.per_hour_amount.$error.required)">
+                                        {{'Required'|translate }}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.per_hour_amount.$error.number)">
+                                        {{'You did not enter a valid number' | translate}}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.per_hour_amount.$error.min)">
+                                        {{'Your field value is lesser minimum price' | translate}}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.per_hour_amount.$error.max)">
+                                        {{'Your field value is greater maximum price' | translate}}
+                                    </span>
+                                </div>
+                                <span class="help-block" ng-show="vehicleType !== undefined">
+                                    <p>{{'Minimum Hour Price'|translate}}: <span>{{vehicleType.minimum_hour_price}}</span></p>
+                                    <p>{{'Maximum Hour Price'|translate}}: <span>{{vehicleType.maximum_hour_price}}</span></p>
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.per_day_amount.$touched) && (vehicleAdd.per_day_amount.$pristine || vehicleAdd.per_day_amount.$invalid)}">
+                                <label for="per_day_amount">{{'Per Day Amount' | translate}}</label>
+                                <input type="number" class="form-control" name="per_day_amount" id="per_day_amount" ng-model="vehicle.per_day_amount" min="{{vehicleType.minimum_day_price}}" max="{{vehicleType.maximum_day_price}}" ng-required="true">
+                                <div ng-show="((vehicleAdd.$submitted || vehicleAdd.per_day_amount.$touched) && (vehicleAdd.per_day_amount.$pristine || vehicleAdd.per_day_amount.$invalid))">
+                                    <span class="error" ng-show="(vehicleAdd.per_day_amount.$error.required)">
+                                        {{'Required'|translate }}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.per_day_amount.$error.number)">
+                                        {{'You did not enter a valid number' | translate}}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.per_day_amount.$error.min)">
+                                        {{'Your field value is lesser minimum price' | translate}}
+                                    </span>
+                                    <span class="error" ng-show="(vehicleAdd.per_day_amount.$error.max)">
+                                        {{'Your field value is greater maximum price' | translate}}
+                                    </span>
+                                </div>
+                                <span class="help-block" ng-show="vehicleType !== undefined">
+                                    <p>{{'Minimum Day Price'|translate}}: <span>{{vehicleType.minimum_day_price}}</span></p>
+                                    <p>{{'Maximum Day Price'|translate}}: <span>{{vehicleType.maximum_day_price}}</span></p>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                   
+                   	<div class="clearfix">
+                    	<h4>{{'Counter Locations' | translate}}</h4>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.pickup_location.$touched) && (vehicleAdd.pickup_location.$pristine || vehicleAdd.pickup_location.$invalid) && (vehicleAdd.pickup_location.$error.required)}">
+                                <p class="trip-loc">{{'Pick Up Locations' | translate}}</p>
+                                <div class="col-sm-12 row">
+                                    <div class="checkbox">
+                                    	<label class="custom-checkbox">
+                                            <input type="checkbox" ng-model="all_pickup_location" name="all_pickup_location" ng-click="selectAllPickupLocation()">
+                                            <span></span>{{'Select All'|translate}}
+                                    	</label>
+                                    </div>
+                                    <div class="checkbox" name="pickup_lccation" ng-repeat="location in vehicle_counter_locations">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" ng-model="location.selected" name="pickup_location" value="{{location.name}}" ng-required="vehicle.pickup_counter_locations.length == 0" ng-click="pickupSelection(location.id)"> 
+                                            <span></span>{{location.name}}
+                                        </label>
+                                    </div>
+                                    <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.pickup_location.$touched) && (vehicleAdd.pickup_location.$pristine || vehicleAdd.pickup_location.$invalid) && (vehicleAdd.pickup_location.$error.required)">
+                                        {{'Choose Pickup locations' | translate}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.drop_location.$touched) && (vehicleAdd.drop_location.$pristine || vehicleAdd.drop_location.$invalid) && (vehicleAdd.drop_location.$error.required)}">
+                                <p class="trip-loc">{{'Drop Off Locations' | translate}}</p>
+                                <div class="col-sm-12 row">
+                                    <div class="checkbox">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" ng-model="all_drop_location" name="all_drop_location" ng-click="selectAllDropLocation()">
+                                            <span></span>{{'Select All'|translate}}
+                                        </label>
+                                    </div>
+                                    <div class="checkbox" ng-repeat="location in vehicle_counter_locations">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" ng-model="location.checked" name="drop_location" value="{{location.name}}" ng-required="vehicle.drop_counter_locations.length == 0" ng-click="dropSelection(location.id)">
+                                            <span></span>{{location.name}}
+                                        </label>
+                                    </div>
+                                    <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.drop_location.$touched) && (vehicleAdd.drop_location.$pristine || vehicleAdd.drop_location.$invalid) && (vehicleAdd.drop_location.$error.required)">
+                                        {{'Choose Drop locations' | translate}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                 	<div class="clearfix">
+                    	<h4>{{'Specification' | translate}}</h4>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.no_of_seats.$touched) && (vehicleAdd.no_of_seats.$pristine || vehicleAdd.no_of_seats.$invalid) && (vehicleAdd.no_of_seats.$error.required)}">
+                                <label>{{'Seats' | translate}}?</label>
+                                <select class="form-control" id="no_of_seats" name="no_of_seats" ng-model="vehicle.no_of_seats" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                    <option ng-repeat="seat in getNumber(seats) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.no_of_seats.$touched) && (vehicleAdd.no_of_seats.$pristine || vehicleAdd.no_of_seats.$invalid) && (vehicleAdd.no_of_seats.$error.required)">
+                                    {{'Required' | translate}}
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.no_of_doors.$touched) && (vehicleAdd.no_of_doors.$pristine || vehicleAdd.no_of_doors.$invalid) && (vehicleAdd.no_of_doors.$error.required)}">
+                                <label>{{'Doors' | translate}}?</label>
+                                <select class="form-control" name="no_of_doors" ng-model="vehicle.no_of_doors" id="no_of_doors" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                    <option ng-repeat="door in getNumber(doors) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.no_of_doors.$touched) && (vehicleAdd.no_of_doors.$pristine || vehicleAdd.no_of_doors.$invalid) && (vehicleAdd.no_of_doors.$error.required)">
+                                    {{'Required' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.no_small_bags.$touched) && (vehicleAdd.no_small_bags.$pristine || vehicleAdd.no_small_bags.$invalid) && (vehicleAdd.no_small_bags.$error.required)}">
+                                <label>{{'Small bags' | translate}}?</label>
+                                <select class="form-control" name="no_small_bags" ng-model="vehicle.no_small_bags" id="no_small_bags" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                    <option ng-repeat="small_bag in getNumber(small_bags) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.no_small_bags.$touched) && (vehicleAdd.no_small_bags.$pristine || vehicleAdd.no_small_bags.$invalid) && (vehicleAdd.no_small_bags.$error.required)">
+                                    {{'Required' | translate}}
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.no_large_bags.$touched) && (vehicleAdd.no_large_bags.$pristine || vehicleAdd.no_large_bags.$invalid) && (vehicleAdd.no_large_bags.$error.required)}">
+                                <label>{{'Large bags' | translate}}?</label>
+                                <select class="form-control" id="no_large_bags" ng-model="vehicle.no_large_bags" name="no_large_bags" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                    <option ng-repeat="large_bag in getNumber(large_bags) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.no_large_bags.$touched) && (vehicleAdd.no_large_bags.$pristine || vehicleAdd.no_large_bags.$invalid) && (vehicleAdd.no_large_bags.$error.required)">
+                                    {{'Required' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                        	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.fuel_type.$touched) && (vehicleAdd.fuel_type.$pristine || vehicleAdd.fuel_type.$invalid) && (vehicleAdd.fuel_type.$error.required)}">
+                                <label>{{'Fuel Type' | translate}}?</label>
+                                <select class="form-control" id="fuel_type_id" name="fuel_type" ng-model="vehicle.fuel_type_id" ng-options="name for (name, id) in fuelTypes" ng-required="true">
+                                    <option value="">{{'select' | translate}}</option>
+                                </select>
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.fuel_type.$touched) && (vehicleAdd.fuel_type.$pristine || vehicleAdd.fuel_type.$invalid) && (vehicleAdd.fuel_type.$error.required)">
+                                    {{'Required' | translate}}
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.mileage.$touched) && (vehicleAdd.mileage.$pristine || vehicleAdd.mileage.$invalid) && (vehicleAdd.mileage.$error.required)}">
+                                <label>{{'Mileage' | translate}}</label>
+                                <input type="text" name="mileage" id="mileage" class="form-control" placeholder="{{'Mileage' | translate}}" ng-model="vehicle.mileage" ng-required="true">
+                                <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.mileage.$touched) && (vehicleAdd.mileage.$pristine || vehicleAdd.mileage.$invalid) && (vehicleAdd.mileage.$error.required)">
+                                    {{'Required' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                        	<div class="col-sm-6">
+                                <div class="form-group" ng-class="{'has-error' : (vehicleAdd.$submitted || vehicleAdd.is_manual_transmission.$touched) && (vehicleAdd.is_manual_transmission.$pristine || vehicleAdd.is_manual_transmission.$invalid) && (vehicleAdd.is_manual_transmission.$error.required)}">
+                                    <div class="checkbox">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" name="is_manual_transmission" ng-true-value="1" ng-false-value="0" ng-model="vehicle.is_manual_transmission" id="is_manual_transmission" ng-required="vehicle.no_of_gears"> 
+                                            <span></span>{{'Manual Transmission' | translate}}?
+                                        </label>
+                                    </div>
+                                    <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.is_manual_transmission.$touched) && (vehicleAdd.is_manual_transmission.$pristine || vehicleAdd.is_manual_transmission.$invalid) && (vehicleAdd.is_manual_transmission.$error.required)">
+                                        {{'Required' | translate}}
+                                    </span>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.no_of_gears.$touched) && (vehicleAdd.no_of_gears.$pristine || vehicleAdd.no_of_gears.$invalid) && (vehicleAdd.no_of_gears.$error.required)}">
+                                    <label>{{'Gears' | translate}}?</label>
+                                    <select class="form-control" id="no_of_gears" name="no_of_gears" ng-model="vehicle.no_of_gears" ng-required="vehicle.is_manual_transmission">
+                                        <option value="">{{'select' | translate}}</option>
+                                        <option ng-repeat="gear in getNumber(gears) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                    </select>
+                                    <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.no_of_gears.$touched) && (vehicleAdd.no_of_gears.$pristine || vehicleAdd.no_of_gears.$invalid) && (vehicleAdd.no_of_gears.$error.required)">
+                                        {{'Required' | translate}}
+                                    </span>
+                                </div>
+                           	</div>
+                            <div class="col-sm-6">
+                            	<div class="form-group" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.is_airbag.$touched) && (vehicleAdd.is_airbag.$pristine || vehicleAdd.is_airbag.$invalid) && (vehicleAdd.is_airbag.$error.required)}">
+                                    <div class="checkbox">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" ng-model="vehicle.is_airbag" name="is_airbag" id="is_airbag" ng-true-value="1" ng-false-value="0" ng-required="vehicle.no_of_airbags"> 
+                                            <span></span>{{'Airbag' | translate}}?
+                                        </label>
+                                    </div>
+                                    <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.is_airbag.$touched) && (vehicleAdd.is_airbag.$pristine || vehicleAdd.is_airbag.$invalid) && (vehicleAdd.is_airbag.$error.required)">
+                                        {{'Required' | translate}}
+                                    </span>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : (vehicleAdd.$submitted || vehicleAdd.no_of_airbags.$touched) && (vehicleAdd.no_of_airbags.$pristine || vehicleAdd.no_of_airbags.$invalid) && (vehicleAdd.no_of_airbags.$error.required)}">
+                                    <label>{{'No of airbags' | translate}}</label>
+                                    <select class="form-control" id="no_of_airbags" name="no_of_airbags" ng-model="vehicle.no_of_airbags" ng-required="vehicle.is_airbag">
+                                        <option value="">{{'select' | translate}}</option>
+                                        <option ng-repeat="air_bag in getNumber(air_bags) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                    </select>
+                                    <span class="error" ng-show="(vehicleAdd.$submitted || vehicleAdd.no_of_airbags.$touched) && (vehicleAdd.no_of_airbags.$pristine || vehicleAdd.no_of_airbags.$invalid) && (vehicleAdd.no_of_airbags.$error.required)">
+                                        {{'Required' | translate}}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="clearfix">
+                        	<div class="form-group">
+                            	<div class="checkbox">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" ng-model="vehicle.is_ac" ng-true-value="1" ng-false-value="0" name="is_ac" id="is_ac"> 
+                                        <span></span>{{'Ac' | translate}}?
+                                    </label>
+								</div>
+                            </div>
+                            <div class="form-group">
+                            	<div class="checkbox">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" ng-model="vehicle.is_abs" ng-true-value="1" ng-false-value="0" name="is_abs" id="is_abs"> 
+                                        <span></span>{{'Abs' | translate}}?
+                                    </label>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-btn">
+                        <label class="sr-only" for="submit">{{'Submit' | translate}}</label>
+                        <button type="submit" class="btn btn-orange" id="submit" value="{{'Submit' | translate}}">{{'Submit' | translate}}</button>
+                    </div>
+            	</form>
+            </div>
+    	</div>
+	</div>
+</div>

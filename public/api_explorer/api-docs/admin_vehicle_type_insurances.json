@@ -1,0 +1,314 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_type_insurances",
+      "operations": [
+        {
+          "summary": "Fetch List of vehicle_type_insurances",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Vehicle Type Insurance",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Vehicle Type Insurance Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle_type_insurances by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_type_insurances"
+        },
+        {
+          "summary": "Store Vehicle Type Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "VehicleTypeInsuranceAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleTypeInsuranceAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_type_insurances"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_type_insurances/{id}",
+      "operations": [
+        {
+          "summary": "Update Vehicle Type Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Vehicle Type Insurance Identifier"
+            },
+            {
+              "name": "VehicleTypeInsuranceEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleTypeInsuranceEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_type_insurances__id_"
+        },
+        {
+          "summary": "Show Vehicle Type Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Vehicle Type Insurance Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_type_insurances__id_"
+        },
+        {
+          "summary": "Delete Vehicle Type Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Vehicle Type Insurance Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_type_insurances__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_type_insurances/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Vehicle Type Insurance",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Vehicle Type Insurance Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_type_insurances__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "VehicleTypeInsuranceAdd": {
+      "properties": {
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Vehicle Type Identifier"
+        },
+        "insurance_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Insurance identifier"
+        },
+        "rate": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "rate"
+        },
+        "discount_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "DiscountType identifier"
+        },
+        "duration_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Duration Type identifier"
+        },
+        "max_allowed_amount": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Max allowed amount"
+        }
+      },
+      "id": "VehicleTypeInsuranceAdd"
+    },
+    "VehicleTypeInsuranceEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Vehicle Type Insurance identifier"
+        },
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Vehicle Type Identifier"
+        },
+        "insurance_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Insurance identifier"
+        },
+        "rate": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Rate for this type"
+        },
+        "discount_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "DiscountType identifier"
+        },
+        "duration_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Duration Type identifier"
+        },
+        "max_allowed_amount": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Max allowed amount"
+        }
+      },
+      "id": "VehicleTypeInsuranceEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

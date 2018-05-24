@@ -1,0 +1,46 @@
+<!-- MODAL -->
+<!--<script type="text/ng-template" id="myModalContent.html">-->
+<div class="user-feedback">
+    <div class="modal-header">
+        <a data-dismiss="modal" ng-click="modalClose($event)" class="modalClose"><i class="fa fa-lg fa-times-circle close"></i></a>
+        <h3 class="modal-title">{{'Reviews' | translate}}</h3>
+    </div>
+    <div class="modal-body">
+        <ul class="media-list">
+            <li class="media" ng-repeat="vehicleFeedback in vehicleFeedbacks" ng-if="vehicle_metadata.total > 0">
+            	<div class="media-left">
+                	<a href="" class="pull-left" ng-click="userDashboard(vehicleFeedback.user.username)" data-dismiss="modal">
+                        <img class="media-object" ng-src="{{vehicleFeedback.to_user.attachmentable.thumb.medium}}" title="{{feedback.user.username}}">
+                    </a>
+                </div>
+                <div class="media-body">
+                	<div class="col-sm-9">
+                    	<h3>
+                        	<a href="" ng-click="userDashboard(vehicleFeedback.user.username)" data-dismiss="modal">{{vehicleFeedback.user.username}}</a>
+                            <span am-time-ago="vehicleFeedback.created_at.date"></span>
+                      	</h3>
+                        <p>{{vehicleFeedback.feedback}}</p>
+                   	</div>
+                    <div class="col-md-3 clearfix">
+                    	<ul class="list-inline pull-right">
+                        	<li ng-repeat = 'rating in maxRatings track by $index'>
+                            	<i class="fa fa-1x text-danger" ng-class="(rating <= vehicleFeedback.rating) ? 'fa-star' : 'fa-star-o'"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li ng-if="vehicle_metadata.total == 0">
+                <div class="alert alert-danger">
+                    {{'No Record Found' | translate}}
+                </div>
+            </li>
+        </ul>
+        <div class="paging clearfix text-center" ng-show="vehicle_metadata.total > 0">
+            <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="vehicle_metadata.total" num-pages="vehicle_metadata.total_pages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="vehicle_metadata.per_page" ng-change="paginate()"></uib-pagination>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-red" type="button" ng-click="modalClose()">Close</button>
+    </div>
+</div>

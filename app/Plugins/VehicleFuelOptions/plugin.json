@@ -1,0 +1,9 @@
+{
+  "name": "VehicleFuelOptions",
+  "class": "fa fa-2x fa-tint",
+  "description": "By enabling this, item owner can manage fuel_options based on vehicle types.",
+  "dependencies": "VehicleRentals",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "18"
+}

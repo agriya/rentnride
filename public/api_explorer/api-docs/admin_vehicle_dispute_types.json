@@ -1,0 +1,165 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_dispute_types",
+      "operations": [
+        {
+          "summary": "Fetch Dispute types",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of pages ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The page Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort page by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_dispute_types"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_dispute_types/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Dispute Closed Types",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Edit dispute type identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_dispute_types__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_dispute_types/{id}",
+      "operations": [
+        {
+          "summary": "Update Dispute Closed Types",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Edit dispute type Identifier"
+            }
+          ],
+          "DisputeTypeEdit": [
+            "body",
+            "required",
+            {
+              "type": "DisputeTypeEdit"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_dispute_types__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "DisputeTypeEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The closed type identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "The name of the closed type"
+        },
+        "is_booker": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The booker / host identifier"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "DisputeTypeEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

@@ -1,0 +1,115 @@
+<div ng-if="dispute_types">
+    <form role="form" class="clearfix" name="disputeAdd" ng-submit="disputeSubmit(disputeAdd.$valid)" novalidate>
+        <div class="hide">
+            <input type="text" name="item_user_id" id="item_user_id" value="{{vehicle_rental_id}}" ng-model="vehicle_dispute.item_user_id"/>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (disputeAdd.$submitted || disputeAdd.dispute_type_id.$touched) && (disputeAdd.dispute_type_id.$pristine || disputeAdd.dispute_type_id.$invalid) }">
+            <label class="control-label" for="dispute_type_id">{{'Dispute Type' | translate}}</label>
+            <select name="dispute_type_id" id="dispute_type_id" class="form-control" ng-model="vehicle_dispute.dispute_type" ng-options="dispute_type.id as dispute_type.name for dispute_type in dispute_types" ng-required="true">
+                <option value="">Select</option>
+            </select>
+            <span class="error" ng-show="(disputeAdd.$submitted || disputeAdd.dispute_type_id.$touched) && (disputeAdd.dispute_type_id.$pristine || disputeAdd.dispute_type_id.$invalid) && (disputeAdd.dispute_type_id.$error.required)">{{'Required' | translate}}</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (disputeAdd.$submitted || disputeAdd.reason.$touched) && (disputeAdd.reason.$pristine || disputeAdd.reason.$invalid) }">
+            <label class="control-label" for="reason">{{'Reason' | translate}}</label>
+            <textarea class="form-control" name="reason" id="reason" placeholder="{{'Reason' | translate}}" ng-model="vehicle_dispute.reason" ng-required="true"/>
+            <span class="error" ng-show="(disputeAdd.$submitted || disputeAdd.reason.$touched) && (disputeAdd.reason.$pristine || disputeAdd.reason.$invalid) && (disputeAdd.reason.$error.required)">{{'Required' | translate}}</span>
+        </div>
+        <div class="form-group pull-right">
+            <button class="btn btn-orange btn-block" type="submit">{{'Submit' | translate}}</button>
+        </div>
+    </form>
+</div>
+<div ng-if="all_dispute_types">
+    <div class="alert alert-info">
+        <strong>
+            {{'Dispute is possible only for the following cases' | translate}}
+        </strong>
+        <ol class="">
+            <li ng-repeat='all_dispute_type in all_dispute_types'>
+                {{all_dispute_type.name}}
+            </li>
+        </ol>
+        <strong>{{'Currently, Your booking hasn\'t met those cases' | translate}}</strong>
+    </div>
+</div>
+<div class="alert alert-info" ng-if="is_under_dispute">{{'Current dispute for this booking hasn\'t been closed yet. Only one dispute at a time for an booking is possible' | translate}}.</div>
+<div class="dispute-info" ng-if="dispute_array">
+    <h4>{{'Dispute Information' | translate }}</h4>
+    <div class="clearfix">
+        <dl class="dl-horizontal">
+            <dt>{{'Dispute ID' | translate}} #</dt>
+            <dd class="stats-val">{{dispute_details.id}}</dd>
+            <dt>{{'Disputer' | translate}}</dt>
+            <dd class="stats-val">{{dispute_details.user.username}}</dd>
+            <dt>{{'Dispute Status' | translate}}</dt>
+            <dd>
+				<p ng-if="dispute_details.dispute_status.id === 1">{{'Waiting for response from the other user' | translate}}</p>
+				<p ng-if="dispute_details.dispute_status.id === 2">{{'Conversation Underway' | translate}}</p>
+				<p ng-if="dispute_details.dispute_status.id === 3">{{'Waiting for Admin Decision' | translate}}</p>
+            </dd>
+            <dt>{{'Last Replied' | translate}}</dt>
+            <dd>{{dispute_details.last_replied_date}}</dd>
+            <dt>{{'Disputed On' | translate}}</dt>
+            <dd>{{dispute_details.created_at}}</dd>
+            <dt>{{'Disputed' | translate}}</dt>
+            <dd></dd>
+            <dt>{{'Dispute Reason' | translate}}</dt>
+            <dd>{{dispute_details.dispute_type.name}}</dd>
+            <dt>{{'Reason' | translate}}</dt>
+            <dd>{{dispute_details.reason}}</dd>
+        </dl>
+    </div>
+    <div class="section">
+        <form class="clearfix" role="form" name="disputeResolve" novalidate>
+            <h4>{{'Dispute Actions' | translate}}</h4>
+            <div class="clearfix" ng-repeat='dispute_closed_type in dispute_closed_types'>
+                <div class="form-group" ng-if="(dispute_closed_type.id === ConstDisputeClosedType.SpecificationFavourBookerRefund || dispute_closed_type.id === ConstDisputeClosedType.FeedbackFavourBooker || dispute_closed_type.id === ConstDisputeClosedType.SpecificationFavourHost)">
+                    <button class="btn" ng-click="resolveDispute(dispute_closed_type.id)" name="dispute_close_type_id" id="dispute_close_type_id_{{dispute_closed_type.id}}" ng-model="resolve_dispute.dispute_close_type_id" type="submit">
+                        {{dispute_closed_type.name}}
+                    </button>
+                </div>
+                <div class="form-group" ng-if="dispute_closed_type.id === ConstDisputeClosedType.FeedbackFavourHost">
+                    <button class="btn" ng-click="checkfeedback(dispute_closed_type.id)" name="dispute_close_type_id" id="dispute_close_type_id_{{dispute_closed_type.id}}" ng-model="resolve_dispute.dispute_close_type_id" type="submit">
+                        {{dispute_closed_type.name}}
+                    </button>
+                </div>
+                <div class="form-group" ng-if="dispute_closed_type.id === ConstDisputeClosedType.FeedbackResponseFavourHost && dispute_diff_days >= $root.settings['dispute.days_left_for_disputed_user_to_reply']">
+                    <button class="btn" ng-click="checkfeedback(dispute_closed_type.id)" name="dispute_close_type_id" id="dispute_close_type_id_{{dispute_closed_type.id}}" ng-model="resolve_dispute.dispute_close_type_id" type="submit">
+                        {{dispute_closed_type.name}}
+                    </button>
+                </div>
+                <div class="form-group" ng-if="dispute_closed_type.id === ConstDisputeClosedType.SpecificationResponseFavourBooker && dispute_diff_days >= $root.settings['dispute.days_left_for_disputed_user_to_reply']">
+                    <button class="btn" ng-click="resolveDispute(dispute_closed_type.id)" name="dispute_close_type_id" id="dispute_close_type_id_{{dispute_closed_type.id}}" ng-model="resolve_dispute.dispute_close_type_id" type="submit">
+                        {{dispute_closed_type.name}}
+                    </button>
+                </div>
+                <!-- For Security  -->
+                <div class="form-group" ng-if="dispute_closed_type.id === ConstDisputeClosedType.SecurityFavourBooker">
+                    <button class="btn" ng-click="resolveDispute(dispute_closed_type.id)" name="dispute_close_type_id" id="dispute_close_type_id_{{dispute_closed_type.id}}" ng-model="resolve_dispute.dispute_close_type_id" type="submit">
+                        {{dispute_closed_type.name}}
+                    </button>
+                </div>
+                <div class="form-group" ng-if="dispute_closed_type.id === ConstDisputeClosedType.SecurityFavourHost">
+                    <button class="btn" ng-click="resolveDispute(dispute_closed_type.id)" name="dispute_close_type_id" id="dispute_close_type_id_{{dispute_closed_type.id}}" ng-model="resolve_dispute.dispute_close_type_id" type="submit">
+                        {{dispute_closed_type.name}}
+                    </button>
+                </div>
+                <div class="form-group" ng-if="dispute_closed_type.id === ConstDisputeClosedType.SecurityResponseFavourHost && dispute_diff_days >= $root.settings['dispute.days_left_for_disputed_user_to_reply']">
+                    <button class="btn" ng-click="resolveDispute(dispute_closed_type.id)" name="dispute_close_type_id" id="dispute_close_type_id_{{dispute_closed_type.id}}" ng-model="resolve_dispute.dispute_close_type_id" type="submit">
+                        {{dispute_closed_type.name}}
+                    </button>
+                </div>
+                <p class="m-t-30" ng-if="(dispute_closed_type.id === ConstDisputeClosedType.SpecificationResponseFavourBooker || dispute_closed_type.id === ConstDisputeClosedType.FeedbackResponseFavourHost || dispute_closed_type.id === ConstDisputeClosedType.SecurityResponseFavourHost) && dispute_diff_days >= $root.settings['dispute.days_left_for_disputed_user_to_reply']">{{'The below action will be automatically be taken, if the disputer didn\'t reply in' | translate}} {{$root.settings['dispute.days_left_for_disputed_user_to_reply']}} {{' days' | translate}}</p>
+                <div class="alert alert-info clearfix m-b-20" ng-if="dispute_closed_type.id !== ConstDisputeClosedType.SpecificationResponseFavourBooker && dispute_closed_type.id !== ConstDisputeClosedType.FeedbackResponseFavourHost && dispute_closed_type.id !== ConstDisputeClosedType.SecurityResponseFavourHost && dispute_diff_days < $root.settings['dispute.days_left_for_disputed_user_to_reply']">
+                	{{dispute_closed_type.reason}}
+                </div>
+                <div class="alert alert-info clearfix" ng-if="(dispute_closed_type.id == ConstDisputeClosedType.SpecificationResponseFavourBooker || dispute_closed_type.id == ConstDisputeClosedType.FeedbackResponseFavourHost || dispute_closed_type.id == ConstDisputeClosedType.SecurityResponseFavourHost) && dispute_diff_days >= $root.settings['dispute.days_left_for_disputed_user_to_reply']">
+                    {{dispute_closed_type.reason}}
+                </div>
+                <edit-feedback id="edit_feedback_{{dispute_closed_type.id}}" class="hide" feedback_id="feedback.id" item_user_id="vehicle_rental_id" dispute_closed_type_id="dispute_closed_type.id" ng-if="dispute_closed_type.id === ConstDisputeClosedType.FeedbackFavourHost"></edit-feedback>
+                <edit-feedback class="hide" id="edit_feedback_{{dispute_closed_type.id}}" feedback_id="feedback.id" item_user_id="vehicle_rental_id" dispute_closed_type_id="dispute_closed_type.id" ng-if="dispute_closed_type.id === ConstDisputeClosedType.FeedbackResponseFavourHost  && dispute_diff_days >= $root.settings['dispute.days_left_for_disputed_user_to_reply']"></edit-feedback>
+            </div>
+        </form>
+    </div>
+</div>

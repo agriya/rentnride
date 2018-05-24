@@ -1,0 +1,9 @@
+{
+	"name": "Withdrawals", 
+	"class": "fa fa-2x fa-money",
+	"description": "By enabling this plugin, instructor can withdraw their revenue amount. The instructor can send the money withdrawal request to site with the account details. Site can transfer the amount to the user account and maked to paid.",
+	"dependencies": "",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "8"
+}

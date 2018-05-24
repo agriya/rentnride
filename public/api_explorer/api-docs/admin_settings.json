@@ -1,0 +1,289 @@
+{
+  "apis": [
+    {
+      "path": "/admin/settings",
+      "operations": [
+        {
+          "summary": "List all settings",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "setting_category_id",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Setting category ID",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "sorting field name",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "sort setting category by ascending / descending order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_settings"
+        }
+      ]
+    },
+    {
+      "path": "/admin/setting_categories/{id}/settings",
+      "operations": [
+        {
+          "summary": "List all settings for the specified category",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "setting_category_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Setting category id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_setting_categories__id__settings"
+        }
+      ]
+    },
+    {
+      "path": "/admin/settings/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit setting",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "setting_id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Setting id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_settings__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/settings/{id}",
+      "operations": [
+        {
+          "summary": "Update setting",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Setting id"
+            },
+            {
+              "name": "SettingEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "SettingEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_settings__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/settings/{name}/show",
+      "operations": [
+        {
+          "summary": "Show details for the specified setting name",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "name",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Setting name"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_settings__name__show"
+        }
+      ]
+    },
+    {
+      "path": "/admin/plugins",
+      "operations": [
+        {
+          "summary": "List all available plugin and enable plugin",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_plugins"
+        },
+        {
+          "summary": "Update plugin setting",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "PluginEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "PluginEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_plugins"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "SettingEdit": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "required": true,
+          "description": "Setting Id"
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Value for the setting"
+        }
+      },
+      "id": "SettingEdit"
+    },
+    "PluginEdit": {
+      "properties": {
+        "is_enabled": {
+          "type": "integer",
+          "required": true,
+          "description": "Enable?"
+        },
+        "plugin_name": {
+          "type": "string",
+          "required": true,
+          "description": "Plugin name?"
+        }
+      },
+      "id": "PluginEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

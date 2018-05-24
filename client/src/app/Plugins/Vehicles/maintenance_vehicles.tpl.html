@@ -1,0 +1,55 @@
+<div class="page-head">
+    <div class="container">
+        <h2 class="pull-left text-uppercase">{{'Maintenance Dates' | translate}}</h2>
+        <div class="pull-right profile-settings">
+            <button ng-click="addMaintenanceDate()" class="btn btn-green-d">Add</button>	
+        </div>
+    </div>
+</div>
+<div class="vehicle-maintenance">
+	<div class="container">
+    	<div class="table-responsive m-t-30">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{'Vehicle name' | translate}}</th>
+                        <th>{{'Start Date' | translate}}</th>
+                        <th>{{'End Date' | translate}}</th>
+                        <th>{{'Action' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='maintenanceVehicle in model.maintenanceVehicles' ng-show="model._metadata.total > 0">
+                        <td><a href="#/vehicle/{{maintenanceVehicle.vehicle.id}}/{{maintenanceVehicle.vehicle.slug}}" title="{{maintenanceVehicle.vehicle.name}}">{{maintenanceVehicle.vehicle.name}}</a></td>
+                        <td>{{maintenanceVehicle.start_date}}</td>
+                        <td>{{maintenanceVehicle.end_date}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <a href="javascript:void(0);" title="{{'Settings' | translate}}" class="dropdown-toggle btn btn-large" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>
+                                    <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#/maintenance_vehicle/{{maintenanceVehicle.id}}/edit" title="{{'Edit' | translate}}" class="text-muted">{{'Edit' | translate}}</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="model.removeVehicle(maintenanceVehicle.id)" title="{{'Delete' | translate}}" class="text-muted">{{'Delete' | translate}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-show="model._metadata.total === 0">
+                        <td colspan="4">
+                            <p class="alert alert-danger">{{'No Record Found' |translate}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+   		</div>
+    </div>
+    <div class="paging clearfix text-center" ng-show="model._metadata.total > 0">
+        <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="model._metadata.total" num-pages="model._metadata.total_pages" ng-model="model.currentPage" max-size="model.maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="model._metadata.per_page" ng-change="model.paginate()"></uib-pagination>
+    </div>
+</div>

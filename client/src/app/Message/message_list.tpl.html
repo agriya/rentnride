@@ -1,0 +1,48 @@
+<div class="page-head">
+	<div class="container">
+    	<h2 class="text-uppercase">{{'Messages' | translate}} - 
+            <span ng-show="type == 'inbox'">{{'Inbox' | translate}}</span>
+            <span ng-show="type == 'sentmail'">{{'Sent' | translate}}</span>
+            <span ng-show="type == 'starred'">{{'Starred' | translate}}</span>
+        </h2>
+    </div>
+</div>
+<div class="message">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                <div ng-include="sidebar_tpl" class="message-sidebar"></div>
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="message-view">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tr ng-repeat="message in messages" ng-if="_metadata.total > 0">
+                                <td>
+                                    <span class="fa fa-fw" ng-class="(message.is_starred) == 1 ? 'fa-star' : 'fa-star-o'" ng-click="StarMessage(message.id, message.is_starred)"></span>
+                                </td>
+                                <td>
+                                    <a href="#/user/{{message.from_user.username}}" title="{{message.from_user.username}}">{{message.from_user.username}}</a>
+                                </td>
+                                <td width="600" class="status-mail">
+                                    <a href="#/message/{{message.id}}/{{type}}" title="{{message.message_content.subject}}"><span ng-bind-html="message.message_content.subject"></span></a>
+                                </td>
+                                <td>
+                                    {{message.created_at}}
+                                </td>
+                            </tr>
+                            <tr class="text-center" ng-show="_metadata.total === 0">
+                                <td colspan="4">
+                                    <p class="alert alert-danger">{{'No Record Found' |translate}}</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="paging clearfix text-center" ng-show="_metadata.total > 0">
+                        <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="_metadata.total" num-pages="_metadata.total_pages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="_metadata.per_page" ng-change="paginate()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

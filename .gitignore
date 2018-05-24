@@ -1,0 +1,17 @@
+.env
+.idea
+.phpstorm.meta.php
+_ide_helper.php
+composer.lock
+/vendor
+/node_modules
+/public/ag-admin
+/public/vendor
+/public/client
+/public/assets
+/public/api
+/public/Plugins
+/public/index.html
+/public/karma-unit.js
+/public/templates-app.js
+/public/templates-common.js

@@ -1,0 +1,105 @@
+<div class="page-head money-head">
+	<div class="container">
+    	<div class="pull-left">
+            <h2 class="text-uppercase">{{'Withdraw Fund Requests' | translate}}</h2>
+            <p>{{'The requested amount will be deducted from your available balance after approval. Once its approved, the requested amount will be manually pay to you.' | translate}}</p>
+        	 <label>{{'Available Balance:'|translate}}<span>{{getFormatCurrency(user_available_balance)}}</span></label>
+        </div>
+        <div class="pull-right profile-settings text-right">
+        	<a href="#/money_transfer_account" class="btn btn-green-d">{{'Add / Manage money transfer account'|translate}}</a>
+            <dashboard-settings class="pull-right"></dashboard-settings>
+        </div>
+    </div>
+</div>
+
+<div class="add-wallet">
+	<div class="container">
+    	<div class="alert alert-info m-b-20">{{'The requested amount will be deducted from your available balance after approval. Once its approved, the requested amount will be manually pay to you.' | translate}}</div>
+        <form class="clearfix" role="form" name="moneyTransfer" ng-submit="model.userCashWithdrawSubmit(moneyTransfer.$valid)" ng-if='model.moneyTransferList.length' novalidate>
+        	<div class="wallet-amount row">
+               	<h2 class="text-uppercase">{{'Choose your money transfer option'|translate}}</h2>
+                <div class="form-group col-sm-12" ng-class="{ 'has-error' : (moneyTransfer.$submitted || moneyTransfer.money_transfer_id.$touched) && (moneyTransfer.money_transfer_id.$pristine || moneyTransfer.money_transfer_id.$invalid) && (moneyTransfer.money_transfer_id.$error.required) }">
+                    <ul class="list-inline transfer-option">
+                        <li class="" ng-repeat="moneyTransfer in model.moneyTransferList">
+                            <div class="radio" ng-click="model.moneyTransfer.money_transfer_account_id = moneyTransfer.id;">
+                                <label for="moneyTransfer_{{moneyTransfer.id}}" class="custom-radio" ng-class="{ 'text-muted' : model.moneyTransfer.money_transfer_account_id !== moneyTransfer.id  }">
+                                    <input class="hide" type="radio" value="{{moneyTransfer.id}}" id="moneyTransfer_{{moneyTransfer.id}}" name="money_transfer_id" ng-model="model.moneyTransfer.money_transfer_account_id" required ng-required="!model.moneyTransfer.money_transfer_account_id">
+                                    <span></span>
+                                    <p ng-bind-html="moneyTransfer.account|html"></p>
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                    <span class="error" ng-show="(moneyTransfer.$submitted || moneyTransfer.money_transfer_id.$touched) && (moneyTransfer.money_transfer_id.$pristine || moneyTransfer.money_transfer_id.$invalid) && (moneyTransfer.money_transfer_id.$error.required)">
+                        {{'You must select one account' | translate}}
+                    </span>
+                </div>
+                <div class="form-group col-sm-6" ng-class="{ 'has-error' : ((moneyTransfer.$submitted || moneyTransfer.amount.$touched) && (moneyTransfer.amount.$pristine || moneyTransfer.amount.$invalid)) || amountErr }">
+                    <div class="row">
+                    	<label class="col-sm-3 col-md-2 control-label" for="amount">{{'Amount'|translate}}({{$root.default_currency.symbol}})</label>
+                        <div class="col-sm-9 col-md-10">
+                            <input type="number" min="{{withdrawals.minimum_withdraw_amount}}" max="{{withdrawals.maximum_withdraw_amount}}" class="form-control" name="amount" id="amount" placeholder="{{'Amount'|translate}}" ng-model="model.moneyTransfer.amount" ng-change="amountErr=''"  required>
+                            <div ng-show="((moneyTransfer.$submitted || moneyTransfer.amount.$touched) && (moneyTransfer.amount.$pristine || moneyTransfer.amount.$invalid)) || amountErr">
+                                <span class="error" ng-show="(moneyTransfer.amount.$error.required)">
+                                    {{'You must enter the amount' | translate}}
+                                </span>
+                                <span class="error" ng-show="(moneyTransfer.amount.$error.number)">
+                                    {{'You did not enter a valid number' | translate}}
+                                </span>
+                                <span class="error" ng-show="(moneyTransfer.amount.$error.min)">
+                                    {{'Your field value is lesser minimum value' | translate}}
+                                </span>
+                                <span class="error" ng-show="(moneyTransfer.amount.$error.max)">
+                                    {{'Your field value is greater maximum value' | translate}}
+                                </span>
+                                <span class="error" ng-show="amountErr">
+                                    {{amountErr}}
+                                </span>
+                            </div>
+                        </div>
+                 	</div>
+                </div>
+                <div class="form-group col-sm-2">
+                	<label class="sr-only" for="submit">{{'Submit'|translate}}</label>
+                    <button id="submit" class="btn btn-block btn-orange" type="submit">{{'Submit' | translate }}</button>
+                </div> 
+                <div class="clearfix"></div>
+                <ul class="list-inline">
+                    <li>{{'Minimum withdraw amount'|translate}}:&nbsp;<span>{{getFormatCurrency(withdrawals.minimum_withdraw_amount, 'site')}}</span></li>
+                    <li>{{'Maximum withdraw amount'|translate}}:&nbsp;<span>{{getFormatCurrency(withdrawals.maximum_withdraw_amount, 'site')}}</span></li>
+                </ul>
+          	</div>
+        </form>
+        <div class="add-wallet-table">
+            <h2 class="text-uppercase">{{'Cash Withdraw Requests'|translate}}</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{'Date' |translate}}</th>
+                        <th>{{'Account'|translate}}
+                        <th>{{'Amount' |translate}}</th>
+                        <th>{{'Status' |translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="userCashWithdrawals in model.userCashWithdrawalsList">
+                        <td>{{userCashWithdrawals.created_at}}</td>
+                        <td>{{userCashWithdrawals.money_transfer_account.account}}</td>
+                        <td>{{getFormatCurrency(userCashWithdrawals.amount)}}</td>
+                        <td ng-class="{'pending':userCashWithdrawals.withdrawal_status.name == 'Pending', 'complete':userCashWithdrawals.withdrawal_status.name == 'Success', 'reject':userCashWithdrawals.withdrawal_status.name == 'Rejected'}"><span>{{userCashWithdrawals.withdrawal_status.name}}</span></td>
+                    </tr>
+                    <tr ng-show="_metadata.total === 0">
+                        <td colspan="4">
+                            <p class="alert alert-danger">{{'No Record Found' |translate}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="paging clearfix text-center" ng-show="_metadata.total > 0">
+                <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="_metadata.total" num-pages="_metadata.total_pages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="_metadata.per_page" ng-change="paginate()"></uib-pagination>
+            </div>
+        </div>
+    </div>
+</div>

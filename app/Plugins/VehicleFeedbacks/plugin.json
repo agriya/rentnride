@@ -1,0 +1,9 @@
+{
+  "name": "VehicleFeedbacks",
+  "class": "fa fa-2x fa-thumbs-up",
+  "description": "By enabling this plugin, vehicle feedback to be added for items",
+  "dependencies": "VehicleRentals",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "13"
+}

@@ -1,0 +1,61 @@
+<div class="transactions">
+    <div class="page-head">
+        <div class="container">
+            <div class="pull-left">
+                <h2 class="text-uppercase">{{'My Transactions' | translate}}</h2>
+                <p ng-show="transaction_metadata.total > 0">{{'We found '|translate}} {{transaction_metadata.total}} {{' results provides our transaction listed'| translate}}</p>
+            </div>
+            <div class="pull-right profile-settings">
+                <dashboard-settings></dashboard-settings>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-xs-12 transaction-tab">
+            <div id="transactions-tab-container" class="clearfix">
+                <ul class="nav nav-pills pull-right">
+                    <li ng-class="{active : activeMenu === 'all'}">
+                        <a class="show" ng-click="filterTransaction('all')" data-target="#" data-toggle="tab">{{'All' | translate }}</a>
+                    </li>
+                    <li ng-class="{active : activeMenu === 'today'}">
+                        <a class="show" ng-click="filterTransaction('today')" data-target="#" data-toggle="tab">{{'Today' | translate }}</a>
+                    </li>
+                    <li ng-class="{active : activeMenu === 'this_week'}">
+                        <a class="show" ng-click="filterTransaction('this_week')" data-target="#" data-toggle="tab">{{'This Week' | translate }}</a>
+                    </li>
+                    <li ng-class="{active : activeMenu === 'this_month'}">
+                        <a class="show" ng-click="filterTransaction('this_month')" data-target="#" data-toggle="tab">{{'This Month' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'Date'|translate}}</th>
+                            <th>{{'Description'|translate}}</th>
+                            <th>{{'Credit' |translate}}</th>
+                            <th>{{'Debit' |translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="transaction in TransactionLists">
+                            <td>{{transaction.created_at}}</td>
+                            <td><div ng-bind-html="transaction.description | html"></div></td>
+                            <td>{{getFormatCurrency(transaction.credit_amount)}}</td>
+                            <td>{{getFormatCurrency(transaction.debit_amount)}}</td>
+                        </tr>
+                        <tr ng-show="transaction_metadata.total == 0">
+                            <td colspan="4">
+                                <p class="alert alert-danger">{{'No Record Found' |translate}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="paging clearfix text-center" ng-show="transaction_metadata.total > 0">
+            <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="transaction_metadata.total" num-pages="transaction_metadata.total_pages" ng-model="transaction_currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="transaction_metadata.per_page" ng-change="transaction_paginate()"></uib-pagination>
+        </div>
+    </div>
+</div>

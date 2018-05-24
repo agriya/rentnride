@@ -1,0 +1,9 @@
+{
+  "name": "VehicleInsurances",
+  "class": "fa fa-2x fa-university",
+  "description": "By enabling this, item owner can manage taxes based on vehicle types.",
+  "dependencies": "VehicleRentals",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "16"
+}

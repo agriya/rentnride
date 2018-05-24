@@ -1,0 +1,298 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_type_prices",
+      "operations": [
+        {
+          "summary": "Get the list of vehicle type prices",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search vehicle type price",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "is_active",
+                "all"
+              ],
+              "type": "string",
+              "description": "Filter list for vehicle type prices",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The vehicle type price Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle type price by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_type_prices"
+        },
+        {
+          "summary": "Store vehicle type price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "VehicleTypePriceAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleTypePriceAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_type_prices"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_type_prices/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit the vehicle type price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_type_prices__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_type_prices/{id}",
+      "operations": [
+        {
+          "summary": "Update vehicle type price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "vehicle type price id"
+            },
+            {
+              "name": "VehicleTypePriceEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleTypePriceEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_type_prices__id_"
+        },
+        {
+          "summary": "View the vehicle type price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_type_prices__id_"
+        },
+        {
+          "summary": "Delete the specified vehicle type price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter vehicle type price ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_type_prices__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "VehicleTypePriceAdd": {
+      "properties": {
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_type_id"
+        },
+        "minimum_no_of_day": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "minimum_no_of_day"
+        },
+        "maximum_no_of_day": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "maximum_no_of_day"
+        },
+        "discount_percentage": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "discount_percentage"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is_active"
+        }
+      },
+      "id": "VehicleTypePriceAdd"
+    },
+    "VehicleTypePriceEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Vehicle type price identifier"
+        },
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_type_id"
+        },
+        "minimum_no_of_day": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "minimum_no_of_day"
+        },
+        "maximum_no_of_day": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "maximum_no_of_day"
+        },
+        "discount_percentage": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "discount_percentage"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is_active"
+        }
+      },
+      "id": "VehicleTypePriceEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

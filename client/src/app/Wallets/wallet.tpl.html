@@ -1,0 +1,58 @@
+<div class="page-head">
+	<div class="container">
+    	<h2 class="text-uppercase pull-left">{{'Add to Wallet' | translate}}</h2>
+        <div class="pull-right profile-settings">
+            <dashboard-settings></dashboard-settings>
+        </div>
+    </div>
+</div>
+
+<div class="add-wallet">
+	<div class="container">
+    	<form role="form" class="clearfix" name="PaymentForm" ng-submit="PaymentSubmit(PaymentForm)" novalidate>
+        	<div class="row wallet-amount">
+                <div class="form-group col-sm-6" ng-class="{ 'has-error' : ((PaymentForm.$submitted || PaymentForm.amount.$touched) && (PaymentForm.amount.$pristine || PaymentForm.amount.$invalid)) || amountErr }">
+                	<div class="row">        
+                       	<label class="col-sm-3 col-md-2 control-label" for="amount">{{'Amount' | translate}}({{$root.default_currency.symbol}})</label>
+                        <div class="col-sm-9 col-md-10">
+                            <input type="number" class="form-control" name="amount" id="amount" placeholder="{{'Amount' | translate}}" ng-model='wallet.amount' ng-required="true" min="{{min_wallet_amount}}" max="{{max_wallet_amount}}" ng-change="amountErr=''"/>
+                            <div ng-show="((PaymentForm.$submitted || PaymentForm.amount.$touched) && (PaymentForm.amount.$pristine || PaymentForm.amount.$invalid)) || amountErr">
+                                <span class="error" ng-show="(PaymentForm.amount.$error.required)">
+                                    {{'Enter Amount'|translate }}
+                                </span>
+                                <span class="error" ng-show="(PaymentForm.amount.$error.number)">
+                                    {{'You did not enter a valid number' | translate}}
+                                </span>
+                                <span class="error" ng-show="(PaymentForm.amount.$error.min)">
+                                    {{'Your field value is lesser than the minimum value' | translate}}
+                                </span>
+                                <span class="error" ng-show="(PaymentForm.amount.$error.max)">
+                                    {{'Your field value is greater than the maximum value' | translate}}
+                                </span>
+                                <span ng-show="amountErr" class="error">{{amountErr}}</span>
+                            </div>
+                        </div>
+                  	</div>
+                </div>
+                <div class="form-group col-sm-2 hide">
+                    <button class="btn btn-block btn-orange" id="js-wallet-form-submit" type="submit">{{'Submit' | translate }}</button>
+                </div>
+                <div class="clearfix"></div>
+            	<ul class="list-inline">
+                    <li>{{'Minimum wallet amount'|translate}}:&nbsp;<span>{{getFormatCurrency(min_wallet_amount, 'site')}}</span></li>
+                    <li>{{'Maximum wallet amount'|translate}}:&nbsp;<span>{{getFormatCurrency(max_wallet_amount, 'site')}}</span></li>
+                </ul>
+            </div>
+            <div class="vehicle-payment">
+            	<div class="payment-left">
+                    <div class="payment-form">
+              			<div ng-include="gatewayTpl"></div>
+                    </div>
+				</div>
+            </div>
+            <div class="hide">
+                <input type="text" ng-model="gateway_id">
+            </div>
+        </form>
+    </div>
+</div>

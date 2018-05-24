@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <ma-view-actions>
+                <ma-back-button></ma-back-button>
+            </ma-view-actions>
+            <h1><span> Edit Vehicle Company</span></h1>
+        </div>
+    </div>
+</div>
+<div class="row" id="create-view">
+    <div class="edit-form">
+        <form class="form-horizontal" role="form" name="CompanyAdd" ng-submit="VehicleCompaniesEdit(CompanyAdd.$valid)" novalidate>
+            <div class="form-group" ng-class="{'has-error':(CompanyAdd.$submitted || CompanyAdd.user_id.$touched) && (!CompanyAdd.user_id.$pristine && CompanyAdd.user_id.$invalid) && (CompanyAdd.user_id.$error.required)}">
+                <label class="control-label" for="user_id">User </label>
+                <select class="form-control" name="user_id" id="user_id" ng-model="vehicleCompanies.user_id"  ng-options="user.id as user.username for user in users" ng-required="true">
+                    <option value="">select</option>
+                </select>
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.user_id.$touched) && (!CompanyAdd.user_id.$pristine && CompanyAdd.user_id.$invalid))">
+                    <span class="help-block" ng-show="(CompanyAdd.user_id.$error.required)">Required</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.name.$touched) && (!CompanyAdd.name.$pristine && CompanyAdd.name.$invalid))|| model.nameErr}">
+                <label class="control-label">Name</label>
+                <input type="text" class="form-control" placeholder="Name" id="name" name="name" ng-model="vehicleCompanies.name" ng-required="true" ng-change="model.nameErr=''">
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.name.$touched) && (!CompanyAdd.name.$pristine && CompanyAdd.name.$invalid)) || model.nameErr">
+                    <span class="help-block" ng-show="(CompanyAdd.name.$error.required)">Required</span>
+                    <span class="help-block" ng-show="model.nameErr">{{model.nameErr}}</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.full_address.$touched) && (!CompanyAdd.full_address.$pristine && CompanyAdd.full_address.$invalid))|| model.full_addressErr}">
+                <label class="control-label">Address</label>
+                <input type="text" class="form-control" placeholder="Address" name="full_address" id="full_address" g-places-autocomplete ng-model="vehicleCompanies.full_address" ng-required="true" ng-change="model.full_addressErr=''">
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.full_address.$touched) && (!CompanyAdd.full_address.$pristine && CompanyAdd.full_address.$invalid)) || model.full_addressErr">
+                    <span class="help-block" ng-show="(CompanyAdd.full_address.$error.required)">Required</span>
+                    <span class="help-block" ng-show="model.full_addressErr">{{model.full_addressErr}}</span>
+                </div>
+            </div>
+            <input type="hidden" class="form-control" placeholder="Address" name="address" id="address" ng-model="vehicleCompanies.address"/>
+            <div class="form-group" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.latitude.$touched) && (!CompanyAdd.latitude.$pristine && CompanyAdd.latitude.$invalid))|| model.latitudeErr}">
+                <label class="control-label">Latitude</label>
+                <input type="text" class="form-control" placeholder="Latitude" name="latitude" ng-model="vehicleCompanies.latitude" ng-required="true" ng-change="model.latitudeErr=''">
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.latitude.$touched) && (!CompanyAdd.latitude.$pristine && CompanyAdd.latitude.$invalid)) || model.latitudeErr">
+                    <span class="help-block" ng-show="(CompanyAdd.latitude.$error.required)">Required</span>
+                    <span class="help-block" ng-show="model.latitudeErr">{{model.latitudeErr}}</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.longitude.$touched) && (!CompanyAdd.longitude.$pristine && CompanyAdd.longitude.$invalid))|| model.longitudeErr}">
+                <label class="control-label">Longitude</label>
+                <input type="text" class="form-control" placeholder="Longitude" name="longitude" ng-model="vehicleCompanies.longitude" ng-required="true" ng-change="model.longitudeErr=''">
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.longitude.$touched) && (!CompanyAdd.longitude.$pristine && CompanyAdd.longitude.$invalid)) || model.longitudeErr">
+                    <span class="help-block" ng-show="(CompanyAdd.longitude.$error.required)">Required</span>
+                    <span class="help-block" ng-show="model.longitudeErr">{{model.longitudeErr}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fax</label>
+                <input type="text" class="form-control" placeholder="Fax" name="fax" ng-model="vehicleCompanies.fax">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone</label>
+                <input type="text" class="form-control" placeholder="Phone" name="phone" ng-model="vehicleCompanies.phone">
+            </div>
+            <div class="form-group" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.mobile.$touched) && (!CompanyAdd.mobile.$pristine && CompanyAdd.mobile.$invalid))|| model.mobileErr}">
+               
+                <label class="control-label">Mobile</label>
+                <input type="text" class="form-control" placeholder="Mobile" name="mobile" ng-model="vehicleCompanies.mobile" ng-required="true" ng-change="model.mobileErr=''">
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.mobile.$touched) && (!CompanyAdd.mobile.$pristine && CompanyAdd.mobile.$invalid)) || model.mobileErr">
+                    <span class="help-block" ng-show="(CompanyAdd.mobile.$error.required)">Required</span>
+                    <span class="help-block" ng-show="model.mobileErr">{{model.mobileErr}}</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.email.$touched) && (!CompanyAdd.email.$pristine && CompanyAdd.email.$invalid))|| model.emailErr}">
+               
+                <label class="control-label">Email</label>
+                <input type="email" class="form-control" placeholder="Email" name="email" ng-model="vehicleCompanies.email" ng-required="true" ng-change="model.emailErr=''">
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.email.$touched) && (!CompanyAdd.email.$pristine && CompanyAdd.email.$invalid)) || model.emailErr">
+                    <span class="help-block" ng-show="(CompanyAdd.email.$error.required)">Required</span>
+                    <span class="help-block" ng-show="(CompanyAdd.email.$error.email)">Enter valid email</span>
+                    <span class="help-block" ng-show="model.emailErr">{{model.emailErr}}</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.is_active.$touched) && (!CompanyAdd.is_active.$pristine && CompanyAdd.is_active.$invalid))|| model.is_activeErr}">
+                <label class="control-label">Status?</label>
+                <select class="form-control" ng-model="vehicleCompanies.is_active" name="is_active" id="is_active" ng-required="true" ng-change="model.is_activeErr=''">
+                    <option value="" selected="selected">Active?</option>
+                    <option value="1" ng-selected="vehicleCompanies.status == 'Active'">Active</option>
+                    <option value="0" ng-selected="vehicleCompanies.status == 'Deactive'">Deactive</option>
+                    <option value="2" ng-selected="vehicleCompanies.status == 'Rejected'">Rejected</option>
+                </select>
+                <div ng-show="((CompanyAdd.$submitted || CompanyAdd.is_active.$touched) && (!CompanyAdd.is_active.$pristine && CompanyAdd.is_active.$invalid)) || model.is_activeErr">
+                    <span class="help-block" ng-show="(CompanyAdd.is_active.$error.required)">Required</span>
+                    <span class="help-block" ng-show="model.is_activeErr">{{model.is_activeErr}}</span>
+                </div>
+            </div>
+            <div class="form-group mob-dc">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>

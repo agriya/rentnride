@@ -1,0 +1,101 @@
+<!--- company Add Page--->
+<div class="form-block">
+    <div class="vehicle-company">
+        <div class="page-head">
+            <div class="container">
+                <h2 class="text-uppercase pull-left">{{'Become a Host' | translate}}</h2>
+                <div class="pull-right profile-settings">
+                    <dashboard-settings></dashboard-settings>
+                </div>
+            </div>
+        </div>
+        <div class="container">    
+            <div class="col-md-12">
+                <div id="create-view">
+                    <div class="loader" ng-show="loader_is_disabled"><img src="assets/img/loader.gif" alt="[Image: {{'Loader'| translate}}]" title="{{'Loader'| translate}}"/></div>
+                    <div class="clearfix" ng-if="message">
+                        <h4>
+                            <p class="alert alert-warning"><i class="fa fa-warning"></i>&nbsp;&nbsp;&nbsp;{{message}}</p> 
+                            <ul class="list-inline company-list" ng-if="is_reject_active == 2">
+                                <li ng-show="$root.settings['site.enabled_plugins'].indexOf('Contacts') > -1">
+                                    <a class="btn btn-orange" href="#/contactus">{{'admin' | translate }}</a>
+                                </li>
+                                <li ng-hide="$root.settings['site.enabled_plugins'].indexOf('Contacts') > -1">
+                                    <a class="btn btn-orange" href="mailto:{{$root.settings['site.from_email']}}">{{'admin' | translate }}</a>
+                                </li>
+                            </ul>
+                        </h4>
+                    </div>
+                    <div class="clearfix" ng-show="form_is_active">
+                        <form class="" role="form" name="CompanyAdd" ng-submit="VehicleCompaniesAdd(CompanyAdd.$valid)" novalidate>
+                            <div class="clearfix">
+                                <div class="row">
+                                    <div class="form-group col-sm-6" ng-class="{'has-error' : (CompanyAdd.$submitted || CompanyAdd.name.$touched) && (CompanyAdd.name.$pristine || CompanyAdd.name.$invalid) && (CompanyAdd.name.$error.required)}">
+                                        <label class="control-label">{{'Name' | translate }}</label>
+                                        <div class="clearfix">
+                                            <input type="text" class="form-control" placeholder="{{'Name' | translate }}" id="name" name="name" ng-model="vehicleCompanies.name" ng-required="true" ng-change="model.nameErr=''">
+                                            <span ng-show="(CompanyAdd.$submitted || CompanyAdd.name.$touched) && (CompanyAdd.name.$pristine || CompanyAdd.name.$invalid) && (CompanyAdd.name.$error.required)" class="error">{{'Required' | translate }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6" ng-class="{'has-error' : (CompanyAdd.$submitted || CompanyAdd.full_address.$touched) && (CompanyAdd.full_address.$pristine || CompanyAdd.full_address.$invalid) && (CompanyAdd.full_address.$error.required) || (addressErr)}">
+                                        <label class="control-label">{{'Address' | translate }}</label>
+                                        <div class="clearfix">
+                                            <input type="text" class="form-control" placeholder="{{'Address' | translate }}" name="full_address" id="full_address" g-places-autocomplete ng-model="vehicleCompanies.full_address" ng-required="true" ng-change="addressErr=''">
+                                            <span ng-show="(CompanyAdd.$submitted || CompanyAdd.full_address.$touched) && (CompanyAdd.full_address.$pristine || CompanyAdd.full_address.$invalid) && (CompanyAdd.full_address.$error.required)" class="error">
+                                                {{'Required' | translate }}
+                                            </span>
+                                            <span class="error" ng-show="addressErr">{{'Select address' | translate}}</span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="address" ng-model="vehicleCompanies.address"/>
+                                    <input type="hidden" name="latitude" ng-model="vehicleCompanies.latitude"/>
+                                    <input type="hidden" name="longitude" ng-model="vehicleCompanies.longitude"/>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">{{'Fax' | translate }}</label>
+                                        <div class="clearfix">
+                                            <input type="text" class="form-control" placeholder="{{'Fax' | translate }}" name="fax" ng-model="vehicleCompanies.fax"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">{{'Phone' | translate }}</label>
+                                        <div class="clearfix">
+                                            <input type="text" class="form-control" placeholder="{{'Phone' | translate }}" name="phone" ng-model="vehicleCompanies.phone"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-6" ng-class="{'has-error' : (CompanyAdd.$submitted || CompanyAdd.mobile.$touched) && (CompanyAdd.mobile.$pristine || CompanyAdd.mobile.$invalid) && (CompanyAdd.mobile.$error.required || CompanyAdd.mobile.$error.pattern)}">
+                                        <label class="control-label">{{'Mobile' | translate }}</label>
+                                        <div class="clearfix">
+                                            <input type="text" class="form-control" placeholder="{{'Mobile' | translate }}" name="mobile" ng-model="vehicleCompanies.mobile" ng-required="true" ng-pattern="/^[0-9]*$/" ng-change="model.mobileErr=''">
+                                            <span ng-show="(CompanyAdd.$submitted || CompanyAdd.mobile.$touched) && (CompanyAdd.mobile.$pristine || CompanyAdd.mobile.$invalid) && (CompanyAdd.mobile.$error.required)" class="error">
+                                                {{'Required' | translate }}
+                                            </span>
+                                            <span class="error" ng-show="(CompanyAdd.mobile.$error.pattern)">
+                                                {{'Enter valid number'|translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6" ng-class="{'has-error' : ((CompanyAdd.$submitted || CompanyAdd.email.$touched) && (CompanyAdd.email.$pristine || CompanyAdd.email.$invalid) && (CompanyAdd.email.$error.required) || CompanyAdd.email.$error.email) || emailErr}">
+                                        <label class="control-label">{{'Email' | translate }}</label>
+                                        <div class="clearfix">
+                                            <input type="email" class="form-control" placeholder="{{'Email' | translate }}" name="email" ng-model="vehicleCompanies.email" ng-required="true" ng-change="emailErr=''">
+                                            <span ng-show="((CompanyAdd.$submitted || CompanyAdd.email.$touched) && (CompanyAdd.email.$pristine || CompanyAdd.email.$invalid) && (CompanyAdd.email.$error.required)) " class="error">{{'Required' | translate }}</span>
+                                            <span class="error" ng-show="(CompanyAdd.email.$error.email)">{{'Enter valid Email' | translate }}</span>
+                                            <span class="error" ng-show="emailErr">{{emailErr}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix form-footer">
+                                <button class="btn btn-orange" type="submit">{{'Update' | translate}}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

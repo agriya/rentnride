@@ -1,0 +1,260 @@
+{
+  "apis": [
+    {
+      "path": "/admin/unavailable_vehicles",
+      "operations": [
+        {
+          "summary": "Get the list of vehicles",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "vehicle_id",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Particular vehicle ID",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search vehicle",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The vehicle Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_unavailable_vehicles"
+        },
+        {
+          "summary": "Store unavailable vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "UnavailableVehicleAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "UnavailableVehicleAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_unavailable_vehicles"
+        }
+      ]
+    },
+    {
+      "path": "/admin/unavailable_vehicles/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit the unavailable vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_unavailable_vehicles__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/unavailable_vehicles/{id}",
+      "operations": [
+        {
+          "summary": "Update unavailable vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "unavailable vehicle id"
+            },
+            {
+              "name": "UnavailableVehicleEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "UnavailableVehicleEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_unavailable_vehicles__id_"
+        },
+        {
+          "summary": "show the unavailable vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_unavailable_vehicles__id_"
+        },
+        {
+          "summary": "Delete the specified unavailable vehicle",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter unavailable vehicle ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_unavailable_vehicles__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "UnavailableVehicleAdd": {
+      "properties": {
+        "vehicle_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_model_id"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "maintenance_start_date"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "maintenance_end_date"
+        }
+      },
+      "id": "UnavailableVehicleAdd"
+    },
+    "UnavailableVehicleEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Vehicle identifier"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "maintenance_start_date"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "maintenance_end_date"
+        }
+      },
+      "id": "UnavailableVehicleEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

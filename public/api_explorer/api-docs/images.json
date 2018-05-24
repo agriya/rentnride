@@ -1,0 +1,57 @@
+{
+  "apis": [
+    {
+      "path": "/img/{size}/{model}/{filename}",
+      "operations": [
+        {
+          "summary": "Create images",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "size",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Size"
+            },
+            {
+              "name": "model",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Model"
+            },
+            {
+              "name": "filename",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "File name"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__img__size___model___filename_"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

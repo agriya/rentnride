@@ -1,0 +1,333 @@
+{
+  "apis": [
+    {
+      "path": "/admin/pages?filter={filter}&sort={sort}&sortby={sortby}&page={page}&type={type}&field={field}&q={q}",
+      "operations": [
+        {
+          "summary": "Fetch pages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "type",
+              "paramType": "query",
+              "type": "string",
+              "description": "Display Pages By Listing Type",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "field",
+              "paramType": "query",
+              "type": "string",
+              "description": "Give Whatever Fields Needed by &quot;Comma Seperator&quot;",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Pages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "type": "string",
+              "description": "filter list of pages ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The page Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort page by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_pages_filter__filter__sort__sort__sortby__sortby__page__page__type__type__field__field__q__q_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/pages",
+      "operations": [
+        {
+          "summary": "Store Pages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "PageAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "PageAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_pages"
+        }
+      ]
+    },
+    {
+      "path": "/admin/pages/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Page",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Page Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_pages__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/pages/{id}",
+      "operations": [
+        {
+          "summary": "update pages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Page Identifier"
+            },
+            {
+              "name": "PageEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "PageEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_pages__id_"
+        },
+        {
+          "summary": "Delete Pages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Page Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_pages__id_"
+        },
+        {
+          "summary": "Show Pages",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Page Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_pages__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "PageAdd": {
+      "properties": {
+        "slug": {
+          "type": "string",
+          "required": true,
+          "description": "Page Slug"
+        },
+        "language_id": {
+          "description": "an array of page objects",
+          "required": false,
+          "$ref": "PageAddArray"
+        }
+      },
+      "id": "PageAdd"
+    },
+    "PageAddArray": {
+      "properties": {
+        "language_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Language Identifier"
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Page Title"
+        },
+        "page_content": {
+          "type": "string",
+          "required": true,
+          "description": "Page Content"
+        },
+        "slug": {
+          "type": "string",
+          "required": true,
+          "description": "Page Slug"
+        }
+      },
+      "id": "PageAddArray"
+    },
+    "PageEdit": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "required": true,
+          "description": "The Page Identifier"
+        },
+        "language_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Language Identifier"
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Page Title"
+        },
+        "page_content": {
+          "type": "string",
+          "required": true,
+          "description": "Page Content"
+        },
+        "slug": {
+          "type": "string",
+          "required": true,
+          "description": "Page Slug"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "PageEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

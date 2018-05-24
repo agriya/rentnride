@@ -1,0 +1,95 @@
+<!--- Vehicles Listings--->
+<div class="page-head">
+    <div class="container">
+        <h2 class="text-uppercase pull-left">{{'My Vehicles' | translate}}</h2>
+        <div class="pull-right profile-settings">
+            <dashboard-settings></dashboard-settings>
+        </div>
+    </div>
+</div>
+<div class="vehicle-dashboard">
+	<div class="container">
+        <div class="row" ng-repeat="vehicle in model.vehicles">
+            <div class="col-md-12 vehicle-list-view">
+                <div class="media">
+                    <div class="media-left">
+                        <img ng-src="{{vehicle.attachments.thumb.medium}}">
+                    </div>
+                    <div class="media-body row">
+                        <div class="col-sm-8 text-left">
+                            <h4><a href="#/vehicle/{{vehicle.id}}/{{vehicle.slug}}" title="{{vehicle.name}}">{{vehicle.vehicle_make.name}}-{{vehicle.vehicle_model.name}}#{{vehicle.id}}</a></h4>
+                            <p class="rating" ng-click="modalOpen('lg',vehicle.id)" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1">
+                                <span ng-repeat = 'rating in maxRatings track by $index'>
+                                    <i class="fa fa-star" ng-class="((rating < vehicle.roundedRating)? 'fa-star':((((vehicle.feedback_rating - rating) > 0) && ((vehicle.feedback_rating - rating) < 1)) ? 'fa-star-half': 'fa-star-o'))"></i>
+                                </span>
+                            </p>
+                            <ul class="list-inline medium">
+                                <li ng-show="vehicle.is_manual_transmission">
+                                    <i class="fa fa-code-fork"></i> {{'Manual' | translate }}
+                                </li>
+                                <li ng-show="!vehicle.is_manual_transmission">
+                                    <i class="fa fa-code-fork"></i> {{'Automatic' | translate }}
+                                </li>
+                                <li ng-show="vehicle.is_ac">
+                                    <i class="fa fa-asterisk"></i> {{'Air Conditioning' | translate }}
+                                </li>
+                                <li ng-show="vehicle.no_of_seats > 0">
+                                    <i class="fa fa-male"></i> {{vehicle.no_of_seats}} {{'People' | translate}}
+                                </li>
+                                <li ng-show="vehicle.no_small_bags > 0">
+                                    <i class="fa fa-briefcase"></i> {{vehicle.no_small_bags}} {{'Small Bags' | translate}}
+                                </li>
+                                <li ng-show="vehicle.no_large_bags > 0">
+                                    <i class="fa fa-briefcase"></i> {{vehicle.no_large_bags}} {{'Large Bags' | translate}}
+                                </li>
+                            </ul>
+                            <a href="" class="btn btn-green-d location" ng-click="vehicle.status = ! vehicle.status">{{vehicle.counter_location.data.length}} {{'Location' | translate}}
+                                <i class="fa fa-angle-down" ng-class="{'fa-angle-up': vehicle.status, 'fa-angle-down': !vehicle.status}"></i>
+                            </a>	
+                        </div>
+                        <div class="col-sm-4 package-list">
+                            <div class="text-right clearfix package-details">
+                                <p><span>{{'Day' | translate}} -</span> {{getFormatCurrency(vehicle.per_day_amount)}}</p>
+                                <p><span>{{'Hour' | translate}} -</span> {{getFormatCurrency(vehicle.per_hour_amount)}}</p>
+                            </div>
+                            <div class="dropdown pull-right">
+                                <a href="javascript:void(0);" title="{{'Settings' | translate}}" class="dropdown-toggle btn btn-orange" data-toggle="dropdown" aria-expanded="true">Settings<span class="fa fa-angle-down"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#/vehicle/edit/{{vehicle.id}}" title="{{'Edit' | translate}}">{{'Edit'| translate}}</a>
+                                    </li>
+                                    <li ng-if="$root.settings['vehicle.listing_fee'] > 0 && !vehicle.is_paid">
+                                        <a href="" ng-click="model.payNow(vehicle.id)" title="{{'Pay Now' | translate}}">{{'Pay Now' | translate}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="" ng-click="model.maintenance(vehicle.id)" title="{{'Maintenance' | translate}}">{{'Maintenance' | translate}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix text-left m-t-30 pick-drop row" ng-show="vehicle.status">
+                <div class="col-sm-6">
+                    <h3 class="text-uppercase">{{'Pick Up Locations'|translate}}</h3>
+                    <ul class="list-unstyled" ng-repeat="location in vehicle.pickup_locations">
+                        <li>{{location.address}}</li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <h3 class="text-uppercase">{{'Drop Off Locations'|translate}}</h3>
+                    <ul class="list-unstyled" ng-repeat="location in vehicle.drop_locations">
+                        <li>{{location.address}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center" ng-show="model._metadata.total === 0">
+            <p class="alert alert-danger">{{'No Record Found' | translate}}</p>
+        </div>
+        <div class="paging clearfix text-center" ng-show="model._metadata.total > 0">
+            <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="model._metadata.total" num-pages="model._metadata.total_pages" ng-model="model.currentPage" max-size="model.maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="model._metadata.per_page" ng-change="model.paginate()"></uib-pagination>
+        </div>
+   	</div>
+</div>

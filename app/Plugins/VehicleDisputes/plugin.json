@@ -1,0 +1,9 @@
+{
+  "name": "VehicleDisputes",
+  "class": "fa fa-2x fa-retweet",
+  "description": "By enabling this, item owner / booker can raise dispute against their inconveniences.",
+  "dependencies": "VehicleRentals",
+  "module_id": "794",
+  "module_hash": "e92a3686920c2a8696450d198f31eea1",
+  "display_order": "12"
+}

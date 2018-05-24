@@ -1,0 +1,294 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_special_prices",
+      "operations": [
+        {
+          "summary": "Get the list of vehicle special prices",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "format": "int64",
+              "description": "Give which page to be loaded",
+              "required": false
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search vehicle special price",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "is_active",
+                "all"
+              ],
+              "type": "string",
+              "description": "Filter list for vehicle special prices",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The vehicle special price Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort vehicle special price by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_special_prices"
+        },
+        {
+          "summary": "Store vehicle special price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "VehicleSpecialPriceAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleSpecialPriceAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_special_prices"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_special_prices/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit the vehicle special price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_special_prices__id__edit"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_special_prices/{id}",
+      "operations": [
+        {
+          "summary": "Update vehicle special price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "vehicle special price id"
+            },
+            {
+              "name": "VehicleSpecialPriceEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "VehicleSpecialPriceEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_special_prices__id_"
+        },
+        {
+          "summary": "View the vehicle special price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_special_prices__id_"
+        },
+        {
+          "summary": "Delete the specified vehicle special price",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter vehicle special price ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_special_prices__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "VehicleSpecialPriceAdd": {
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "start_date"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "end_date"
+        },
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_type_id"
+        },
+        "discount_percentage": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "discount_percentage"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is_active"
+        }
+      },
+      "id": "VehicleSpecialPriceAdd"
+    },
+    "VehicleSpecialPriceEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Vehicle special price identifier"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "start_date"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "end_date"
+        },
+        "vehicle_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "vehicle_type_id"
+        },
+        "discount_percentage": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "discount_percentage"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is_active"
+        }
+      },
+      "id": "VehicleSpecialPriceEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

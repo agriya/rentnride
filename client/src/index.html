@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-controller="AppController">
+<head>
+    <title ng-bind="pageTitle"></title>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <!-- Google font -->
+    <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>-->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="assets/css/loader.css"/>
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+    <% }); %>
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+    <!-- reCaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+    
+
+    <meta property="og:title" content=""/>
+    <meta property="og:type" content=""/>
+    <meta property="og:app_id" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="fb:app_id" content=""/>
+    <meta property="fb:admins" content=""/>
+
+    <!-- Twiiter Open Graph start-->
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    <meta name="twitter:card" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image:src" content="">
+    <!-- Twiiter Open Graph end-->
+
+    <!-- Twitter tags start -->
+    <meta name="twitter:app:id:iphone" content="">
+    <meta name="twitter:app:id:ipad" content="">
+    <meta name="twitter:app:url:iphone" content="">
+    <meta name="twitter:app:url:ipad" content="">
+    <meta name="twitter:app:id:googleplay" content="">
+    <meta name="twitter:app:url:googleplay" content="">
+    <!-- Twitter tags end -->
+
+    <!-- Facebook Applinks tags  start -->
+    <meta property="al:ios:app_store_id" content=""/>
+    <meta property="al:ios:url" content=""/>
+    <meta property="al:ipad:app_store_id" content=""/>
+    <meta property="al:ipad:url" content=""/>
+    <meta property="al:android:package" content=""/>
+    <meta property="al:android:url" content=""/>
+    <meta property="al:windows_phone:app_id" content=""/>
+    <meta property="al:windows_phone:url" content=""/>
+    <!-- Facebook Applinks tags  end -->
+
+    <link href="assets/favicon.ico" type="image/x-icon" rel="icon"/>
+    <link href="assets/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/apple-touch-icon-114x114.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- Script load before show loader start -->
+    <div id="preloader" class="loadAng">
+        <div id="status">&nbsp;</div>
+    </div>
+    <!-- Script load before show loader end -->
+    
+    <!-- Header Start -->
+    <div header class="header"></div>
+    <!-- Header End -->
+    
+    <!-- Flash message start-->
+    <div growl limit-messages="1"></div>
+    <!-- Flash message End-->
+    
+    <!-- Container start -->
+    <div class="main-section">
+    
+        <!-- Top Banner start-->
+        <!--<div banner position="topBanner" class="topbanner"></div>-->
+        <!-- Top Banner ENd-->
+    
+        <div ui-view="main" autoscroll="false"></div>
+        <!-- Right scroll top start -->
+        <!-- <div id="scrollUpContent">
+            <a ng-click="scrollMoveTop()" class="scrolltop">
+                <i class="fa fa-angle-up"></i>
+            </a>
+        </div>-->
+        <!-- Right scroll top end -->
+    
+    </div>
+    <!-- Container end -->
+    
+    <!--footer section start-->
+    <footer class="section" footer></footer>
+    <!--footer section end-->
+    
+    <div id="fb-root"></div>
+    <!-- analytics Start -->
+    <div google-analytics ng-if="$root.settings['analytics.is_enabled_google_analytics'] === '1'"></div>
+    <div facebook-pixel ng-if="$root.settings['analytics.is_enabled_facebook_pixel'] === '1'"></div>
+    <!-- analytics End -->
+</body>
+</html>

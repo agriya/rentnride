@@ -1,0 +1,6 @@
+<div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' ng-repeat='idx in maxRatings track by $index'>
+
+    <i class="fa fa-2x" ng-class="((hoverValue + _rating) <= $index) ? 'fa-star-o' : 'fa-star'" ng-Click='isolatedClick($index + 1)'
+       ng-mouseenter='isolatedMouseHover($index + 1)'
+       ng-mouseleave='isolatedMouseLeave($index + 1)' ></i>
+</div>

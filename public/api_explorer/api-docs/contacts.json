@@ -1,0 +1,77 @@
+{
+  "apis": [
+    {
+      "path": "/contacts",
+      "operations": [
+        {
+          "summary": "Add Contact Details",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "ContactAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "ContactAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_contacts"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "ContactAdd": {
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "required": true,
+          "description": "Contact First Name"
+        },
+        "last_name": {
+          "type": "string",
+          "required": true,
+          "description": "Contact Last Name"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Contact Email"
+        },
+        "subject": {
+          "type": "string",
+          "required": true,
+          "description": "Contact Subject"
+        },
+        "message": {
+          "type": "string",
+          "required": true,
+          "description": "Contact Message"
+        },
+        "telephone": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Contact Number"
+        }
+      },
+      "id": "ContactAdd"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

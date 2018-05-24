@@ -1,0 +1,290 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_extra_accessories",
+      "operations": [
+        {
+          "summary": "Fetch List of extra accessories",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Extra Accessory",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of extra accessories ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Extra Accessory Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Extra Accessory by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_extra_accessories"
+        },
+        {
+          "summary": "Store Extra Accessory",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "ExtraAccessoryAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "ExtraAccessoryAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_extra_accessories"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_extra_accessories/{id}",
+      "operations": [
+        {
+          "summary": "Update ExtraAccessory",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The ExtraAccessory Identifier"
+            },
+            {
+              "name": "ExtraAccessoryEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "ExtraAccessoryEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_extra_accessories__id_"
+        },
+        {
+          "summary": "Show Extra Accessory",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Extra Accessory Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_extra_accessories__id_"
+        },
+        {
+          "summary": "Delete ExtraAccessory",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The ExtraAccessory Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_extra_accessories__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_extra_accessories/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Extra Accessory",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Extra Accessory Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_extra_accessories__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "ExtraAccessoryAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "ExtraAccessory Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        }
+      },
+      "id": "ExtraAccessoryAdd"
+    },
+    "ExtraAccessoryEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The ExtraAccessory identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "ExtraAccessory Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "ExtraAccessoryEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

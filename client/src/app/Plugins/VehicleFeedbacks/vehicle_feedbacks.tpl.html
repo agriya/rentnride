@@ -1,0 +1,42 @@
+<div class="feedback-block">
+    <uib-carousel active="active" interval="interval" no-wrap="noWrapSlides">
+        <uib-slide ng-repeat="feedback in feedbacks track by $index" index="$index">
+            <div class="container">
+            	<div class="col-md-8 col-md-offset-2">
+                    <p><img class="img-responsive center-block" src="assets\img\quote.png" alt="quote"></p>
+                    <p class="feedback">{{feedback.feedback}}</p>
+                    <h3>{{feedback.user.username}}</h3>
+                    <span>{{feedback.feedbackable.name}}</span>
+				</div>
+            </div>
+        </uib-slide>
+    </uib-carousel>
+</div>
+<!--<uib-carousel active="active" interval="interval" no-wrap="noWrapSlides">
+    <uib-slide ng-repeat="feedback in feedbacks track by $index" index="$index">
+        <div class="carousel-inner">
+            <div class="item active">
+        <div class="section bg-warning">
+            <div class="container">
+                <div class="row">
+                    <div class="well-lg"></div>
+                    <div class="well-sm"></div>
+                    <div class="col-md-10 col-md-offset-1">
+                        <p class="text-center fa-inverse">
+                            <i class="fa fa-quote-left fa-2x"></i>
+                        </p>
+                        <p class="text-center fa-inverse text-16 pro-font-light"> {{feedback.feedback}}</p>
+                        <h3 class="text-center fa-inverse pro-font-bold text-16">
+                            <b>{{feedback.user.username}}</b>
+                        </h3>
+                        <p class="text-center fa-inverse pro-font-light text-12">{{feedback.feedbackable.name}}</p>
+                        <div class="well-lg"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+            </div>
+    </uib-slide>
+</uib-carousel>-->

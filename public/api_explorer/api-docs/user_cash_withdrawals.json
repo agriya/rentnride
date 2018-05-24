@@ -1,0 +1,119 @@
+{
+  "apis": [
+    {
+      "path": "/user_cash_withdrawals",
+      "operations": [
+        {
+          "summary": "Get the list of withdrawal requests",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "pending",
+                "success",
+                "rejected",
+                "all"
+              ],
+              "type": "integer",
+              "description": "filter list of requests ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The field_name to sort",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Requests by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__user_cash_withdrawals"
+        },
+        {
+          "summary": "Store Withdrawal Requests",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "UserCashWithdrawal",
+              "paramType": "body",
+              "required": true,
+              "type": "UserCashWithdrawal",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__user_cash_withdrawals"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "UserCashWithdrawal": {
+      "properties": {
+        "money_transfer_account_id": {
+          "type": "integer",
+          "required": true,
+          "description": "Money Transfer Account Td"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "required": true,
+          "description": "Amount to be withdrawn"
+        }
+      },
+      "id": "UserCashWithdrawal"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

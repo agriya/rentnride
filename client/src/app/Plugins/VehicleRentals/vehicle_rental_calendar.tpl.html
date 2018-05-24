@@ -1,0 +1,45 @@
+<div class="page-head">
+	<div class="container">
+    	<h2 class="text-uppercase">{{ model.title }}</h2>
+        
+    </div>
+</div>
+<div class="calendar-block">
+	<div class="container">
+        <div class="clearfix">
+            <div class="calendar-header text-center">
+            	<h2 class="text-center">{{ model.calendarTitle }}</h2>
+                <div class="pull-left">
+                    <div class="btn-group">
+                        <button class="btn btn-red" mwl-date-modifier date="model.viewDate"  decrement="model.calendarView" ng-click="prev()">
+                            {{'Previous'|translate}}
+                        </button>
+                        <button class="btn btn-default" mwl-date-modifier date="model.viewDate"  set-to-today ng-click="today()">
+                            {{'Today'|translate}}
+                        </button>
+                        <button class="btn btn-red"  mwl-date-modifier  date="model.viewDate" increment="model.calendarView" ng-click="next()">
+                            {{'Next'|translate}}
+                        </button>
+                    </div>
+				</div>
+                <div class="pull-right">
+                	<div class="btn-group">
+                        <label class="btn btn-red" ng-model="model.calendarView" uib-btn-radio="'month'">{{'Month'|translate}}</label>
+                        <label class="btn btn-red" ng-model="model.calendarView" uib-btn-radio="'week'">{{'Week'|translate}}</label>
+                        <label class="btn btn-red" ng-model="model.calendarView" uib-btn-radio="'day'">{{'Day'|translate}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="calendar-body">
+                <mwl-calendar
+                        events="model.events"
+                        view="model.calendarView"
+                        view-title="model.calendarTitle"
+                        view-date="model.viewDate"
+                        on-event-click="model.eventClicked(calendarEvent)"
+                        >
+                </mwl-calendar>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="form-block">
+    <div class="page-head">
+        <div class="container">
+            <div class="pull-left">
+                <h2 class="text-uppercase">{{'Edit Profile' | translate}}</h2>
+                <p>{{'Please enter your personal information and company information' | translate}}</p>
+            </div>
+            <div class="pull-right profile-settings">
+                <dashboard-settings></dashboard-settings>
+            </div>
+        </div>
+    </div>
+	<div class="form-field">
+        <div class="container">
+          	<div class="row">
+                <div class="col-md-3 pro-pic">
+                    <a href="#/user/{{user.username}}" title="{{user.username}}">
+                        <img ng-if="user.user_avatar_source_id != model.ConstSocialLogin.Twitter && user.user_avatar_source_id != model.ConstSocialLogin.Github" ng-src="{{user.attachmentable.thumb.large}}" title="{{user.username}}" alt="{{user.username}}" class="img-responsive">
+                        <img ng-if="user.user_avatar_source_id == model.ConstSocialLogin.Twitter || user.user_avatar_source_id == model.ConstSocialLogin.Github" ng-src="{{user.attachmentable.thumb.large}}" title="{{user.username}}" alt="{{user.username}}" height="{{model.thumb.medium.height}}" width="{{model.thumb.medium.width}}" class="img-responsive">
+                    </a>
+                    <span class="input-file text-center"><a href="#/profile_image"><i class="fa fa-cloud-upload"></i>{{'Change image' | translate }}</a></span>
+                </div>
+                <div class="col-md-9">
+                    <form class="" enctype="multipart/form-data" name="userprofileEdit" ng-submit="model.userProfile(userprofileEdit.$valid)" novalidate>
+                        <div class="clearfix">
+                            <h4>{{'Personal Info' | translate }}</h4>
+                            <div class="row">
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.first_name.$touched) && (userprofileEdit.first_name.$pristine || userprofileEdit.first_name.$invalid) && (userprofileEdit.first_name.$error.required)}">
+                                    <label class="control-label" for="first_name">{{'First Name' | translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="{{'First Name' | translate}}" ng-model="model.user_profile.first_name" ng-required="true"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.first_name.$touched) && (userprofileEdit.first_name.$pristine || userprofileEdit.first_name.$invalid) && (userprofileEdit.first_name.$error.required)" class="error">{{'Required' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.last_name.$touched) && (userprofileEdit.last_name.$pristine || userprofileEdit.last_name.$invalid || userprofileEdit.last_name.$error.pattern)}">
+                                    <label class="control-label" for="last_name">{{'Last Name' | translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="text" class="form-control" name="last_name" id="last_name" ng-pattern="/^[a-zA-Z]*$/" placeholder="{{'Last Name' | translate}}" ng-model="model.user_profile.last_name" ng-required="true"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.last_name.$touched) && (userprofileEdit.last_name.$pristine || userprofileEdit.last_name.$invalid) && (userprofileEdit.last_name.$error.required)" class="error">{{'Required' | translate }}</span>
+                                        <span ng-show="(userprofileEdit.last_name.$error.pattern)" class="error">
+                                            {{'Enter the Last Name without Numbers and Blankspace'|translate}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.about_me.$touched) && (userprofileEdit.about_me.$pristine || userprofileEdit.about_me.$invalid)}">
+                                    <label class="control-label" for="about_me">{{'About me' | translate}}</label>
+                                    <div class="clearfix">
+                                        <textarea class="form-control" id="about_me" name="about_me" placeholder="{{'About me' | translate}}" ng-model="model.user_profile.about_me" required></textarea>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.about_me.$touched) && (userprofileEdit.about_me.$pristine || userprofileEdit.about_me.$invalid) && (userprofileEdit.about_me.$error.required)" class="error">{{'Required' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : userprofileEdit.file.$error.maxSize}">
+                                    <label class="control-label" for="inputFile">{{'Avatar'|translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="file" ngf-select ng-model="file" name="file" accept=".png,.jpg" ngf-max-size="2MB" id="inputFile">
+                                        <span ng-show="userprofileEdit.file.$error.maxSize" class="error">{{'File too large, please upload less than 2MB file'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="clearfix social-info">
+                            <h4>{{'Social Info' | translate }}</h4>
+                            <div class="row">
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.website.$touched) && (userprofileEdit.website.$pristine || userprofileEdit.website.$invalid) && (userprofileEdit.website.$error.url)}">
+                                    <label class="control-label" for="website">{{'Website' | translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="url" class="form-control" name="website" id="website" placeholder="{{'Website' | translate}}" ng-model="model.user_profile.website"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.website.$touched) && (userprofileEdit.website.$pristine || userprofileEdit.website.$invalid) && (userprofileEdit.website.$error.url)" class="error">{{'Enter Valid URL' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.facebook_profile_link.$touched) && (userprofileEdit.facebook_profile_link.$pristine || userprofileEdit.facebook_profile_link.$invalid) && (userprofileEdit.facebook_profile_link.$error.url)}">
+                                    <label class="control-label" for="facebook_profile_link">{{'Facebook profile link' | translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="url" class="form-control" name="facebook_profile_link" id="facebook_profile_link" placeholder="{{'Facebook profile link' | translate}}" ng-model="model.user_profile.facebook_profile_link"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.facebook_profile_link.$touched) && (userprofileEdit.facebook_profile_link.$pristine || userprofileEdit.facebook_profile_link.$invalid) && (userprofileEdit.facebook_profile_link.$error.url)" class="error">{{'Enter Valid URL' | translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.twitter_profile_link.$touched) && (userprofileEdit.twitter_profile_link.$pristine || userprofileEdit.twitter_profile_link.$invalid) && (userprofileEdit.twitter_profile_link.$error.url)}">
+                                    <label class="control-label" for="twitter_profile_link">{{'Twitter profile link' | translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="url" class="form-control" name="twitter_profile_link" id="twitter_profile_link" placeholder="{{'Twitter profile link' | translate}}" ng-model="model.user_profile.twitter_profile_link"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.twitter_profile_link.$touched) && (userprofileEdit.twitter_profile_link.$pristine || userprofileEdit.twitter_profile_link.$invalid) && (userprofileEdit.twitter_profile_link.$error.url)" class="error">{{'Enter Valid URL' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error': (userprofileEdit.$submitted || userprofileEdit.google_plus_profile_link.$touched) && (userprofileEdit.google_plus_profile_link.$pristine || userprofileEdit.google_plus_profile_link.$invalid) && (userprofileEdit.google_plus_profile_link.$error.url)}">
+                                    <label class="control-label" for="google_plus_profile_link">{{'Google Plus profile link' | translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="url" class="form-control" name="google_plus_profile_link" id="google_plus_profile_link" placeholder="{{'Google Plus profile link' | translate}}" ng-model="model.user_profile.google_plus_profile_link"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.google_plus_profile_link.$touched) && (userprofileEdit.google_plus_profile_link.$pristine || userprofileEdit.google_plus_profile_link.$invalid) && (userprofileEdit.google_plus_profile_link.$error.url)" class="error">{{'Enter Valid URL' | translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                 <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.linkedin_profile_link.$touched) && (userprofileEdit.linkedin_profile_link.$pristine || userprofileEdit.linkedin_profile_link.$invalid) && (userprofileEdit.linkedin_profile_link.$error.url)}">
+                                    <label class="control-label" for="linkedin_profile_link">{{'LinkedIn profile link' | translate}}
+                                    </label>
+                                    <div class="clearfix">
+                                        <input type="url" class="form-control" name="linkedin_profile_link" id="linkedin_profile_link" placeholder="{{'LinkedIn profile link' | translate}}" ng-model="model.user_profile.linkedin_profile_link"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.linkedin_profile_link.$touched) && (userprofileEdit.linkedin_profile_link.$pristine || userprofileEdit.linkedin_profile_link.$invalid) && (userprofileEdit.linkedin_profile_link.$error.url)" class="error">{{'Enter Valid URL' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6" ng-class="{ 'has-error' : (userprofileEdit.$submitted || userprofileEdit.youtube_profile_link.$touched) && (userprofileEdit.youtube_profile_link.$pristine || userprofileEdit.youtube_profile_link.$invalid) && (userprofileEdit.youtube_profile_link.$error.url) }">
+                                    <label class="control-label" for="youtube_profile_link">{{'Youtube profile link' | translate}}</label>
+                                    <div class="clearfix">
+                                        <input type="url" class="form-control" name="youtube_profile_link" id="youtube_profile_link" placeholder="{{'Youtube profile link' | translate}}" ng-model="model.user_profile.youtube_profile_link"/>
+                                        <span ng-show="(userprofileEdit.$submitted || userprofileEdit.youtube_profile_link.$touched) && (userprofileEdit.youtube_profile_link.$pristine || userprofileEdit.youtube_profile_link.$invalid) && (userprofileEdit.youtube_profile_link.$error.url)" class="error">{{'Enter Valid URL' | translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix form-footer">
+                            <button class="btn btn-orange" type="submit">{{'Update' | translate }}</button>
+                        </div>
+                    </form>
+                </div>
+        	</div>
+        </div>
+    </div>
+    <vehicle-company></vehicle-company>
+</div>

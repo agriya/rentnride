@@ -1,0 +1,167 @@
+{
+  "apis": [
+    {
+      "path": "/vehicle_disputes",
+      "operations": [
+        {
+          "summary": "Fetch Disputes",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Pages",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "Open",
+                "Under Discussion",
+                "Waiting Administrator Decision",
+                "Closed"
+              ],
+              "type": "string",
+              "description": "filter list of pages ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The page Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort page by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_disputes"
+        }
+      ]
+    },
+    {
+      "path": "/vehicle_disputes/add",
+      "operations": [
+        {
+          "summary": "Resolve Disputes",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "DisputeAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "DisputeAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__vehicle_disputes_add"
+        }
+      ]
+    },
+    {
+      "path": "/vehicle_disputes/{id}",
+      "operations": [
+        {
+          "summary": "View the vehicle rental dispute by vehicle rental id",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "defaultValue": "id"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__vehicle_disputes__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "DisputeAdd": {
+      "properties": {
+        "item_user_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The item user Identifier"
+        },
+        "dispute_type_id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The closed type Identifier"
+        },
+        "reason": {
+          "type": "string",
+          "required": true,
+          "description": "The reason of dispute"
+        }
+      },
+      "id": "DisputeAdd"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

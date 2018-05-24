@@ -1,0 +1,27 @@
+<div class="vehicle-payment payment-last">
+    <div class="container">
+    	<div class="payment-left col-md-12">
+            <div class="clearfix">
+                <vehicle></vehicle>
+            </div>
+            <div class="payment-form">
+                <div class="col-md-12">
+                    <h4>{{'Listing Fee summary'|translate}}</h4>
+                    <ul class="list-group col-md-5">
+                        <li class="list-group-item">
+                            <span class=" pull-right">{{$root.default_currency.symbol}}{{$root.settings['vehicle.listing_fee']}}</span>
+                            {{'Listing Fee'|translate}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <form role="form" class="payment-form clearfix" name="PaymentForm" ng-submit="PaymentSubmit(PaymentForm)" novalidate>
+                <div class="col-sm-12">
+                    <h4>{{'Payment Types'|translate}}</h4>
+                    <div class="alert alert-info">{{'This Payment transacts in'|translate}} {{$root.default_currency.symbol}}{{$root.default_currency.code}}. {{'Your Total Charge is ' | translate}} {{$root.default_currency.symbol}}{{$root.settings['vehicle.listing_fee']}}.</div>
+                    <div ng-include="gatewayTpl"></div>
+                </div>
+            </form>
+     	</div>
+    </div>
+</div>

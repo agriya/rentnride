@@ -1,0 +1,290 @@
+{
+  "apis": [
+    {
+      "path": "/admin/vehicle_fuel_options",
+      "operations": [
+        {
+          "summary": "Fetch List of fuel options",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Fuel Option",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of fuel options ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Fuel Option Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort FuelOption by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_fuel_options"
+        },
+        {
+          "summary": "Store Fuel Option",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "FuelOptionAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "FuelOptionAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_vehicle_fuel_options"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_fuel_options/{id}",
+      "operations": [
+        {
+          "summary": "Update FuelOption",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Fuel Option Identifier"
+            },
+            {
+              "name": "FuelOptionEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "FuelOptionEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_vehicle_fuel_options__id_"
+        },
+        {
+          "summary": "Show Fuel Option",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The FuelOption Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_fuel_options__id_"
+        },
+        {
+          "summary": "Delete FuelOption",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The FuelOption Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_vehicle_fuel_options__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/vehicle_fuel_options/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Fuel Option",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Fuel Option Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_vehicle_fuel_options__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "FuelOptionAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "FuelOption Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        }
+      },
+      "id": "FuelOptionAdd"
+    },
+    "FuelOptionEdit": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "The Fuel Option identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Fuel Option Name"
+        },
+        "short_description": {
+          "type": "string",
+          "required": true,
+          "description": "Short Description"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Description"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "FuelOptionEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

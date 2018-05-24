@@ -1,0 +1,104 @@
+{
+  "apis": [
+    {
+      "path": "/money_transfer_accounts",
+      "operations": [
+        {
+          "summary": "Get the list of money transfer accounts",
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Page number for filtering",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__money_transfer_accounts"
+        },
+        {
+          "summary": "Store money transfer accounts",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "MoneyTranferAccountAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "MoneyTranferAccountAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__money_transfer_accounts"
+        }
+      ]
+    },
+    {
+      "path": "/money_transfer_accounts/{id}",
+      "operations": [
+        {
+          "summary": "Delete the specified money transfer account",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "Enter money transfer account ID"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__money_transfer_accounts__id_"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "MoneyTranferAccountAdd": {
+      "properties": {
+        "account": {
+          "type": "string",
+          "required": true,
+          "description": "Money Transfer account details"
+        }
+      },
+      "id": "MoneyTranferAccountAdd"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

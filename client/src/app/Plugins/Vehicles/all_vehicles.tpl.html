@@ -1,0 +1,273 @@
+<div class="page-head">
+	<div class="container">
+    	<div class="pull-left left-head">
+            <h2 class="text-uppercase">{{'List of vehicles'| translate}}</h2>
+        	<p>{{'We found' | translate}} {{_metadata.total}} {{'results provides our service listed' | translate}}.</p>
+        </div>
+    	<div class="pull-right profile-settings">
+            <label class="control-label">{{'Sort by' | translate}}</label>
+            <div class="dropdown pull-right"><a class="btn dropdown-toggle" data-toggle="dropdown">{{sort_name | translate}} <span class="fa fa-angle-down"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">{{'Day Price' | translate }}</li>
+                    <li><a href="" ng-click="sortVehicles('day','price','desc')">{{'Highest Price' | translate }}</a></li>
+                    <li><a href="" ng-click="sortVehicles('day','price','asc')">{{'Lowest Price' | translate }}</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">{{'Hour Price' | translate }}</li>
+                    <li><a href="" ng-click="sortVehicles('hour','price','desc')">{{'Highest Price' | translate }}</a></li>
+                    <li><a href="" ng-click="sortVehicles('hour','price','asc')">{{'Lowest Price' | translate }}</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">{{'Rating' | translate }}</li>
+                    <li><a href="" ng-click="sortVehicles('feedback','rating','asc')">{{'Lower Rating' | translate }}</a></li>
+                    <li><a href="" ng-click="sortVehicles('feedback','rating','desc')">{{'Higher Rating' | translate }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="vehicle-list">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 filter-menus">
+            	<h4 class="text-uppercase filter-by">{{'Filter By' | translate }}</h4>
+                <div class="car-types">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status.type">
+                            <uib-accordion-heading>
+                                <h4>{{'Car Types' | translate }} <span class="pull-right fa fa-minus" ng-class="{'fa-minus': status.type, 'fa-plus': !status.type}"></span></h4>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="(type,id) in vehicle_type_lists">
+                                <label class="custom-checkbox">
+                                	<input type="checkbox" value="{{id}}" ng-click="filterBasedSearch('type',id)">
+                                    <span></span>{{type}}
+                              	</label>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+                <div ng-if="vehicle_price_length > 0">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status.price">
+                            <uib-accordion-heading>
+                                <h4>{{'Price'|translate}} <span class="pull-right fa fa-minus" ng-class="{'fa-minus': status.price, 'fa-plus': !status.price}"></span></h4>                            </uib-accordion-heading>
+                            <uib-tabset active="indextab" type="pills">
+                                <uib-tab index="0" heading="{{'Hour'|translate}}" select="refreshSlider()">
+                                    <rzslider rz-slider-model="hourPriceRange.min" rz-slider-high="hourPriceRange.max" rz-slider-options="hourPriceRange.options"></rzslider>
+                                </uib-tab>
+                                <uib-tab index="1" heading="{{'Day'|translate}}" select="refreshSlider()" active="true">
+                                    <rzslider rz-slider-model="dayPriceRange.min" rz-slider-high="dayPriceRange.max" rz-slider-options="dayPriceRange.options"></rzslider>
+                                </uib-tab>
+                            </uib-tabset>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+                <div class="preference">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status.preference">
+                            <uib-accordion-heading>
+                                <h4>{{'Preferences'|translate}} <span class="pull-right fa fa-minus" ng-class="{'fa-minus': status.preference, 'fa-plus': !status.preference}"></span></h4>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" ng-model="vehicle.ac" ng-click="filterBasedSearch('ac',vehicle.is_ac)" ng-true-value="1" ng-false-value="0">
+                                    <span></span>{{'Air Conditioning' | translate}}
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                	<input type="checkbox" ng-model="vehicle.non_ac" ng-click="filterBasedSearch('ac',vehicle.is_ac)" ng-true-value="1" ng-false-value="0">
+                                    <span></span>{{'Non - Air Conditioning' | translate}}
+                             	</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                	<input type="checkbox" ng-model="vehicle.manual_transmission" ng-click="filterBasedSearch('manual',vehicle.is_manual_transmission)" ng-true-value="1" ng-false-value="0">
+                                    <span></span>{{'Manual Transmission' | translate}}
+                             	</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                	<input type="checkbox" ng-model="vehicle.auto_transmission" ng-click="filterBasedSearch('automatic',vehicle.auto_transmission)" ng-true-value="1" ng-false-value="0">
+                                    <span></span>{{'Automatic Transmission' | translate}}
+                               	</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                	<input type="checkbox" ng-model="vehicle.airbag" ng-click="filterBasedSearch('manual',vehicle.is_airbag)" ng-true-value="1" ng-false-value="0">
+                                    <span></span>{{'Air Bag' | translate}}
+                              	</label>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+                <div class="fuel-options">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status.fuel">
+                            <uib-accordion-heading>
+                                <h4>{{'Fuel Options'|translate}} <span class="pull-right fa fa-minus" ng-class="{'fa-minus': status.fuel, 'fa-plus': !status.fuel}"></span></h4>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="(name, id) in fuel_lists">
+                                <label class="custom-checkbox">
+                                	<input type="checkbox" ng-click="filterBasedSearch('fuel', id)" value="{{id}}">
+                                    <span></span>{{name}}
+                              	</label>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+                <div class="seat-capacity">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status.seat">
+                            <uib-accordion-heading>
+                                <h4>{{'Seating Capacity'|translate}} <span class="pull-right fa fa-minus" ng-class="{'fa-minus': status.seat, 'fa-plus': !status.seat}"></span></h4>
+                            </uib-accordion-heading>
+                            <rzslider rz-slider-model="seatRange.min" rz-slider-high="seatRange.max" rz-slider-options="seatRange.options"></rzslider>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+            </div>
+            <div class="col-md-9 vehicle-details">
+                <div class="clearfix" ng-repeat="list in searchData">
+                    <div class="col-sm-12 clearfix">
+                        <h4 class="pull-left">
+                            <a href="#/vehicle/{{list.id}}/{{list.slug}}">{{list.vehicle_make.name}}
+                                <span> - {{list.vehicle_model.name}}</span>
+                            </a>
+                            <p class="star-rate" ng-show="$root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1" ng-click="modalOpen('lg',list.id)">
+                                <span ng-repeat = 'rating in maxRatings track by $index'>
+                                    <i class="fa fa-star" ng-class="((rating < list.roundedRating)? 'fa-star':((((list.feedback_rating - rating) > 0) && ((list.feedback_rating - rating) < 1)) ? 'fa-star-half': 'fa-star-o'))"></i>
+                                </span>
+                            </p>
+                            <label class="host">{{list.vehicle_company.name}}</a></label>
+                        </h4>
+                        <p class="location pull-right" ng-click="list.status = ! list.status">{{list.counter_location.data.length}} {{'Location' | translate}}
+                            <span class="fa fa-angle-down pull-right" ng-class="{'fa-angle-up': list.status, 'fa-angle-down': !list.status}"></span>
+                        </p>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="vehicle-img">
+                                    <img class="img-responsive" ng-src="{{list.attachments.thumb.medium}}">
+                                    <p class="offer" ng-if="list.max_discount_percent">
+                                        <strong>{{list.max_discount_percent}}%</strong>
+                                        <span>{{'offer'|translate}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <ul class="list-unstyled clearfix">
+                                    <li class="manual col-lg-6" ng-show="list.is_manual_transmission">
+                                        {{'Manual' | translate }}
+                                    </li>
+                                    <li class="automatic col-lg-6" ng-show="!list.is_manual_transmission">
+                                        {{'Automatic' | translate }}
+                                    </li>
+                                    <li class="air-cond col-lg-6" ng-show="list.is_ac">
+                                        {{'Air Conditioning' | translate }}
+                                    </li>
+                                    <li class="user col-lg-6" ng-show="list.no_of_seats > 0">
+                                        {{list.no_of_seats}} {{'People' | translate}}
+                                    </li>
+                                    <li class="bag col-lg-6" ng-show="list.no_small_bags > 0">
+                                        {{list.no_small_bags}} {{'Small Bags' | translate}}
+                                    </li>
+                                    <li class="luggage col-lg-6" ng-show="list.no_large_bags > 0">
+                                        {{list.no_large_bags}} {{'Large Bags' | translate}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 booknow-block pull-right">
+                        <h4><strong>{{getFormatCurrency(list.per_day_amount)}}</strong> / {{'Day' | translate}}</h4>
+                        <h4><strong>{{getFormatCurrency(list.per_hour_amount)}}</strong> / {{'Hour' | translate}}</h4>
+                        <button ng-show="$root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1 && list.user_id != $root.auth.id" ng-click="list.status = !list.status" class="btn btn-green btn-block">{{'Book Now'|translate}}</button>
+                    </div>
+                    <div class="col-sm-12 rental-location" ng-show="list.status">
+                    	<div class="clearfix">
+                        	<h3 class="pull-left">{{'Select Your Rental Location' | translate }}</h3>
+                            <div class="col-md-6 pull-right diff-loc">
+                                <div class="checkbox">
+                                    <label class="custom-checkbox">
+                                        <input class="hide" type="checkbox" ng-model="is_drop_location" value="">
+                                        <span></span>{{'Return car to a different location' | translate}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <form name="bookingForm" novalidate ng-submit="VehicleBooking(list.id, list.slug, bookingForm.$valid)">
+                            <div class="row">
+                                <div class="col-md-6 scrollbar">
+                                    <h4>{{'Pick-Up Location' | translate}}</h4>
+                                    <div class="form-group" ng-class="{'has-error':(bookingForm.$submitted || bookingForm.pickup_location.$touched) && (bookingForm.pickup_location.$pristine || bookingForm.pickup_location.$invalid) && (bookingForm.pickup_location.$error.required)}">
+                                        <div class="radio" ng-repeat="location in list.pickup_locations">
+                                            <label class="custom-radio">
+                                                <input class="hide" type="radio" name="pickup_location" ng-model="vehicle.pickup_location.id" ng-value="location.id" ng-required="true">
+                                                <span></span>{{location.address}}
+                                            </label>
+                                        </div>
+                                        <span class="error" ng-show="(bookingForm.$submitted || bookingForm.pickup_location.$touched) && (bookingForm.pickup_location.$pristine || bookingForm.pickup_location.$invalid) && (bookingForm.pickup_location.$error.required)">{{'Required'|translate}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 scrollbar" ng-show="is_drop_location">
+                                    <h4>{{'Drop-Up Location' | translate}}</h4>
+                                    <div class="form-group" ng-class="{'has-error':(bookingForm.$submitted || bookingForm.drop_location.$touched) && (bookingForm.drop_location.$pristine || bookingForm.drop_location.$invalid) && (bookingForm.drop_location.$error.required)}">
+                                        <div class="radio" ng-repeat="location in list.drop_locations">
+                                            <label class="custom-radio">
+                                                <input class="hide" type="radio" name="drop_location" ng-model="vehicle.drop_location.id" ng-value="location.id" ng-required="is_drop_location">
+                                                <span></span>{{location.address}}
+                                            </label>
+                                        </div>
+                                        <span class="error" ng-show="(bookingForm.$submitted || bookingForm.drop_location.$touched) && (bookingForm.drop_location.$pristine || bookingForm.drop_location.$invalid) && (bookingForm.drop_location.$error.required)">{{'Required'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row date-selection">
+                                <div class="col-md-5">
+                                    <div class="form-group" ng-class="{ 'has-error' : (bookingForm.$submitted || bookingForm.pickup_date.$touched) && (bookingForm.pickup_date.$pristine || bookingForm.pickup_date.$invalid) && (bookingForm.pickup_date.$error.required) || vehicle.pickup_date < currentDate}">
+                                        <label class="control-label" for="pickupDateTime">{{'Pickup Date and Time' | translate}}</label>
+                                       	<div class="icon-calendar">     
+                                            <input type="text" name="pickup_date" placeholder="{{'Pickup Date' | translate}}" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="vehicle.pickup_date" is-open="list.open_pickup" id="pickupDateTime" ng-required="true" ng-change="dateErr=''" ng-focus="openPickupCalendar($event, 'date', $index)" button-bar="buttonBar"/>	
+                                      	</div>
+                                        <span ng-show="(bookingForm.$submitted || bookingForm.pickup_date.$touched) && (bookingForm.pickup_date.$pristine || bookingForm.pickup_date.$invalid) && (bookingForm.pickup_date.$error.required)" class="error">
+                                            {{'Select Pickup Date' | translate }}
+                                        </span>
+                                        <span ng-show="vehicle.pickup_date < currentDate" class="error">
+                                            {{'Pickup Date should be greater than current date' | translate }}
+                                        </span>
+                                        <span ng-show="dateErr" class="error">{{dateErr}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group" ng-class="{'has-error' : (bookingForm.$submitted || bookingForm.drop_date.$touched) && (bookingForm.drop_date.$pristine || bookingForm.drop_date.$invalid) && (bookingForm.drop_date.$error.required) || (vehicle.drop_date <= vehicle.pickup_date)}">
+                                        <label class="control-label" for="dropDateTime">{{'Dropoff Date and Time' | translate }}</label>
+                                        <div class="icon-calendar">
+                                            <input type="text" name="drop_date" placeholder="{{'Drop Off Date' | translate}}" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="vehicle.drop_date" is-open="list.open_drop" id="dropDateTime" ng-required="true" ng-change="dateErr=''" ng-focus="openDropCalendar($event, 'date', $index)" button-bar="buttonBar"/>
+                                      	</div>
+                                       	<span ng-show="(bookingForm.$submitted || bookingForm.drop_date.$touched) && (bookingForm.drop_date.$pristine || bookingForm.drop_date.$invalid) && (bookingForm.drop_date.$error.required)" class="error">
+                                        	{{'Select Drop Off Date' | translate }}
+                                        </span>
+                                        <span ng-show="(vehicle.drop_date <= vehicle.pickup_date)" class="error">
+                                            {{'End Date Should be Greater than Start date' | translate }}
+                                        </span>
+                                        <span ng-show="dateErr" class="error">{{dateErr}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button ng-show="$root.settings['site.enabled_plugins'].indexOf('VehicleRentals') > -1 && list.user_id != $root.auth.id" type="submit" class="btn btn-green btn-block">{{'Book Now'|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="paging clearfix text-right" ng-show="_metadata.total > 0">
+                    <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="_metadata.total" num-pages="_metadata.total_pages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="_metadata.per_page" ng-change="paginate()"></uib-pagination>
+                </div>
+                <div class="col-md-12" ng-show="_metadata.total === 0">
+                    <p class="alert alert-danger">{{'No Record Found' | translate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

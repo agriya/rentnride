@@ -1,0 +1,52 @@
+{
+  "apis": [
+    {
+      "path": "/wallets",
+      "operations": [
+        {
+          "summary": "Add amount to user wallet",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "WalletAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "WalletAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__wallets"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WalletAdd": {
+      "properties": {
+        "amount": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "Amount to be added to wallet"
+        }
+      },
+      "id": "WalletAdd"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

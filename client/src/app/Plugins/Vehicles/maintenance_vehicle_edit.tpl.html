@@ -1,0 +1,37 @@
+<!--- Vehicle Maintenance Add Page--->
+<div class="page-head">
+	<div class="container">
+    	<h2 class="text-uppercase">{{'Edit Vehicle Maintenance Dates'|translate}}</h2>
+    </div>
+</div>
+<div class="vehicle-maintenance">
+    <div class="container">
+        <div id="create-view">
+            <form class="clearfix" name="manitenanceVehicleEdit" ng-submit="model.editManitenanceDates(manitenanceVehicleEdit.$valid)" novalidate>
+                <div class="row">
+                    <div class="form-group col-sm-6" ng-class="{ 'has-error' : (manitenanceVehicleEdit.$submitted || manitenanceVehicleEdit.start_date.$touched) && (manitenanceVehicleEdit.start_date.$pristine || manitenanceVehicleEdit.start_date.$invalid) && (manitenanceVehicleEdit.start_date.$error.required)}">
+                        <label class="control-label" for="start_date">{{'Start Date' | translate}}</label>
+                        <div class="icon-calendar">
+                            <input type="text" name="start_date" id="start_date" placeholder="{{'Start Date' | translate}}" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="model.start_date" is-open="open_start.date" ng-required="true" ng-click="model.openStartCalendar($event, 'date')" button-bar="buttonBar"/>
+                        </div>
+                        <span ng-show="(manitenanceVehicleEdit.$submitted || manitenanceVehicleEdit.start_date.$touched) && (manitenanceVehicleEdit.start_date.$pristine || manitenanceVehicleEdit.start_date.$invalid) && (manitenanceVehicleEdit.start_date.$error.required)" class="error">
+                            {{'Select From Date' | translate }}
+                        </span>
+                    </div>
+                    <div class="form-group col-sm-6" ng-class="{ 'has-error' : (manitenanceVehicleEdit.$submitted || manitenanceVehicleEdit.end_date.$touched) && (manitenanceVehicleEdit.end_date.$pristine || manitenanceVehicleEdit.end_date.$invalid)}">
+                        <label class="control-label" for="end_date">{{'End Date' | translate}}</label>
+                        <div class="icon-calendar">
+                            <input type="text" id="end_date" name="end_date" placeholder="{{'End Date' | translate}}" class="form-control"  datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="model.end_date" is-open="open_end.date" ng-required="true" close-text="Close" ng-click="model.openEndCalendar($event, 'date')" button-bar="buttonBar"/>
+                        </div>
+                        <span ng-show="(manitenanceVehicleEdit.$submitted || manitenanceVehicleEdit.end_date.$touched) && (manitenanceVehicleEdit.end_date.$pristine || manitenanceVehicleEdit.end_date.$invalid) && (manitenanceVehicleEdit.end_date.$error.required)" class="error">
+                            {{'Select End Date' | translate }}
+                        </span>
+                    </div>
+                    <div class="form-group col-sm-2 pull-right">
+                        <button class="btn btn-orange btn-block" type="submit">{{'Save' | translate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

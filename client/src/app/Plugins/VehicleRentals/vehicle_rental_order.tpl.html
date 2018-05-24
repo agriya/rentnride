@@ -1,0 +1,23 @@
+<div class="vehicle-payment payment-last">
+    <div class="container">
+        <div class="col-md-8 payment-left">
+            <vehicle></vehicle>
+            <coupon></coupon>
+            <form role="form" class="payment-form col-md-12" name="PaymentForm" ng-submit="PaymentSubmit(PaymentForm)" novalidate>
+                <h4>{{'Payment Types'|translate}}</h4>
+                <div class="row">
+                    <div class="hide">
+                        <input type="text" ng-model="VehicleRentalDetails.total_amount" name="amount">
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="alert alert-info">{{'This Payment transacts in'|translate}} {{$root.default_currency.symbol}}{{$root.default_currency.code}}. {{'Your Total Charge is ' | translate}} {{$root.default_currency.symbol}}{{VehicleRentalDetails.total_amount}}.</div>
+                        <div ng-include="gatewayTpl"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="payment-right">
+            <trip-detail></trip-detail>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="dropdown">
+    <a href="javascript:void(0);" title="{{'Edit' | translate}}" class="dropdown-toggle btn btn-large" data-toggle="dropdown">
+    	{{'Settings' | translate}}
+        <span class="fa fa-angle-down"></span>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+        	<a href="#/wallets" title="{{'Add to Wallet' | translate}}">{{'Add to Wallet' | translate}}</a>
+        </li>
+        <li>
+            <a href="#/users/change_password" title="{{'Change Password' | translate}}">{{'Change Password' | translate}}</a>
+        </li>
+        <li>
+            <a href="#/transactions" title="{{'Transactions' | translate}}">{{'Transactions' | translate}}</a>
+        </li>
+        <li ng-if="$root.settings['site.enabled_plugins'].indexOf('Withdrawals') > -1">
+            <a href="#/money_transfer_account" title="{{'Money Transfer Account' | translate}}">{{'Money Transfer Account' | translate}}</a>
+        </li>
+        <li ng-if="$root.settings['site.enabled_plugins'].indexOf('SocialLogins') > -1">
+            <a href="#/social" title="{{'Social' | translate}}">{{'Social' | translate}}</a>
+        </li>
+        <li ng-if="$root.settings['site.enabled_plugins'].indexOf('Withdrawals') > -1">
+            <a href="#/user_cash_withdrawals" title="{{'Withdraw Fund Requests' | translate}}">{{'Withdraw Fund Requests' | translate}}</a>
+        </li>
+        <li ng-if="$root.settings['site.enabled_plugins'].indexOf('Vehicles') > -1">
+            <a href="#/vehicle/company" title="{{'Company' | translate}}">{{'Company' | translate}}</a>
+        </li>
+    </ul>
+</div>

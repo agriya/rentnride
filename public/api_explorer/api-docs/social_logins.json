@@ -1,0 +1,478 @@
+{
+  "apis": [
+    {
+      "path": "/auth/facebook",
+      "operations": [
+        {
+          "summary": "Facebook Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Facebook",
+              "paramType": "body",
+              "required": true,
+              "type": "Facebook",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__auth_facebook"
+        }
+      ]
+    },
+    {
+      "path": "/auth/google",
+      "operations": [
+        {
+          "summary": "Google Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Google",
+              "paramType": "body",
+              "required": true,
+              "type": "Google",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__auth_google"
+        }
+      ]
+    },
+    {
+      "path": "/auth/linkedin",
+      "operations": [
+        {
+          "summary": "Linkedin Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Linkedin",
+              "paramType": "body",
+              "required": true,
+              "type": "Linkedin",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__auth_linkedin"
+        }
+      ]
+    },
+    {
+      "path": "/auth/twitter",
+      "operations": [
+        {
+          "summary": "Twitter Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Twitter",
+              "paramType": "body",
+              "required": true,
+              "type": "Twitter",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__auth_twitter"
+        }
+      ]
+    },
+    {
+      "path": "/auth/github",
+      "operations": [
+        {
+          "summary": "Github Users",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Github",
+              "paramType": "body",
+              "required": true,
+              "type": "Github",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__auth_github"
+        }
+      ]
+    },
+    {
+      "path": "/provider_users",
+      "operations": [
+        {
+          "summary": "Fetch provider usres list",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "filter",
+              "paramType": "query",
+              "type": "string",
+              "description": "filter list of provider user",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The State Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort States by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__provider_users"
+        }
+      ]
+    },
+    {
+      "path": "/auth/unlink",
+      "operations": [
+        {
+          "summary": "Unlink Provider user",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Unlink",
+              "paramType": "body",
+              "required": true,
+              "type": "Unlink",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__auth_unlink"
+        }
+      ]
+    },
+    {
+      "path": "/update_profile",
+      "operations": [
+        {
+          "summary": "Update profile image",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "UpdateProfile",
+              "paramType": "body",
+              "required": true,
+              "type": "UpdateProfile",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__update_profile"
+        }
+      ]
+    },
+    {
+      "path": "/social_login",
+      "operations": [
+        {
+          "summary": "Social login register email",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "SocialLogin",
+              "paramType": "body",
+              "required": true,
+              "type": "SocialLogin",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__social_login"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Facebook": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "required": true,
+          "description": "Facebook app id"
+        },
+        "secret_key": {
+          "type": "string",
+          "required": true,
+          "description": "Facebook secret id"
+        },
+        "code": {
+          "type": "string",
+          "required": true,
+          "description": "Authenticated code"
+        },
+        "redirectUri": {
+          "type": "string",
+          "required": true,
+          "description": "Redirect url"
+        }
+      },
+      "id": "Facebook"
+    },
+    "Google": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "required": true,
+          "description": "Google app id"
+        },
+        "secret_key": {
+          "type": "string",
+          "required": true,
+          "description": "Google secret id"
+        },
+        "code": {
+          "type": "string",
+          "required": true,
+          "description": "Authenticated code"
+        },
+        "redirectUri": {
+          "type": "string",
+          "required": true,
+          "description": "Redirect url"
+        }
+      },
+      "id": "Google"
+    },
+    "Linkedin": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "required": true,
+          "description": "Linkedin app id"
+        },
+        "secret_key": {
+          "type": "string",
+          "required": true,
+          "description": "Linkedin secret id"
+        },
+        "code": {
+          "type": "string",
+          "required": true,
+          "description": "Authenticated code"
+        },
+        "redirectUri": {
+          "type": "string",
+          "required": true,
+          "description": "Redirect url"
+        }
+      },
+      "id": "Linkedin"
+    },
+    "Twitter": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "required": true,
+          "description": "Twitter app id"
+        },
+        "secret_key": {
+          "type": "string",
+          "required": true,
+          "description": "Twitter secret id"
+        },
+        "code": {
+          "type": "string",
+          "required": true,
+          "description": "Authenticated code"
+        },
+        "redirectUri": {
+          "type": "string",
+          "required": true,
+          "description": "Redirect url"
+        }
+      },
+      "id": "Twitter"
+    },
+    "Github": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "required": true,
+          "description": "Github app id"
+        },
+        "secret_key": {
+          "type": "string",
+          "required": true,
+          "description": "Github secret id"
+        },
+        "code": {
+          "type": "string",
+          "required": true,
+          "description": "Authenticated code"
+        },
+        "redirectUri": {
+          "type": "string",
+          "required": true,
+          "description": "Redirect url"
+        }
+      },
+      "id": "Github"
+    },
+    "Unlink": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "required": true,
+          "description": "Enter Provider name"
+        }
+      },
+      "id": "Unlink"
+    },
+    "UpdateProfile": {
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "required": true,
+          "description": "Enter Source identifies"
+        }
+      },
+      "id": "UpdateProfile"
+    },
+    "SocialLogin": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Email"
+        },
+        "thrid_party_profile": {
+          "type": "string",
+          "required": true,
+          "description": "third party profile"
+        }
+      },
+      "id": "SocialLogin"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

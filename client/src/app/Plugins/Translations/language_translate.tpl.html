@@ -1,0 +1,5 @@
+<div ng-if="visible" class="lang-select">
+<select class="form-control translate-input" ng-model="currentLocaleDisplayName" ng-options="localesDisplayName for localesDisplayName in localesDisplayNames" ng-change="changeLanguage(currentLocaleDisplayName)">
+</select>
+</div>
+

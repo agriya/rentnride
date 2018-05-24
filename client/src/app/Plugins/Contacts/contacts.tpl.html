@@ -1,0 +1,77 @@
+<!--- Contact Form--->
+<div class="page-head">
+	<div class="container">
+    	<h2 class="text-uppercase pull-left">{{'Contact Us' | translate}}</h2>
+    </div>
+</div>
+<div class="contactus">
+	<div class="container">
+    	<form role="form" class="clearfix" name="contactFormAdd" ng-submit="model.contactFormSubmit(contactFormAdd.$valid);" novalidate>
+        	<div class="row">
+            	<div class="form-group col-sm-4" ng-class="{ 'has-error' : (contactFormAdd.$submitted || contactFormAdd.firstname.$touched) && (contactFormAdd.firstname.$pristine || contactFormAdd.firstname.$invalid)}">
+                    <label class="control-label" for="firstname">{{'First Name' | translate}}</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="{{'First Name' | translate}}" ng-model='model.contactForm.first_name' ng-required="true" ng-minlength="2">
+                    <div ng-show="(contactFormAdd.$submitted || contactFormAdd.firstname.$touched) && (contactFormAdd.firstname.$pristine || contactFormAdd.firstname.$invalid)">
+                        <span class="error" ng-show="(contactFormAdd.firstname.$error.required)">{{'You must enter your first name' | translate}}</span>
+                        <span class="error" ng-show="(contactFormAdd.firstname.$error.minlength)">{{'Minimum length is 2' | translate}}</span>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4" ng-class="{ 'has-error' : (contactFormAdd.$submitted || contactFormAdd.lastname.$touched) && (contactFormAdd.lastname.$pristine || contactFormAdd.lastname.$invalid)}">
+                    <label class="control-label" for="lastname">{{'Last Name' | translate}}</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="{{'Last Name' | translate}}" ng-model='model.contactForm.last_name' ng-required="true" ng-minlength="2">
+                    <div ng-show="(contactFormAdd.$submitted || contactFormAdd.lastname.$touched) && (contactFormAdd.lastname.$pristine || contactFormAdd.lastname.$invalid)">
+                        <span class="error" ng-show="(contactFormAdd.lastname.$error.required)">{{'You must enter your last name' | translate}}</span>
+                        <span class="error" ng-show="(contactFormAdd.lastname.$error.minlength)">{{'Minimum length is 2' | translate}}.</span>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4" ng-class="{ 'has-error' : ((contactFormAdd.$submitted || contactFormAdd.email.$touched) && (contactFormAdd.email.$pristine || contactFormAdd.email.$invalid || contactFormAdd.email.$error.email || contactFormAdd.email.$error.pattern)) || model.emailErr}">
+                    <label class="control-label" for="email">{{'Email' | translate}}</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="{{'Email' | translate}}" ng-model='model.contactForm.email' ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-required="true" ng-change="model.emailErr = ''">
+                    <div ng-show="((contactFormAdd.$submitted || contactFormAdd.email.$touched) && (contactFormAdd.email.$pristine || contactFormAdd.email.$invalid)) || model.emailErr ">
+                        <span class="error" ng-show="(contactFormAdd.email.$error.required)">{{'You must enter your Email' | translate}}.</span>
+                        <span class="error" ng-show="(contactFormAdd.email.$error.email || contactFormAdd.email.$error.pattern)">{{'Enter Valid Email' | translate}}</span>
+                        <span class="error" ng-show="model.emailErr">{{model.emailErr}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-4" ng-class="{ 'has-error' : (contactFormAdd.$submitted || contactFormAdd.subject.$touched) && (contactFormAdd.subject.$pristine || contactFormAdd.subject.$invalid)}">
+                    <label class="control-label" for="subject">{{'Subject' | translate}}</label>
+                    <input type="text" class="form-control" name="subject" id="subject" ng-model='model.contactForm.subject' placeholder="{{'Subject' | translate}}" ng-required="true" ng-minlength="5">
+                    <div ng-show="(contactFormAdd.$submitted || contactFormAdd.subject.$touched) && (contactFormAdd.subject.$pristine || contactFormAdd.subject.$invalid) ">
+                        <span class="error" ng-show="(contactFormAdd.subject.$error.required)">{{'You must enter your Subject' | translate}}</span>
+                        <span class="error" ng-show="(contactFormAdd.subject.$error.minlength)">{{'Minimum length is 5' | translate}}</span>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4" ng-class="{ 'has-error' : (contactFormAdd.$submitted || contactFormAdd.mobile.$touched) && (contactFormAdd.mobile.$pristine || contactFormAdd.mobile.$invalid)}">
+                    <label class="control-label" for="subject">{{'Mobile' | translate}}</label>
+                    <input type="text" id="mobile" class="form-control" name="mobile" placeholder="{{'Mobile Number' | translate}}" ng-model='model.contactForm.telephone' ng-required="true" ng-minlength="10">
+                    <div ng-show="(contactFormAdd.$submitted || contactFormAdd.mobile.$touched) && (contactFormAdd.mobile.$pristine || contactFormAdd.mobile.$invalid)">
+                        <span class="error" ng-show="(contactFormAdd.mobile.$error.required)">{{'You must enter your Mobile number' | translate}}</span>
+                        <span class="error" ng-show="(contactFormAdd.mobile.$error.number)">{{'Enter valid number' | translate}}</span>
+                        <span class="error" ng-show="(contactFormAdd.mobile.$error.minlength)">{{'Minimum length is 10' | translate}}</span>
+                    </div>
+                </div>
+           	</div>
+			<div class="row">
+                <div class="form-group col-sm-12" ng-class="{ 'has-error' : (contactFormAdd.$submitted || contactFormAdd.message.$touched) && (contactFormAdd.message.$pristine || contactFormAdd.message.$invalid)}">
+                    <label class="control-label" for="subject">{{'Message' | translate}}</label>
+                    <textarea rows="3" id="message" class="form-control" name="message" placeholder="{{'Message' | translate}}" ng-model='model.contactForm.message' ng-required="true" ng-minlength="10"></textarea>
+                    <div ng-show="(contactFormAdd.$submitted || contactFormAdd.message.$touched) && (contactFormAdd.message.$pristine || contactFormAdd.message.$invalid)">
+                        <span class="error" ng-show="(contactFormAdd.message.$error.required)">{{'You must enter your Message' | translate}}</span>
+                        <span class="error" ng-show="(contactFormAdd.message.$error.minlength)">{{'Minimum length is 10' | translate}}</span>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12" ng-class="{ 'has-error' : model.captchaErr}">
+                    <label class="control-label">{{'Captcha' | translate}}</label>
+                    <div class="g-recaptcha" vc-recaptcha key="model.captcha_site_key" on-create="setRecaptchaId(widgetId)" on-success="model.captchaErr=''"></div>
+                    <span class="error" ng-show="model.captchaErr">{{model.captchaErr}}</span>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="sr-only" for="submit2">{{'Submit' | translate}}</label>
+                    <button type="submit" class="btn btn-orange btn-block" id="submit2" value="{{'Submit' | translate}}">{{'Submit' | translate}}</button>
+                </div>
+        	</div>
+        </form>
+    </div>
+</div>

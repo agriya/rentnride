@@ -1,0 +1,261 @@
+{
+  "apis": [
+    {
+      "path": "/admin/countries",
+      "operations": [
+        {
+          "summary": "Fetch List of countries",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "paramType": "query",
+              "type": "integer",
+              "description": "Give which page to be loaded",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search Country",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "active",
+                "inactive"
+              ],
+              "type": "string",
+              "description": "filter list of countries ",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The Country Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort Country by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_countries"
+        },
+        {
+          "summary": "Store Country",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "CountryAdd",
+              "paramType": "body",
+              "required": true,
+              "type": "CountryAdd",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "POST",
+          "nickname": "post__admin_countries"
+        }
+      ]
+    },
+    {
+      "path": "/admin/countries/{id}",
+      "operations": [
+        {
+          "summary": "Update Country",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Country Identifier"
+            },
+            {
+              "name": "CountryEdit",
+              "paramType": "body",
+              "required": true,
+              "type": "CountryEdit",
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "PUT",
+          "nickname": "put__admin_countries__id_"
+        },
+        {
+          "summary": "Delete Country",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Country Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "DELETE",
+          "nickname": "delete__admin_countries__id_"
+        }
+      ]
+    },
+    {
+      "path": "/admin/countries/{id}/edit",
+      "operations": [
+        {
+          "summary": "Edit Country",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "paramType": "path",
+              "type": "integer",
+              "format": "int64",
+              "required": true,
+              "description": "The Country Identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_countries__id__edit"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "CountryAdd": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Country Name"
+        },
+        "iso2": {
+          "type": "string",
+          "required": true,
+          "description": "iso2"
+        },
+        "iso3": {
+          "type": "string",
+          "required": true,
+          "description": "iso3"
+        }
+      },
+      "id": "CountryAdd"
+    },
+    "CountryEdit": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "description": "The Country identifier"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Country Name"
+        },
+        "iso2": {
+          "type": "string",
+          "required": true,
+          "description": "iso2"
+        },
+        "iso3": {
+          "type": "string",
+          "required": true,
+          "description": "iso3"
+        },
+        "is_active": {
+          "format": "int64",
+          "type": "integer",
+          "required": true,
+          "description": "is active"
+        }
+      },
+      "id": "CountryEdit"
+    }
+  },
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

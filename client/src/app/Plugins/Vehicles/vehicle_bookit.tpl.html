@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <a data-dismiss="modal" ng-click="modalClose($event)" class="modalClose"><i class="fa fa-lg fa-times-circle close"></i></a>
+    <h3 class="modal-title">{{vehicle.name}}</h3>
+</div>
+<form name="BookitForm" novalidate ng-submit="Bookit(BookitForm.$valid)">
+<div class="modal-body clearfix">
+    <div class="col-md-12">
+           <div class="row">
+               <div class="form-group col-md-6" ng-class="{ 'has-error' : (BookitForm.$submitted || BookitForm.pickup_location.$touched) && (BookitForm.pickup_location.$pristine || BookitForm.pickup_location.$invalid) && (BookitForm.pickup_location.$error.required)}">
+                   <label class="control-label" for="pickupLocation" >{{'Pick - Up Location' | translate }}</label>
+                   <div class="radio" ng-repeat="location in pickup_locations">
+                       <label class="custom-radio"><input class="hide" type="radio" id="pickupLocation" name="pickup_location" ng-model="vehicle.pickup_location_id" ng-value="location.id" ng-required="true">
+                       	<span></span>{{location.address}}</label>
+                   </div>
+                    <span ng-show="(BookitForm.$submitted || BookitForm.pickup_location.$touched) && (BookitForm.pickup_location.$pristine || BookitForm.pickup_location.$invalid) && (BookitForm.pickup_location.$error.required)" class="error">{{'Required' | translate }}</span>
+               </div>
+               <div class="form-group col-md-6">
+                   <label class="control-label" for="dropLocation" >{{'Drop - Up Location' | translate }}</label>
+                   <div class="radio" ng-repeat="location in drop_locations">
+                       <label class="custom-radio"><input class="hide" type="radio" id="dropLocation" name="drop_location" ng-model="vehicle.drop_location_id" ng-value="location.id">
+                       <span></span>{{location.address}}</label>
+                   </div>
+                    <!--<span ng-show="(BookitForm.$submitted || BookitForm.drop_location.$touched) && (BookitForm.drop_location.$pristine || BookitForm.drop_location.$invalid) && (BookitForm.drop_location.$error.required)" class="help-block">
+                                {{'Required' | translate }}
+                    </span>-->
+               </div>
+           </div>
+            <div class="row">
+               <div class="form-group col-md-6" ng-class="{ 'has-error' : (BookitForm.$submitted || BookitForm.pickup_date.$touched) && (BookitForm.pickup_date.$pristine || BookitForm.pickup_date.$invalid) && (BookitForm.pickup_date.$error.required) || vehicle.start_date < currentDate}">
+                   	<label class="control-label" for="pickupdate" >{{'Pickup Date' | translate }}</label>
+                   	<div class="icon-calendar">
+                       <input type="text" name="pickup_date" placeholder="{{'Pickup Date' | translate}}" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="vehicle.start_date" is-open="open_pickup.date" id="pickupdate" ng-required="true" ng-focus="openPickupCalendar($event, 'date')" button-bar="buttonBar"/>
+					</div>
+                    <span ng-show="(BookitForm.$submitted || BookitForm.pickup_date.$touched) && (BookitForm.pickup_date.$pristine || BookitForm.pickup_date.$invalid) && (BookitForm.pickup_date.$error.required)" class="error">{{'Required' | translate }}</span>
+                   <span ng-show="vehicle.start_date < currentDate" class="error">{{'Pickup Date should be greater than current date' | translate }}</span>
+               </div>
+               <div class="form-group col-md-6" ng-class="{ 'has-error' : (BookitForm.$submitted || BookitForm.drop_date.$touched) && (BookitForm.drop_date.$pristine || BookitForm.drop_date.$invalid) && (BookitForm.drop_date.$error.required) || (vehicle.end_date <= vehicle.start_date)}">
+                  	<label class="control-label" for="dropdate" >{{'Drop Off Date' | translate }}</label>
+                 	<div class="icon-calendar">      
+                       <input type="text" name="drop_date" placeholder="{{'Drop Off Date' | translate}}" class="form-control" datetime-picker="yyyy-MM-dd HH:mm:ss" ng-model="vehicle.end_date" is-open="open_drop.date" id="dropdate" ng-required="true" ng-focus="openDropCalendar($event, 'date')" button-bar="buttonBar"/>
+                    </div>
+                    <span ng-show="(BookitForm.$submitted || BookitForm.drop_date.$touched) && (BookitForm.drop_date.$pristine || BookitForm.drop_date.$invalid) && (BookitForm.drop_date.$error.required)" class="error">{{'Required' | translate }}</span>
+                   <span ng-show="(vehicle.end_date <= vehicle.start_date)" class="error">{{'End Date Should be Greater than Start date' | translate }}</span>
+               </div>
+            </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-green" type="submit">{{'Book It' | translate }}</button>
+    <button class="btn btn-red" type="button" ng-click="modalClose()">{{'Close' | translate }}</button>
+</div>
+</form>

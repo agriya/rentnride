@@ -1,0 +1,10 @@
+{
+	"api_url": "<http://rentnride.demo.agriya.com/public>",
+	"host": "<host name>",
+	"host_username": "<host user name>",
+	"host_password": "<host password>",
+	"upload_path": "</home/spgsql/html/bookorrent>",
+	"db_name": "<db name>",
+	"db_user": "<db user name>",
+	"db_password": "<db password>"
+}

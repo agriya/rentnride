@@ -1,0 +1,47 @@
+DirectoryIndex index.html index.php
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+	
+	RewriteBase /bookorrent/public
+
+    # Apache seems to discard the Authorization header if it is not a
+    # base64 encoded user/pass combo
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+# gzip
+<IfModule mod_deflate.c>
+    	AddOutputFilterByType DEFLATE text/javascript application/x-javascript text/css text/html
+</IfModule>
+
+# browser caching
+<IfModule mod_expires.c>
+	ExpiresByType text/css "access plus 1 month"
+	ExpiresByType text/javascript "access plus 1 month"
+	ExpiresByType image/gif "access plus 1 month"
+	ExpiresByType image/jpeg "access plus 1 month"
+	ExpiresByType image/png "access plus 1 month"
+#	ExpiresByType video/x-flv "access plus 1 month"
+	ExpiresByType application/x-shockwave-flash "access plus 1 month"
+
+	# special MIME type for icons
+	AddType image/vnd.microsoft.icon .ico
+	# now we have icon MIME type, we can use it
+	# my favicon doesn't change much
+	ExpiresByType image/vnd.microsoft.icon "access plus 3 months"
+</IfModule>

@@ -1,0 +1,24 @@
+<div class="container modal-lg">
+  <div class="well-lg"></div>
+  <div class="well-sm"></div>
+  <div class="row">
+    <div class="center-form ">
+      <div class="panel-body ">
+		<a data-dismiss="modal" ng-click="modalClose($event)" class="modalClose" ng-if="currentPageType === 'modal'"><i class="fa fa-lg fa-times-circle close"></i></a>
+        <h3 class="text-center">{{'Please enter your email address. To complete registration process.' | translate}}</h3>
+		<hr>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<form method="post" name="userEmail">
+			    <div class="form-group">
+					<input class="form-control input-lg" type="email" name="email" ng-model="user.email" placeholder="{{'Email' | translate}}" required autofocus>
+			    </div>
+				<button ng-click="loginnow(user)" class="btn btn-lg  btn-block btn-success">{{'Submit' | translate}}</button>
+			</form>
+		</div>
+		<div class="well-sm"></div>
+      </div>
+    </div>
+  </div>
+   <div class="well-lg"></div>
+  <div class="well-sm"></div>
+</div>

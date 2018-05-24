@@ -1,0 +1,9 @@
+{
+	"name": "Analytics", 
+	"class": "fa fa-2x fa-user-md",
+	"description": "By enabling this plugin, we can easily understand about our audience and easily get statistic analysing about the site in google or facebook site. The Analytics plugin has two options: <strong>Google Analytics</strong> and <strong>Facebook Pixel</strong>.",
+	"dependencies": "",
+	"module_id": "789",
+	"module_hash": "bd90e913319ba5c39f83629e7ee430e7",
+	"display_order": "1"
+}

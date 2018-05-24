@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h1><span>Plugins</span></h1>
+        </div>
+    </div>
+</div>
+<div id="create-view" class="plugins-block">
+    <div class="clearfix">
+        <div class="refresh-block mob-dc">
+           {{'To reflect plugin changes, you need to' | translate}} <a class="btn btn-xs btn-primary" ng-click="fullRefresh();">{{'refresh' | translate}}.</a>
+        </div>
+        <div class="row">
+        	<!-- Item group starts -->
+            <div class="col-md-6">
+           		<div class="panel panel-default clearfix">
+                    <div class="col-sm-12" ng-show="item_plugin.main.name">
+                        <div class="clearfix">
+                            <h4 class="pull-left"><i class="{{item_plugin.main.class}}"></i> {{item_plugin.main.name}}</h4>
+                            <div class="pull-right dropdown">
+                                    <span class="label label-success"
+                                       ng-if="checkStatus(item_plugin.main.name, enabled_plugin)"> Enabled </span>
+                                    <span class="label label-danger" 
+                                       ng-if="!checkStatus(item_plugin.main.name, enabled_plugin)"> Disabled </span>
+                                    <a class="dropdown-toggle invisible" data-toggle="dropdown" href="javascript:void(0)">
+                                        <i class="fa fa-cog fa-lg"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-class="{'disabled': checkStatus(item_plugin.main.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, item_plugin.main.name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+                                        <li ng-class="{'disabled': !checkStatus(item_plugin.main.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, item_plugin.main.name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+                                    </ul>
+                                </div>
+                        </div>
+                        <p ng-bind-html="item_plugin.main.description"></p>
+                    </div>
+                    <div ng-repeat="plugin in item_plugin.sub_plugins | orderBy:'display_order'">
+                        <!-- Item's sub plugins -->
+                        <div class="col-sm-12 padding-left-30">
+                            <div class="clearfix">
+                                <h4 class="pull-left"><i class="{{plugin.class}}"></i> {{plugin.name}}</h4>
+                                <div class="pull-right dropdown">
+                                    <span class="label label-success"
+                                       ng-if="checkStatus(plugin.name, enabled_plugin)"> Enabled </span>
+                                    <span class="label label-danger"
+                                       ng-if="!checkStatus(plugin.name, enabled_plugin)"> Disabled </span>
+                                    <a class="dropdown-toggle invisible" data-toggle="dropdown" href="javascript:void(0)">
+                                        <i class="fa fa-cog fa-lg"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+                                        <li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p ng-bind-html="plugin.description"></p>
+                        </div>
+                    </div>
+                    <div ng-repeat="plugin in item_plugin.sub_plugins.VehicleRentals.sub_plugins | orderBy:'display_order'">
+                        <!-- Bookings's sub plugins -->
+                        <div class="col-sm-12 padding-left-30">
+                            <div class="clearfix">
+                                <h4 class="pull-left"><i class="{{plugin.class}}"></i> {{plugin.name}}</h4>
+                                <div class="pull-right dropdown">
+                                    <span class="label label-success"
+                                       ng-if="checkStatus(plugin.name, enabled_plugin)"> Enabled </span>
+                                    <span class="label label-danger"
+                                       ng-if="!checkStatus(plugin.name, enabled_plugin)"> Disabled </span>
+                                    <a ng-class="{'disabled': !checkStatus(item_plugin.main.name, enabled_plugin) || !checkStatus(item_plugin.sub_plugins.VehicleRentals.name, enabled_plugin)}" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                                        <i class="fa fa-cog fa-lg"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+                                        <li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p ng-bind-html="plugin.description"></p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            <div class="col-md-6">
+            	<!-- payment gateway group starts -->
+           		<div class="panel panel-default">
+               		<div ng-repeat="plugin in payment_gateway_plugin.sub_plugins | orderBy:'display_order'">
+                    <div class="col-sm-12" ng-if="$first">
+                        <div class="clearfix navbar-btn">
+                         	<h4><i class="fa fa-2x fa-usd text-danger"></i>Payment Gateway</h4>
+                        </div>
+                    </div>					
+                    <div class="col-sm-12 padding-left-30">
+                        <div class="clearfix">
+                            <h4 class="pull-left"><i class="{{plugin.class}}"></i> {{plugin.name}}</h4>
+                            <div class="pull-right dropdown">
+                                <span class="label label-success"
+                                   ng-if="checkStatus(plugin.name, enabled_plugin)"> Enabled </span>
+                                <span class="label label-danger"
+                                   ng-if="!checkStatus(plugin.name, enabled_plugin)"> Disabled </span>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                                    <i class="fa fa-cog fa-lg"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 1)"><i class="fa fa-plus"></i> Enable</a></li>
+                                    <li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 0)"><i class="fa fa-remove"></i> Disable</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p ng-bind-html="plugin.description"></p>
+                    </div>
+                </div>
+               	<div class="clearfix" ng-show="other_plugin.length > 0"></div>
+                </div>
+              <!-- payment gateway group ends -->
+              
+              <!-- others group starts -->
+              <div class="panel panel-default clearfix">
+                   <div ng-repeat="plugin in other_plugin  | orderBy:'display_order'">
+						<div class="col-sm-12" ng-if="$first">
+                            <div class="clearfix navbar-btn">
+                                <h4><i class="fa fa-2x fa-folder-open"></i>Others</h4>
+                            </div>
+                    	</div>
+                        <div class="col-sm-12 padding-left-30" ng-show="plugin.name != 'CancellationTypes'">
+                            <div class="clearfix">
+                                <h4 class="pull-left"><i class="{{plugin.class}}"></i> {{plugin.name}}</h4>
+                                <div class="pull-right dropdown">
+                                    <span class="label label-success"
+                                       ng-if="checkStatus(plugin.name, enabled_plugin)"> {{'Enabled' | translate}} </span>
+                                    <span class="label label-danger" href="javascript:void(0)"
+                                       ng-if="!checkStatus(plugin.name, enabled_plugin)"> {{'Disabled' | translate}} </span>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                                        <i class="fa fa-cog fa-lg"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-class="{'disabled': checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 1)"><i class="fa fa-plus"></i> {{'Enable' | translate}}</a></li>
+                                        <li ng-class="{'disabled': !checkStatus(plugin.name, enabled_plugin)}"><a href="#" ng-click="updatePluginStatus($event, plugin.name, 0)"><i class="fa fa-remove"></i> {{'Disable' | translate}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p ng-bind-html="plugin.description"></p>
+                        </div>
+                    </div>
+              </div>
+               <div class="well-lg clearfix"></div>
+            <!-- others group ends -->
+            </div>
+        </div>
+    </div>
+</div>

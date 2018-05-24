@@ -1,0 +1,154 @@
+<div class="vehicle-payment clearfix">
+	<div class="container">
+        <div class="col-md-8 payment-left">
+            <form name="updateBookingForm" ng-submit="updateVehicleRental(updateBookingForm.$valid)" novalidate>
+                <div class="clearfix">
+                    <vehicle></vehicle>
+                </div>
+                 <div class="payment-form col-md-12">
+                     <div class="clearfix">
+                        <h4>{{'Traveller Details'|translate}}</h4>
+                        <div class="row">
+                            <div class="form-group col-sm-6" ng-class="{'has-error':(updateBookingForm.$submitted || updateBookingForm.first_name.$touched) && (updateBookingForm.first_name.$pristine || updateBookingForm.first_name.$invalid) && (updateBookingForm.first_name.$error.required)}">
+                                <input type="text" name="first_name" ng-model="booker_detail.first_name" id="first_name" class="form-control" placeholder="{{'First Name'|translate}}" ng-required="true">
+                                <span class="error" ng-show="(updateBookingForm.$submitted || updateBookingForm.first_name.$touched) && (updateBookingForm.first_name.$pristine || updateBookingForm.first_name.$invalid) && (updateBookingForm.first_name.$error.required)">
+                                    {{'Required'|translate}}
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{'has-error':(updateBookingForm.$submitted || updateBookingForm.last_name.$touched) && (updateBookingForm.last_name.$pristine || updateBookingForm.last_name.$invalid) && (updateBookingForm.last_name.$error.required)}">
+                                <input type="text" name="last_name" ng-model="booker_detail.last_name" id="last_name" class="form-control" placeholder="{{'Last Name'|translate}}" ng-required="true">
+                                <span class="error" ng-show="(updateBookingForm.$submitted || updateBookingForm.last_name.$touched) && (updateBookingForm.last_name.$pristine || updateBookingForm.last_name.$invalid) && (updateBookingForm.last_name.$error.required)">
+                                    {{'Required'|translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6" ng-class="{'has-error':(updateBookingForm.$submitted || updateBookingForm.mobile.$touched) && (updateBookingForm.mobile.$pristine || updateBookingForm.mobile.$invalid) && (updateBookingForm.mobile.$error.required || updateBookingForm.mobile.$error.pattern)}">
+                                <input type="text" name="mobile" ng-pattern="/^[0-9]*$/" ng-model="booker_detail.mobile" id="mobile" class="form-control" placeholder="{{'Mobile no'|translate}}" ng-required="true">
+                                <span class="error" ng-show="(updateBookingForm.$submitted || updateBookingForm.mobile.$touched) && (updateBookingForm.mobile.$pristine || updateBookingForm.mobile.$invalid) && (updateBookingForm.mobile.$error.required)">
+                                    {{'Required'|translate}}
+                                </span>
+                                <span class="error" ng-show="(updateBookingForm.mobile.$error.pattern)">
+                                    {{'Enter valid number'|translate}}
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6" ng-class="{'has-error':(updateBookingForm.$submitted || updateBookingForm.email.$touched) && (updateBookingForm.email.$pristine || updateBookingForm.email.$invalid ) && (updateBookingForm.email.$error.required || updateBookingForm.email.$error.email)}">
+                                <input type="email" name="email" ng-model="booker_detail.email" id="email" class="form-control" placeholder="{{'Email'|translate}}" ng-required="true">
+                                <span class="error" ng-show="(updateBookingForm.$submitted || updateBookingForm.email.$touched) && (updateBookingForm.email.$pristine || updateBookingForm.email.$invalid) && (updateBookingForm.email.$error.required)">
+                                    {{'Required'|translate}}
+                                </span>
+                                <span class="error" ng-show="(updateBookingForm.email.$error.email)">
+                                    {{'Enter valid email'|translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="clearfix">
+                        <!--<h4>{{'Billing Address'|translate}}</h4>-->
+                        <div class="form-group" ng-class="{'has-error':(updateBookingForm.$submitted || updateBookingForm.full_address.$touched) && (updateBookingForm.full_address.$pristine || updateBookingForm.full_address.$invalid) && (updateBookingForm.full_address.$error.required)}">
+                            <input type="text" class="form-control" placeholder="{{'Address'|translate}}" name="full_address" g-places-autocomplete ng-model="booker_detail.address" ng-required="true" autocomplete="off">
+                            <span class="error" ng-show="(updateBookingForm.$submitted || updateBookingForm.full_address.$touched) && (updateBookingForm.full_address.$pristine || updateBookingForm.full_address.$invalid) && (updateBookingForm.full_address.$error.required)">
+                                {{'Required'|translate}}
+                            </span>
+                        </div>
+                     </div>
+                     <div class="clearfix">
+                        <div class="options row">
+                            <label class="col-sm-3 control-label" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleExtraAccessories') > -1 && vehicle_extra_sccessories.length > 0">
+                                {{'Extra Accessories' | translate}}: 
+                            </label>
+                            <div class="checkbox col-sm-9" ng-repeat="accessory in vehicle_extra_sccessories" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleExtraAccessories') > -1 && vehicle_extra_sccessories.length > 0">
+                                <label class="custom-checkbox">
+                                    <input class="hide" type="checkbox" ng-checked="vehicle_rental.vehicle_type_extra_accessories.indexOf(accessory.id) > -1" value="{{accessory.id}}" ng-click="getExtraAccessory(accessory.id)">
+                                    <span></span>{{accessory.vehicle_extra_accessory.name}}
+                                </label>
+                                <i class="fa fa-angle-down" ng-click="accessory.status = !accessory.status" ng-class="{'fa-angle-up': accessory.status, 'fa-angle-down': !accessory.status}"></i>
+                                <!--percentage-->
+                                <div class="pull-right rental-amount">
+                                    <p ng-show="accessory.discount_type_id == ConstDiscountTypes.percentage && accessory.duration_type_id == ConstDurationTypes.per_day">
+                                        <strong>{{accessory.rate}}%</strong> / {{'per day' | translate}}
+                                    </p>
+                                    <p ng-show="accessory.discount_type_id == ConstDiscountTypes.percentage && accessory.duration_type_id == ConstDurationTypes.per_rental">
+                                        <strong>{{accessory.rate}}%</strong> / {{'per rental' | translate}}
+                                    </p>
+                                    <!--amount-->
+                                    <p ng-show="accessory.discount_type_id == ConstDiscountTypes.amount && accessory.duration_type_id == ConstDurationTypes.per_day">
+                                        <strong>{{getFormatCurrency(accessory.rate)}}</strong> / {{'per day' | translate}}
+                                    </p>
+                                    <p ng-show="accessory.discount_type_id == ConstDiscountTypes.amount && accessory.duration_type_id == ConstDurationTypes.per_rental">
+                                        <strong>{{getFormatCurrency(accessory.rate)}}</strong> / {{'per rental' | translate}}
+                                    </p>
+                                    </div>
+                                    <p class="clearfix" ng-show="accessory.status">{{accessory.vehicle_extra_accessory.description}}</p>
+                                </div>
+                            </div>
+                        
+                            <div class="options row">
+                                <label class="col-sm-3 control-label" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFuelOptions') > -1 && vehicle_type_fuel_option.length > 0">
+                                    {{'Fuel Options'|translate}}: 
+                                </label>
+                                <div class="checkbox col-sm-9" ng-repeat="option in vehicle_type_fuel_option" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFuelOptions') > -1 && vehicle_type_fuel_option.length > 0">
+                                    <label class="custom-checkbox">
+                                        <input class="hide" type="checkbox" ng-checked="vehicle_rental.vehicle_type_fuel_options.indexOf(option.id) > -1" value="{{option.id}}" ng-click="getfuelOption(option.id)">
+                                        <span></span>{{option.vehicle_fuel_option.name}}
+                                    </label>
+                                    <i class="fa fa-angle-down" ng-click="option.status = !option.status" ng-class="{'fa-angle-up': option.status, 'fa-angle-down': !option.status}"></i>    
+                                    <!--percentage-->
+                                    <div class="pull-right rental-amount">
+                                        <p ng-show="option.discount_type_id == ConstDiscountTypes.percentage && option.duration_type_id == ConstDurationTypes.per_day">
+                                            <strong>{{option.rate}}%</strong> / {{'per day' | translate}}
+                                        </p>
+                                        <p ng-show="option.discount_type_id == ConstDiscountTypes.percentage && option.duration_type_id == ConstDurationTypes.per_rental">
+                                            <strong>{{option.rate}}%</strong> / {{'per rental' | translate}}
+                                        </p>
+                                        <!--amount-->
+                                        <p ng-show="option.discount_type_id == ConstDiscountTypes.amount && option.duration_type_id == ConstDurationTypes.per_day">
+                                            <strong>{{getFormatCurrency(option.rate)}}</strong> / {{'per day' | translate}}
+                                        </p>
+                                        <p ng-show="option.discount_type_id == ConstDiscountTypes.amount && option.duration_type_id == ConstDurationTypes.per_rental">
+                                            <strong>{{getFormatCurrency(option.rate)}}</strong> / {{'per rental' | translate}}
+                                        </p>
+                                    </div>
+                                    <p class="clearfix" ng-show="option.status">{{option.vehicle_fuel_option.description}}</p>
+                                </div>
+                            </div>
+                            <div class="options row">
+                                <label class="col-sm-3 control-label" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleInsurances') > -1 && vehicle_type_insurance.length > 0">
+                                    {{'Insurance'|translate}}: 
+                                </label>
+                                <div class="checkbox col-sm-9" ng-repeat="insurance in vehicle_type_insurance" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleInsurances') > -1 && vehicle_type_insurance.length > 0">
+                                    <label class="custom-checkbox">
+                                        <input class="hide" type="checkbox" ng-checked="vehicle_rental.vehicle_type_insurances.indexOf(insurance.id) > -1" value="{{insurance.id}}" ng-click="getVehicleInsurance(insurance.id)">
+                                        <span></span>{{insurance.vehicle_insurance.name}}
+                                    </label>
+                                    <i class="fa fa-angle-down" ng-click="insurance.status = !insurance.status" ng-class="{'fa-angle-up': insurance.status, 'fa-angle-down': !insurance.status}"></i>
+                                    
+                                    <!--percentage-->
+                                    <div class="pull-right rental-amount">
+                                        <p ng-show="insurance.discount_type_id == ConstDiscountTypes.percentage && insurance.duration_type_id == ConstDurationTypes.per_day">
+                                            <strong>{{insurance.rate}}%</strong> / {{'per day' | translate}}
+                                        </p>
+                                        <p ng-show="insurance.discount_type_id == ConstDiscountTypes.percentage && insurance.duration_type_id == ConstDurationTypes.per_rental">
+                                            <strong>{{insurance.rate}}%</strong> / {{'per rental' | translate}}
+                                        </p>
+                                        <!--amount-->
+                                        <p ng-show="insurance.discount_type_id == ConstDiscountTypes.amount && insurance.duration_type_id == ConstDurationTypes.per_day">
+                                            <strong>{{getFormatCurrency(insurance.rate)}}</strong> / {{'per day' | translate}}
+                                        </p>
+                                        <p ng-show="insurance.discount_type_id == ConstDiscountTypes.amount && insurance.duration_type_id == ConstDurationTypes.per_rental">
+                                            <strong>{{getFormatCurrency(insurance.rate)}}</strong> / {{'per rental' | translate}}
+                                        </p>
+                                    </div>
+                                    <p class="clearfix" ng-show="insurance.status">{{insurance.vehicle_insurance.description}}</p>
+                                </div>
+                            </div>
+                            <button type="submit" class="active btn btn-green pull-right">{{'Update'|translate}}</button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="payment-right">
+            <trip-detail></trip-detail>
+        </div>
+    </div>
+</div>

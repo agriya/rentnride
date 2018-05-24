@@ -1,0 +1,256 @@
+<div class="vehicle-view">
+    <div class="vehicle-banner">
+    	<div class="vehicle-banner-img">
+            <img ng-src="{{vehicle.attachments.thumb.large}}">
+		</div>
+        <div class="container">
+        	<div class="vehicle-head text-center">
+                <h1>{{vehicle.vehicle_make.name}} - {{vehicle.vehicle_model.name}}</h1>
+                <p ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1">
+                    <span class="star-rate" ng-repeat='rating in maxRatings track by $index'><i class="fa fa-star" ng-class="((rating < vehicle.roundedRating)? 'fa-star':((((vehicle.feedback_rating - rating) > 0) && ((vehicle.feedback_rating - rating) < 1)) ? 'fa-star-half': 'fa-star-o'))"></i></span>
+                </p>
+                <label class="host">{{vehicle.vehicle_company.name}}</a></label>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                	<div class="vehicle-img">
+                        <img ng-src="{{vehicle.attachments.thumb.large}}" class="img-responsive center-block">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <label>
+                                <p>{{'Day'|translate}}</p>
+                                <h3>{{getFormatCurrency(vehicle.per_day_amount)}}</h3>
+                            </label>
+                            <label>
+                                <p>{{'Hour'|translate}}</p>
+                                <h3>{{getFormatCurrency(vehicle.per_hour_amount)}}</h3>
+                            </label>
+                        </div>                       
+                        <div class="col-sm-5" ng-show="vehicle.user_id != $root.auth.id">
+                             <button class="btn btn-green btn-block" ng-click="openBookitModal('lg')">{{'Book Now'|translate}}</button>
+                        </div>
+                	</div>
+                    <div class="specification">
+                        <ul class="list-inline">
+                            <li class="manual" ng-show="vehicle.is_manual_transmission">{{'Manual' | translate }}</li>
+                            <li class="automatic" ng-show="!vehicle.is_manual_transmission">{{'Automatic' | translate }}</li>
+                            <li class="air-cond" ng-show="vehicle.is_ac">{{'Air Conditioning' | translate }}</li>
+                            <li class="user" ng-show="vehicle.no_of_seats > 0">{{vehicle.no_of_seats}} {{'People' | translate}}</li>
+                            <li class="bag" ng-show="vehicle.no_small_bags > 0">{{vehicle.no_small_bags}} {{'Small Bags' | translate}}</li>
+                            <li class="luggage" ng-show="vehicle.no_large_bags > 0">{{vehicle.no_large_bags}} {{'Large Bags' | translate}}</li>
+                        </ul>
+					</div>
+                </div>
+            </div>
+            <social-share></social-share>
+        </div>
+    </div>
+    <div class="vehicle-view-tab">
+        <div class="tab-head">
+            <div class="container">
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a data-toggle="tab" data-target="#counterLocation">{{'Counter Location'|translate}}</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" data-target="#specification">{{'Specifications'|translate}}</a>
+                    </li>
+                    <li ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1">
+                        <a data-toggle="tab" data-target="#feedback">{{'Feedbacks'|translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+        	<div class="tab-content">
+            	
+                <!-- Start: Counter Location -->
+                <div id="counterLocation" class="tab-pane active">
+                    <div class="counterLocation">
+                    	<h2 class="text-uppercase">{{'Current Location'|translate}}</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>{{'Pickup Locations'|translate}}</h3>
+                                <ul class="list-unstyled pickup">
+                                    <li ng-repeat="location in pickup_locations">{{location.address}}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h3>{{'Drop Locations'|translate}}</h3>
+                                <ul class="list-unstyled drop">
+                                    <li ng-repeat="location in drop_locations">{{location.address}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+             	</div>
+                <!-- End: Counter Location -->
+                
+                <!-- Start: specification -->
+                <div id="specification" class="tab-pane specification-tab">
+                	<!-- Vehicle Extra Accessory -->
+                    <div class="accessory">
+                   		<h2 ng-show="($root.settings['site.enabled_plugins'].indexOf('VehicleExtraAccessories') > -1) && vehicle.vehicle_type && vehicle_extra_accessories.length > 0">
+                        	{{'Insurance'|translate}}
+                      	</h2>
+                        <div class="accessory-field" ng-repeat="data in vehicle_extra_accessories" ng-show="vehicle.vehicle_type && vehicle_extra_accessories.length > 0">
+                            <h3>{{data.vehicle_extra_accessory.name}}</h3>
+                            <p>{{data.vehicle_extra_accessory.description}}</p>
+                            <ul class="list-unstyled">
+                            	<li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{data.rate}}% / {{'per day' | translate}}
+                               	</li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{data.rate}}% / {{'per rental' | translate}}
+                               	</li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{getFormatCurrency(data.rate)}} / {{'per day' | translate}}
+                               	</li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{getFormatCurrency(data.rate)}} / {{'per rental' | translate}}
+                               	</li>
+                            </ul>
+                        </div>
+                  	</div>
+                    
+                    <!-- vehicle Fuel Option -->
+                    <div class="fuel-ption">
+                    	<h2 ng-show="($root.settings['site.enabled_plugins'].indexOf('VehicleFuelOptions') > -1) && vehicle.vehicle_type && vehicle_fuel_option.length > 0">
+                        	{{'Fuel Options'|translate}}
+                        </h2>
+                        <div class="fuel-field" ng-repeat="data in vehicle_fuel_option" ng-show="vehicle.vehicle_type && vehicle_fuel_option.length > 0">
+                        	<h3>{{data.vehicle_fuel_option.name}}</h3>
+                            <p>{{data.vehicle_fuel_option.description}}</p>
+                            <ul class="list-unstyled">
+                            	<li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{data.rate}}% / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{data.rate}}% / {{'per rental' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{getFormatCurrency(data.rate)}} / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{getFormatCurrency(data.rate)}} / {{'per rental' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- vehicle Insurance -->
+                    <div class="insurance">
+						<h2 ng-show="($root.settings['site.enabled_plugins'].indexOf('VehicleInsurances') > -1) && vehicle.vehicle_type && vehicle_insurance.length > 0">
+                        	{{'Insurances'|translate}}
+                        </h2>
+                        <div class="insurance-field" ng-repeat="data in vehicle_insurance" ng-show="vehicle.vehicle_type && vehicle_insurance.length > 0">
+                        	<h3>{{data.vehicle_insurance.name}}</h3>
+                            <p>{{data.vehicle_insurance.description}}</p>
+                            <ul class="list-unstyled">
+                            	<li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{data.rate}}% / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{data.rate}}% / {{'per rental' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{getFormatCurrency(data.rate)}} / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{getFormatCurrency(data.rate)}} / {{'per rental' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- vehicle Tax -->
+                    <div class="tax">
+						<h2 ng-show="($root.settings['site.enabled_plugins'].indexOf('VehicleTaxes') > -1) && vehicle.vehicle_type && vehicle_taxes.length > 0">
+                        	{{'Taxes'|translate}}
+                        </h2>
+                        <div class="tax-field" ng-repeat="data in vehicle_taxes" ng-show="vehicle.vehicle_type && vehicle_taxes.length > 0">
+                        	<h3>{{data.vehicle_tax.name}}</h3>
+                            <p>{{data.vehicle_tax.description}}</p>
+                            <ul class="list-unstyled">
+                            	<li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{data.rate}}% / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{data.rate}}% / {{'per rental' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{getFormatCurrency(data.rate)}} / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{getFormatCurrency(data.rate)}} / {{'per rental' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- vehicle Surcharge -->
+                    <div class="Surcharge">
+						<h2 ng-show="($root.settings['site.enabled_plugins'].indexOf('VehicleSurcharges') > -1) && vehicle.vehicle_type && vehicle_surcharges.length > 0">
+                        	{{'Taxes'|translate}}
+                        </h2>
+                        <div class="Surcharge-field" ng-repeat="data in vehicle_surcharges" ng-show="vehicle.vehicle_type && vehicle_surcharges.length > 0">
+                        	<h3>{{data.vehicle_surcharge.name}}</h3>
+                            <p>{{data.vehicle_surcharge.description}}</p>
+                            <ul class="list-unstyled">
+                            	<li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{data.rate}}% / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.percentage && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{data.rate}}% / {{'per rental' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_day">
+                                	{{getFormatCurrency(data.rate)}} / {{'per day' | translate}}
+                                </li>
+                                <li ng-show="data.discount_type_id == ConstDiscountTypes.amount && data.duration_type_id == ConstDurationTypes.per_rental">
+                                	{{getFormatCurrency(data.rate)}} / {{'per rental' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End: specification -->
+                        
+                <!-- Start: Feedback -->
+                <div id="feedback" class="tab-pane user-feedback" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1">
+                	<h2>{{'Feedbacks' | translate}}</h2>
+                    <div class="media" ng-repeat="vehicleFeedback in vehicleFeedbacks" ng-if="vehicle_feedback_metadata.total > 0">
+                    	<div class="media-left">
+                        	<a href="#/user/{{vehicleFeedback.user.username}}" class="pull-left" data-dismiss="modal">
+                            	<img class="media-object" ng-src="{{vehicleFeedback.user.attachmentable.thumb.smallmedium}}" title="{{vehicleFeedback.user.username}}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                        	<div class="col-md-9">
+                            	<h3>
+                                	<a href="#/user/{{vehicleFeedback.user.username}}">{{vehicleFeedback.user.username}}</a>
+                                	<span am-time-ago="vehicleFeedback.created_at.date"></span>
+                                </h3>
+                                <p>{{vehicleFeedback.feedback}}</p>
+                            </div>
+                            <div class="col-md-3">
+                            	<ul class="list-inline pull-right">
+                                	<li ng-repeat='rating in maxRatings track by $index'>
+                                        <i class="fa fa-1x" ng-class="(rating < vehicleFeedback.rating) ? 'fa-star' : 'fa-star-o'"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="vehicle_feedback_metadata.total == 0">
+                   		<p class="alert alert-danger">{{'No Record Found' | translate}}</p>
+                    </div>
+                    <div class="paging clearfix text-center" ng-if="vehicle_feedback_metadata.total > 0">
+                   		<uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="vehicle_feedback_metadata.total" num-pages="vehicle_feedback_metadata.total_pages" ng-model="model.currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="vehicle_feedback_metadata.per_page" ng-change="paginate()"></uib-pagination>
+                    </div>
+                </div>
+                <!-- End: Feedback --> 
+         	</div>
+		</div>
+  	</div>
+</div>

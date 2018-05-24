@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.buyer_email.$touched) && (PaymentForm.buyer_email.$pristine || PaymentForm.buyer_email.$invalid || PaymentForm.email.$error.email) }">
+        <input name="buyer_email" ng-model="buyer.email" class="form-control" id="buyer_email" type="email" placeholder="{{'Email' | translate}}" ng-required="true">
+        <div ng-show="((PaymentForm.$submitted || PaymentForm.buyer_email.$touched) && (PaymentForm.buyer_email.$pristine || PaymentForm.buyer_email.$invalid))">
+            <div class="error" ng-show="(PaymentForm.buyer_email.$error.required)">{{'Required' | translate}}</div>
+            <div class="error" ng-show="(PaymentForm.buyer_email.$error.email)">{{'Enter Valid Email' | translate}}</div>
+        </div>
+    </div>
+    <div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.buyer_address.$touched) && (PaymentForm.buyer_address.$pristine || PaymentForm.buyer_address.$invalid) }">
+        <input name="buyer_address" ng-model="buyer.address" class="form-control" id="buyer_address" type="text" ng-required="true" placeholder="{{'Address' | translate}}">
+        <div class="error" ng-show="(PaymentForm.$submitted || PaymentForm.buyer_address.$touched) && (PaymentForm.buyer_address.$pristine || PaymentForm.buyer_address.$invalid) && (PaymentForm.buyer_address.$error.required)">{{'Required' | translate}}</div>
+    </div>
+</div>
+<div class="row">
+	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.buyer_city.$touched) && (PaymentForm.buyer_city.$pristine || PaymentForm.buyer_city.$invalid) }">
+        <input name="buyer_city" id="buyer_city" class="form-control" ng-model="buyer.city" type="text" ng-required="true"  placeholder="{{'City' | translate}}">
+        <div class="error" ng-show="(PaymentForm.$submitted || PaymentForm.buyer_city.$touched) && (PaymentForm.buyer_city.$pristine || PaymentForm.buyer_city.$invalid) &&(PaymentForm.buyer_city.$error.required)">{{'Required' | translate}}</div>
+    </div>
+    <div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.buyer_state.$touched) && (PaymentForm.buyer_state.$pristine || PaymentForm.buyer_state.$invalid) }">
+            <input name="buyer_state" ng-model="buyer.state" class="form-control" id="buyer_state" type="text" ng-required="true" placeholder="{{'State'| translate }}">
+            <div class="error" ng-show="(PaymentForm.$submitted || PaymentForm.buyer_state.$touched) && (PaymentForm.buyer_state.$pristine || PaymentForm.buyer_state.$invalid) && (PaymentForm.buyer_state.$error.required)">{{'Required' | translate}}</div>
+    </div>
+</div>
+<div class="row">
+	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.buyer_country.$touched) && (PaymentForm.buyer_country.$pristine || PaymentForm.buyer_country.$invalid) }">
+        <select name="buyer_country" id="buyer_country" class="form-control" ng-model="buyer.country" ng-options="country.iso2 as country.name for country in countries" ng-required="true">
+            <option value="">{{'Country' | translate}}</option>
+        </select>
+        <div class="error" ng-show="(PaymentForm.$submitted || PaymentForm.buyer_country.$touched) && (PaymentForm.buyer_country.$pristine || PaymentForm.buyer_country.$invalid) && (PaymentForm.buyer_country.$error.required)">{{'Required' | translate}}</div>
+    </div>
+    <div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.buyer_zip_code.$touched) && (PaymentForm.buyer_zip_code.$pristine || PaymentForm.buyer_zip_code.$invalid) }">
+        <input name="buyer_zip_code" ng-model="buyer.zip_code" class="form-control" id="buyer_zip_code" type="text" ng-required="true" placeholder="{{'Zip Code' | translate }}">
+        <div class="error" ng-show="(PaymentForm.$submitted || PaymentForm.buyer_zip_code.$touched) && (PaymentForm.buyer_zip_code.$pristine || PaymentForm.buyer_zip_code.$invalid)">
+            <div class="error" ng-show="(PaymentForm.buyer_zip_code.$error.required)">{{'Required' | translate}}</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+	<div class="form-group col-sm-6" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.buyer_phone.$touched) && (PaymentForm.buyer_phone.$pristine || PaymentForm.buyer_phone.$invalid) }">
+        <input name="buyer_phone" ng-model="buyer.phone" class="form-control" id="buyer_phone" type="text" ng-required="true" placeholder="{{'Phone' | translate }}">
+        <div class="error" ng-show="(PaymentForm.$submitted || PaymentForm.buyer_phone.$touched) && (PaymentForm.buyer_phone.$pristine || PaymentForm.buyer_phone.$invalid)">
+            <div class="error" ng-show="(PaymentForm.buyer_phone.$error.required)">{{'Required' | translate}}</div>
+        </div>
+    </div>
+</div>

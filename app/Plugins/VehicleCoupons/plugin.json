@@ -1,0 +1,9 @@
+{
+  "name": "VehicleCoupons",
+  "class": "fa fa-2x fa-gift",
+  "description": "By enabling this, item owner can add coupons. ",
+  "dependencies": "VehicleRentals",
+  "module_id": "793",
+  "module_hash": "13b14c3e061ad1ab578c6c9a16a66348",
+  "display_order": "11"
+}

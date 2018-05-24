@@ -1,0 +1,9 @@
+{
+	"name": "Pages", 
+	"class": "fa fa-2x fa-file-text",
+	"description": "Static pages",
+	"dependencies": "",
+	"module_id": "",
+	"module_hash": "",
+	"display_order": "4"
+}

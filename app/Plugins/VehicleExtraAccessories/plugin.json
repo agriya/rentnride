@@ -1,0 +1,9 @@
+{
+  "name": "VehicleExtraAccessories",
+  "class": "fa fa-2x fa-external-link-square",
+  "description": "By enabling this, item owner can manage extra_accessories based on vehicle types.",
+  "dependencies": "VehicleRentals",
+  "module_id": "",
+  "module_hash": "",
+  "display_order": "17"
+}

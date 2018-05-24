@@ -1,0 +1,85 @@
+{
+  "apis": [
+    {
+      "path": "/cities",
+      "operations": [
+        {
+          "summary": "Fetch List of Cities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "type",
+              "paramType": "query",
+              "type": "string",
+              "description": "Display City By Listing Type",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "field",
+              "paramType": "query",
+              "type": "string",
+              "description": "Give Whatever Fields Needed by &quot;Comma Seperator&quot;",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "q",
+              "paramType": "query",
+              "type": "string",
+              "description": "Search City",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "filter",
+              "paramType": "query",
+              "type": "string",
+              "description": "filter list of City",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sort",
+              "paramType": "query",
+              "type": "string",
+              "description": "The City Identifier",
+              "required": false,
+              "format": "string"
+            },
+            {
+              "name": "sortby",
+              "paramType": "query",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort City by Ascending / Descending Order",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__cities_filter__filter__sort__sort__sortby__sortby__type__type__field__field__q__q_"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

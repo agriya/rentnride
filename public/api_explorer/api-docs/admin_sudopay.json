@@ -1,0 +1,27 @@
+{
+  "apis": [
+    {
+      "path": "/admin/sudopay/synchronize",
+      "operations": [
+        {
+          "summary": "Synchronize of sudopay gateway  and update to DB",
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_sudopay_synchronize"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

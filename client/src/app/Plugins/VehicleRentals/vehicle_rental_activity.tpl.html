@@ -1,0 +1,85 @@
+<div class="vehicle-payment clearfix">
+	<div class="container">
+         <div class="change-head">
+            <h2><a href="#/vehicle/{{vehicleDetails.id}}/{{vehicleDetails.slug}}" title="{{vehicleDetails.name}}">{{vehicleDetails.name}}</a> / {{'Activities' | translate}}</h2>
+        </div>
+        <div class="payment-left clearfix">
+            <div class="clearfix">
+                <vehicle></vehicle>
+            </div>
+            <div class="payment-form table-activities col-md-12">
+                <h4>{{'Activities' | translate}}</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{'Date' | translate}}</th>
+                                <th>{{'Status' | translate}}</th>
+                                <th width="600">{{'Message' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="message in messageDetails">
+                                <td><span am-time-ago="message.created_at.date"></span></td>
+                                <td>{{message.status}}</td>
+                                <td><span ng-bind-html="message.description"></span></td>
+                            </tr>
+                            <tr ng-show="messageDetails.length == 0">
+                                <td colspan="4" class="text-center">
+                                    <p class="alert alert-danger text-left">{{'No Record Found' |translate}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="payment-form col-md-12">
+                <h4>{{'Response and Actions' | translate}}</h4>
+                <div id="actions-tab-container" class="navbar-btn">
+                    <ul class="nav nav-pills">
+                        <!-- private note tabs -->
+                        <li ng-click="filterTab(VehicleRentalDetails.id, 'note')" ng-class="{active : action === 'note' || action === 'all'}">
+                            <a class="show" data-target="#note" data-toggle="tab">{{'Private Note' | translate}}</a>
+                        </li>
+                        <!-- Dispute tab -->
+                        <li ng-click="filterTab(VehicleRentalDetails.id, 'dispute')" ng-class="{active : action === 'dispute'}" ng-if="($root.settings['site.enabled_plugins'].indexOf('VehicleDisputes') > -1) && VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.WaitingForReview ||  VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.BookerReviewed">
+                            <a class="show" data-target="#dispute" data-toggle="tab">{{'Dispute' | translate}}</a>
+                        </li>
+                        <li ng-click="filterTab(VehicleRentalDetails.id, 'review')" ng-class="{active : action === 'review'}" ng-if="($root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1) && VehicleRentalDetails.user_id == $root.auth.id && (VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.WaitingForReview ||  VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.HostReviewed) && VehicleRentalDetails.is_dispute == 0">
+                            <a class="show" data-target="#review" data-toggle="tab">{{'Review' | translate }}</span></a>
+                        </li>
+                        <li ng-click="filterTab(VehicleRentalDetails.id, 'review')" ng-class="{active : action === 'review'}" ng-if="($root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1) && vehicleDetails.user_id == $root.auth.id && (VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.WaitingForReview ||  VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.BookerReviewed) && VehicleRentalDetails.is_dispute == 0">
+                            <a Review data-target="#review" data-toggle="tab">{{'Review' | translate }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <!-- Private note form -->
+                    <div class="tab-pane" id="note" ng-class="{active : action === 'note' || action === 'all'}">
+                        <form role="form" class="clearfix" name="privateNoteAdd" ng-submit="PrivateNoteSubmit(privateNoteAdd.$valid)" novalidate>
+                            <div class="form-group" ng-class="{ 'has-error' : (privateNoteAdd.$submitted || privateNoteAdd.note.$touched) && (privateNoteAdd.note.$pristine || privateNoteAdd.note.$invalid) }">
+                                <label class="ccontrol-label" for="name">{{'Note' | translate}}</label>
+                                <textarea rows="5" class="form-control" name="note" id="name" placeholder="{{'Note' | translate}}" ng-model="note" ng-required="true"/>
+                                <span class="error" ng-show="(privateNoteAdd.$submitted || privateNoteAdd.note.$touched) && (privateNoteAdd.note.$pristine || privateNoteAdd.note.$invalid) && (privateNoteAdd.note.$error.required)">{{'Required' | translate}}</span>
+                            </div>
+                            <div class="form-group">
+                            	<div class="pull-right">
+                                    <button class="btn btn-orange btn-block" type="submit">{{'Update' | translate }}</button>
+                            	</div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Dispute form -->
+                    <div class="tab-pane" id="dispute" ng-class="{active : action === 'dispute'}">
+                        <dispute ng-if="VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.WaitingForReview ||  VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.BookerReviewed"></dispute>
+                    </div>
+                    <!-- Review Form -->
+                    <div class="tab-pane" id="review" ng-class="{active : action === 'review'}">
+                        <feedback ng-if="(VehicleRentalDetails.user_id == $root.auth.id && (VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.WaitingForReview ||  VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.HostReviewed) && VehicleRentalDetails.is_dispute == 0)"></feedback>
+                        <feedback ng-if="(vehicleDetails.user_id == $root.auth.id && (VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.WaitingForReview ||  VehicleRentalDetails.item_user_status_id == ConstItemUserStatus.BookerReviewed)  && VehicleRentalDetails.is_dispute == 0)"></feedback>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

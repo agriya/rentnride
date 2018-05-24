@@ -1,0 +1,47 @@
+{
+  "apis": [
+    {
+      "path": "/admin/stats",
+      "operations": [
+        {
+          "summary": "Get the count of all site activities based on duration",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "filter",
+              "paramType": "query",
+              "enum": [
+                "lastDays",
+                "lastWeeks",
+                "lastMonths",
+                "lastYears"
+              ],
+              "type": "string",
+              "description": "filter stats based on duration ",
+              "required": false,
+              "format": "string"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": "200",
+              "message": "OK"
+            },
+            {
+              "code": "404",
+              "message": "Not Found; Not found"
+            }
+          ],
+          "method": "GET",
+          "nickname": "get__admin_stats"
+        }
+      ]
+    }
+  ],
+  "models": {},
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "/bookorrent/public/api"
+}

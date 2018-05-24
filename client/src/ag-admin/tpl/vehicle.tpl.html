@@ -1,0 +1,105 @@
+<div class="col-md-4">
+    <img src="{{vehicleDetails.attachments.thumb.medium}}" class="img-responsive">
+</div>
+<div class="col-md-8">
+    <div class="col-md-9">
+        <h4><strong>{{vehicleDetails.name}}</strong></h4>
+        <div class="col-md-6 row">
+            <p data-toggle="modal" data-target="#feedbackModal" ng-click="getFeedback(vehicleDetails.id)">
+                <span ng-repeat = 'rating in maxRatings track by $index'>
+                    <i class="fa fa-star text-danger" ng-class="((rating < vehicleDetails.roundedRating)? 'fa-star':((((vehicleDetails.feedback_rating - rating) > 0) && ((vehicleDetails.feedback_rating - rating) < 1))
+                            ? 'fa-star-half': 'fa-star-o'))"></i>
+                </span>{{'Feedback' | translate}}
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-muted pull-right" ng-click="showLocation = ! showLocation">{{vehicleDetails.counter_location.data.length}} {{'Location'|translate}}<span class="fa fa-chevron-down pull-right" ng-class="{'fa-chevron-up': showLocation, 'fa-chevron-down': !showLocation}"></span></p>
+        </div>
+        <ul class="list-inline small">
+            <li ng-show="vehicleDetails.is_manual_transmission">
+                <span class="fa fa-code-fork"></span> {{'Manual' | translate }}
+            </li>
+            <li ng-show="!vehicleDetails.is_manual_transmission">
+                <span class="fa fa-code-fork"></span> {{'Automatic' | translate }}
+            </li>
+            <li ng-show="vehicleDetails.is_ac">
+                <span class="fa fa-asterisk"></span> {{'Air Conditioning' | translate }}
+            </li>
+            <li ng-show="vehicleDetails.no_of_seats > 0">
+                <span class="fa fa-male"></span> {{vehicleDetails.no_of_seats}} {{'People' | translate}}
+            </li>
+            <li ng-show="vehicleDetails.no_small_bags > 0">
+                <span class="fa fa-briefcase"></span> {{vehicleDetails.no_small_bags}} {{'Small Bags' | translate}}
+            </li>
+            <li ng-show="vehicleDetails.no_large_bags > 0">
+                <span class="fa fa-briefcase"></span> {{vehicleDetails.no_large_bags}} {{'Large Bags' | translate}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h4>
+            <strong>{{siteCurrency}}{{vehicleDetails.per_day_amount}}</strong>
+        </h4>
+    </div>
+</div>
+<div class="col-md-12 well" ng-if="showLocation">
+    <div class="col-md-6 scrollbar">
+        <h4><strong>{{'Pickup Locations'|translate}}</strong></h4>
+        <ul class="list-group">
+            <li ng-repeat="location in vehicleDetails.pickup_locations" class="list-group-item">{{location.address}}</li>
+        </ul>
+    </div>
+    <div class="col-md-6 scrollbar">
+        <h4><strong>{{'Drop Locations'|translate}}</strong></h4>
+        <ul class="list-group">
+            <li ng-repeat="location in vehicleDetails.drop_locations" class="list-group-item">{{location.address}}</li>
+        </ul>
+    </div>
+</div>
+
+<!-- MODAL -->
+
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="FeedbackModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{'Feedbacks' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <li class="media" ng-repeat="vehicleFeedback in vehicleFeedbacks" ng-if="vehicle_metadata.total > 0">
+                            <div class="col-md-8">
+                                <a href="" class="pull-left" ng-click="userDashboard(vehicleFeedback.to_user.username)" data-dismiss="modal">
+                                    <img class="media-object" src="{{vehicleFeedback.to_user.attachmentable.thumb.small}}" title="{{feedback.to_user.username}}">
+                                    <p>{{vehicleFeedback.to_user.username}}</p>
+                                </a>
+                                <div class="media-body">
+                                    <p> {{vehicleFeedback.feedback}}</p>
+                                    <p>{{vehicleFeedback.created_at}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            <span ng-repeat = 'rating in maxRatings track by $index'>
+                            <i class="fa fa-1x text-danger" ng-class="(rating <= vehicleFeedback.rating) ? 'fa-star' : 'fa-star-o'"></i>
+                            </span>
+                            </div>
+                        </li>
+                        <li ng-if="vehicle_metadata.total == 0">
+                            <div class="col-md-12">
+                                {{'No Record Found' | translate}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="paging clearfix text-center" ng-show="vehicle_metadata.total > 0">
+                    <uib-pagination total-items="vehicle_metadata.total" num-pages="vehicle_metadata.total_pages" ng-model="modalCurrentPage" max-size="modalMaxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="vehicle_metadata.per_page" ng-change="modalPaginate()"></uib-pagination>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

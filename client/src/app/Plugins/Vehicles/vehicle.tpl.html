@@ -1,0 +1,70 @@
+<div class="vehicle-details">
+    <div class="clearfix">
+        <div class="col-md-12 clearfix">
+            <h4 class="pull-left">
+                <a href="#/vehicle/{{vehicleDetails.id}}/{{vehicleDetails.slug}}">
+                    {{vehicleDetails.vehicle_make.name}}
+                    <span> - {{vehicleDetails.vehicle_model.name}}</span>
+                </a>
+                 <p class="star-rate" ng-click="modalOpen('lg',vehicleDetails.id)" ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1">
+                    <span ng-repeat = 'rating in maxRatings track by $index'>
+                        <i class="fa fa-star" ng-class="((rating < vehicleDetails.roundedRating)? 'fa-star':((((vehicleDetails.feedback_rating - rating) > 0) && ((vehicleDetails.feedback_rating - rating) < 1)) ? 'fa-star-half': 'fa-star-o'))"></i></span>
+                </p>
+                <label class="host" ng-if="vehicleDetails.user">{{vehicleDetails.vehicle_company.name}}</label>
+            </h4>
+            <p class="location pull-right" ng-click="showLocation = ! showLocation">{{vehicleDetails.counter_location.data.length}} {{'Location'|translate}}
+                <span class="fa fa-angle-down pull-right" ng-class="{'fa-angle-up': showLocation, 'fa-angle-down': !showLocation}"></span>
+            </p>
+        </div>
+        <div class="col-md-9">
+            <div class="media">
+                <div class="media-left">
+                    <div class="vehicle-img">
+                        <img ng-src="{{vehicleDetails.attachments.thumb.medium}}" class="img-responsive">
+                    </div>
+                </div>
+                <div class="media-body">
+                    <ul class="list-unstyled clearfix">
+                        <li class="manual col-lg-6" ng-show="vehicleDetails.is_manual_transmission">
+                            {{'Manual' | translate }}
+                        </li>
+                        <li class="automatic col-lg-6" ng-show="!vehicleDetails.is_manual_transmission">
+                            {{'Automatic' | translate }}
+                        </li>
+                        <li class="air-cond col-lg-6" ng-show="vehicleDetails.is_ac">
+                            {{'Air Conditioning' | translate }}
+                        </li>
+                        <li class="user col-lg-6" ng-show="vehicleDetails.no_of_seats > 0">
+                            {{vehicleDetails.no_of_seats}} {{'People' | translate}}
+                        </li>
+                        <li class="bag col-lg-6" ng-show="vehicleDetails.no_small_bags > 0">
+                            {{vehicleDetails.no_small_bags}} {{'Small Bags' | translate}}
+                        </li>
+                        <li class="luggage col-lg-6" ng-show="vehicleDetails.no_large_bags > 0">
+                            {{vehicleDetails.no_large_bags}} {{'Large Bags' | translate}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 booknow-block pull-right">
+            <h4><strong>{{getFormatCurrency(vehicleDetails.per_day_amount)}}</strong> / {{'Day' | translate}}</h4>
+        </div>
+        <div class="col-md-12" ng-if="showLocation">
+        	<div class="row">
+                <div class="col-md-6 list-location">
+                    <h4>{{'Pickup Locations'|translate}}</h4>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="location in vehicleDetails.pickup_locations">{{location.address}}</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 list-location">
+                    <h4>{{'Drop Locations'|translate}}</h4>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="location in vehicleDetails.drop_locations">{{location.address}}</li>
+                    </ul>
+                </div>
+         	</div>
+        </div>
+    </div>
+</div>

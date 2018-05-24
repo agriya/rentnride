@@ -1,0 +1,91 @@
+<div class="page-head">
+    <div class="container">
+        <h2 class="text-uppercase">{{'Orders' | translate}}</h2>
+    </div>
+</div>
+<div class="clearfix">
+    <div class="container">
+        <div id="bookings-tab-container" class="m-t-30 tab-orange">
+            <ul class="nav nav-pills">
+                <li ng-class="{active : statusID === 0}">
+                    <a class="show" ng-click="filterOrder(0, 'all')" data-target="#" data-toggle="tab">{{'All' | translate}}</a>
+                </li>
+                <li ng-repeat="status in itemUserStatus" ng-class="{active : statusID === status.id}">
+                    <a class="show" ng-click="filterOrder(status.id, status.slug)" data-target="#" data-toggle="tab">{{status.name | translate}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+            	<thead>
+                    <tr>
+                        <th>{{'From' | translate}}</th>
+                        <th>{{'To' | translate}}</th>
+                        <th>{{'Name' | translate}}</th>
+                        <!--<th ng-if="statusID == 0">{{'Status' | translate}}</th>-->
+                        <th>{{'Booker' | translate}}</th>
+                        <th>{{'Booking ID' | translate}}</th>
+                        <th>{{'Gross' | translate}}</th>
+                        <th>{{'No of Days' | translate}}</th>
+                        <th>{{'Booked Date' | translate}}</th>
+                        <th>{{'Action' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='itemOrder in itemOrders' ng-show="_metadata.total > 0">					
+                        <td>{{itemOrder.item_booking_start_date}}</td>
+                        <td>{{itemOrder.item_booking_end_date}}</td>
+                        <td><a href="#/vehicle/{{itemOrder.item_userable.id}}/{{itemOrder.item_userable.slug}}" title="{{itemOrder.item_userable.name}}">{{itemOrder.item_userable.vehicle_make.name}}-<strong>{{itemOrder.item_userable.vehicle_model.name}}#{{itemOrder.item_userable.id}}</strong></a></td>
+                        <!--<td  ng-if="statusID == 0">{{itemOrder.item_userable.name}}</td>-->
+                        <td>{{itemOrder.user.username}}</td>
+                        <td>{{itemOrder.id}}</td>
+                        <td>{{getFormatCurrency(itemOrder.total_amount)}}</td>
+                        <td>{{itemOrder.date_diff.total_days}}</td>
+                        <td>{{itemOrder.created_at}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <a href="javascript:void(0);" title="{{'Edit' | translate}}" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>
+                                    <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li ng-if="itemOrder.item_user_status_id == ConstItemUserStatus.WaitingForAcceptance">
+                                        <a ng-click="VehicleRentalReject(itemOrder.id)" title="{{'Reject' | translate}}">{{'Reject' | translate}}</a>
+                                    </li>
+                                    <li ng-if="itemOrder.item_user_status_id == ConstItemUserStatus.WaitingForAcceptance">
+                                        <a ng-click="VehicleRentalConfirm(itemOrder.id)" title="{{'Confirm' | translate}}">{{'Confirm' | translate}}</a>
+                                    </li>
+                                    <li ng-if="$root.settings['site.enabled_plugins'].indexOf('VehicleFeedbacks') > -1 && (itemOrder.item_user_status_id == ConstItemUserStatus.WaitingForReview ||  itemOrder.item_user_status_id == ConstItemUserStatus.BookerReviewed) && itemOrder.is_dispute == 0">
+                                        <a href="#activity/{{itemOrder.id}}/review" title="{{'Review' | translate}}"> {{'Review' | translate}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#activity/{{itemOrder.id}}/all" title="{{'View Activities' | translate}}">{{'View Activities' | translate}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#activity/{{itemOrder.id}}/note" title="{{'Private Note' | translate}}">{{'Private Note' | translate}}</a>
+                                    </li>
+                                    <li ng-if="($root.settings['vehicle_rental.is_host_checkin_and_checkout'] == 1) && itemOrder.checkin">
+                                        <a href="" ng-click="orderCheckin(itemOrder.id)" title="{{'Check In' | translate}}">
+                                            {{'Check In' | translate}}
+                                        </a>
+                                    </li>
+                                    <li ng-if="($root.settings['vehicle_rental.is_host_checkin_and_checkout'] == 1) && itemOrder.checkout">
+                                        <a href="#/vehicle_rental/{{itemOrder.id}}/checkout" title="{{'Check Out' | translate}}">{{'Check Out' | translate}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-show="_metadata.total === 0">
+                        <td colspan="9">
+                            <p class="alert alert-danger">{{'No Record Found' |translate}}</p>
+                        </td>
+                    </tr>
+            	</tbody>
+            </table>
+    	</div>
+    </div>
+    <div class="paging clearfix text-center" ng-show="_metadata.total > 0">
+        <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="_metadata.total" num-pages="_metadata.total_pages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="_metadata.per_page" ng-change="paginate()"></uib-pagination>
+    </div>
+</div>

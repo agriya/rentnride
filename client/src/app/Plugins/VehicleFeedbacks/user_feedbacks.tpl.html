@@ -1,0 +1,36 @@
+<div class="user-feedback">
+    <div class="container">
+        <h2 class="text-uppercase">{{'Reviews' | translate}}</h2>
+        <div class="row">
+            <div class="col-md-12">
+            	<div class="media" ng-repeat="feedback in user_feedbacks" ng-show="feedback_metadata.total > 0">
+                    <div class="media-left">
+                    	<a href="#/user/{{feedback.user.username}}">
+                            <img class="img-responsive" ng-src="{{feedback.user.attachmentable.thumb.smallmedium}}" title="{{feedback.user.username}}">
+                        </a>
+                  	</div>
+                    <div class="media-body">
+                    	<div class="col-sm-9">
+                            <h3>
+                                <a href="#/user/{{feedback.user.username}}">{{feedback.user.username}}</a>
+                                <span am-time-ago="feedback.created_at.date"></span>
+                            </h3>
+                            <p>{{feedback.feedback}}</p>
+                        </div>
+                        <div class="col-sm-3 clearfix">
+                        	<ul class="list-inline pull-right">
+                                <li ng-repeat = 'rating in FeedbackMaxRatings track by $index'>
+                                	<i class="fa " ng-class="(rating < feedback.rating) ? 'fa-star' : 'fa-star-o'"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p ng-if="feedback_metadata.total == 0" class="alert alert-danger">{{'No Reviews'|translate}}</p>
+            </div>
+            <div class="paging clearfix text-center" ng-show="feedback_metadata.total > 0">
+                <uib-pagination previous-text="&#xf0d9" next-text="&#xf0da" total-items="feedback_metadata.total" num-pages="feedback_metadata.total_pages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" items-per-page="feedback_metadata.per_page" ng-change="feedback_paginate()"></uib-pagination>
+            </div>
+      	</div>
+ 	</div>
+</div>
