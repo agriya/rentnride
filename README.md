@@ -1,6 +1,6 @@
 # Rent&Ride
 
-Rent&Ride is an open source service for Car renting business. It is written in AngularJS with REST API for high performance in mind.
+Rent&Ride is an open source for Car Rental Script. It is written in Lumen 5.2 & Angular Base Script for high performance in mind.
 
 > This is project is part of Agriya Open Source efforts. Rent&Ride was originally a paid script and was selling around 60000 Euros. It is now released under dual license (OSL 3.0 & Commercial) for open source community benefits.
 
@@ -28,7 +28,7 @@ This readily available car rental script is developed especially for helping the
 
 [Coroflot clone](https://www.agriya.com/products/car-rental-script) Your most economical ride, it has survived not only five countries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing.
 
-![rentnride-how it works](https://user-images.githubusercontent.com/4700341/47705873-c590e500-dc4d-11e8-9691-7c1d50eefdef.png)
+![rent ride-how it works](https://user-images.githubusercontent.com/4700341/47709376-22909900-dc56-11e8-9841-397171079045.png)
 
 ## Features
 
