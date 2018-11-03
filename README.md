@@ -99,7 +99,7 @@ This car hire rental script doesn't charge money for cancellation fee from it's 
 ```bash
 # Common
 */2 * * * * php /{$absolute_project_path}artisan status_update:cron
-
+```
 
 ### Contributing
 
