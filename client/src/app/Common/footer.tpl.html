@@ -93,6 +93,16 @@
             	</div>
             </div>
       	</div>
-        <p class="text-center">{{'Copyright'|translate}} &copy; {{'Book or Rent'|translate}}. {{currentYear}} {{'All rights reserved'|translate}}</p>
+        <!--p class="text-center">{{'Copyright'|translate}} &copy; {{'Book or Rent'|translate}}. {{currentYear}} {{'All rights reserved'|translate}}</p-->
+        <p class="text-muted list-group-item-heading bot-15-mspace text-12"><span> © {{cdate | date:'yyyy'}}</span> <a href="/" title="{{settings.SITE_NAME}}"
+            class="text-muted"> {{settings.SITE_NAME}}</a>, {{'All rights reserved.'|translate}}
+            <a href="https://www.agriya.com/products/car-rental-script"
+            target="_blank" title="{{'Powered by RentNRide'| translate}}"> <img src="assets/img/powered-rentnride.jpg" alt="[Image: {{'Powered by RentnRide'| translate}}]" title="{{'Powered by RentnRide'| translate}}">                </a> ,{{' v'|translate}}1.0.b1&nbsp;{{'made in '|translate}}&nbsp;
+            <a href="http://www.agriya.com/" target="_blank"
+            title="{{'Agriya Web Development'| translate}}"> <img src="assets/img/powered-by-agriya.png" alt="[Image: {{'Agriya Web Development'| translate}}]" title="{{'Agriya Web Development'| translate}}"></a>
+            <a href="http://www.cssilize.com/" target="_blank" title="{{'CSSilized by CSSilize, PSD to XHTML Conversion'| translate}}">
+            <img src="assets/img/cssilize.png" alt="[Image: {{'CSSilized by CSSilize, PSD to XHTML Conversion'| translate}}]"
+            title="{{'CSSilized by CSSilize, PSD to XHTML Conversion'| translate}}"> </a>
+        </p>        
     </div>
 </div>
